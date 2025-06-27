@@ -1,0 +1,387 @@
+.gridbox
+{
+   max-width: 520px;
+    background: #0a0a0a;
+    margin: 40px auto;
+    display: flow-root;
+    padding: 10px;
+}
+.gridbox > button {
+    width: 18%;
+    height: 90px;
+    background: #17181c;
+    margin: 1%;
+    float: left;
+    cursor: pointer;
+    position: relative;
+}
+
+.gridbox > button:hover
+{
+	background: #303238;
+	transform: scale(1.07);
+}
+.diamond.show
+{
+	background: #ccc;
+   position: relative;
+}
+.diamond.show::before
+{
+	background-image: url(/assets/images/gems.webp);
+}
+.diamond.selected
+{
+   position: relative;
+    background: #390e71 !important;
+}
+.diamond.bgs
+{
+   position: relative;
+    background: #390e71 !important;
+}
+.diamond.selected:hover
+{
+   transform: none !important;
+}
+.diamond.selected::after
+{
+   background-image: url(/assets/images/gems.webp);
+    content: "";
+    width: 100%;
+    height: 90px;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 0px;
+    top:0px;
+}
+.gameinnerwrapper
+{
+   position: relative;
+}
+.resultbox
+{
+   background: #000;
+    padding: 10px;
+    position: absolute;
+    /* margin: 0px auto; */
+    /* display: table; */
+    width: 220px;
+    left: 39%;
+    border: 5px solid #31343d;
+    top: 40%;
+    z-index: 999;
+}
+.diamond.unselected::after
+{
+   background-image: url(/assets/images/gems.webp);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    left: 0;
+    top: 0;
+}
+.diamond.selected.mines::after
+{
+   background-image: url(/assets/images/bomb_mines.gif);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 0;
+    top: 0;
+}
+/*mines.webp*/
+.diamond.unselected.mines::after
+{
+   background-image: url(/assets/images/bomb_mines.gif);
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    left: 0;
+    top: 0;
+}
+.diamond.selected.mines{background:#303238 !important;position: relative;}
+
+.winner {
+  color: #3BC117 !important;
+}
+
+.looser{
+  color: red !important;
+}
+.lor{
+  background-color: #3BC117 !important;
+  color: white !important;
+}
+.gridboxmini
+{
+   max-width: 520px;
+    background: #0a0a0a;
+    margin: 40px auto;
+    display: flow-root;
+    padding: 10px;
+}
+.gridboxmini > div {
+    width: 77px;
+    height: 77px;
+    background: #17181c;
+    margin: 5px;
+    float: left;
+    cursor: pointer;
+    position: relative;
+}
+.spcial .hoverbox {
+   display: flex !important;
+}
+.selectfinish .kenohis {
+   background: #161616;
+}
+.fav{
+    color: yellow;
+}
+
+.like{
+    color: red;
+}
+.warn {
+  border: 1px solid #43a528 !important;
+  background: rgb(99 169 2 / 10%) !important;  
+  border-radius: .125rem;
+  color: #3bc117;
+  padding: 0.75rem 1.25rem;
+  margin-top: 0.5rem;
+  font-size: .75rem;
+}
+.text-success{
+  color: white !important;
+}
+input, textarea, a, button {
+  font-weight: 400;
+}
+.detailForm {
+  margin-top: 1.375rem;
+}
+.detailForm .title {
+  color: #f5f6f7;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.detailForm .ui-input {
+  /*margin-top:15px;*/
+  margin-bottom: 15px;
+}
+.detailForm .formFlex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1.25rem;
+}
+
+.detailForm .formFlex>div:first-child {
+   -webkit-flex: 6;
+   -ms-flex: 6;
+   flex: 6;
+   margin-right: 10px;
+}
+
+.detailForm .formFlex>div:last-child {
+    -webkit-flex: 4;
+    -ms-flex: 4;
+    flex: 4;
+}
+
+.detailForm .ui-input .input-control input[readonly] {
+    opacity: 1;
+}
+
+.devide {
+  width: 100%;
+  border-bottom: 1px solid #272b30;
+  /*margin: 1.875rem 0;*/
+}
+.submit {
+  /*margin: 1.25rem 0 3.75rem;*/
+  padding: 0 3.125rem;
+}
+
+.diamondmini.show
+{
+   background: #ccc;
+   position: relative;
+}
+.diamondmini.show::before
+{
+   background-image: url(/assets/images/gems.webp);
+}
+.diamondmini.selected
+{
+   position: relative;
+    background: #390e71 !important;
+}
+.diamondmini.selected:hover
+{
+   transform: none !important;
+}
+.diamondmini.selected::after
+{
+   background-image: url(/assets/images/gems.webp);
+    content: "";
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 0px;
+    top:0px;
+}
+
+.diamondmini.unselected::after
+{
+   background-image: url(/assets/images/gems.webp);
+    content: "";
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    left: 0;
+    top: 0;
+}
+.diamondmini.selected.mines::after
+{
+   background-image: url(/assets/images/mines.webp);
+    content: "";
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 0;
+    top: 0;
+}
+.diamondmini.unselected.mines::after
+{
+   background-image: url(/assets/images/mines.webp);
+    content: "";
+    width: 90px;
+    height: 90px;
+    position: absolute;
+    background-size: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    left: 0;
+    top: 0;
+}
+.diamondmini.selected.mines{background:#303238 !important;position: relative;}
+
+/*like and fav*/
+.fav{
+    color: yellow;
+}
+
+.like{
+    color: red;
+}
+/**/
+
+/**/
+.disabled-text {
+  color: gray;
+  opacity: 0.5;
+  pointer-events: none;
+}
+input:focus{
+  color: #fff !important;
+}
+
+@media(max-width: 650px)
+{
+  .resultbox{left: 0px;max-width: 400px;width: 97%;top: 25%;}
+}
+.hov{
+    cursor: pointer !important;
+}
+
+
+/*new*/
+
+.ui-dialog>div:last-child {
+    padding: 1.25rem;
+    background-color: var(--35p5sb);
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+
+.h1yfs6k1 .hotkey-list {
+    margin-top: 0.5rem;
+}
+
+
+.h1yfs6k1 .hotkey-item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 1.25rem;
+    height: 3.5rem;
+    border-radius: .25rem;
+    margin-bottom: 0.5rem;
+    background-color:#17181b;
+    color: rgb(153 164 176 / 60%);
+}
+
+
+.h1yfs6k1 .hotkey-item .hotkey-key {
+    width: 6.25rem;
+    text-align: center;
+    position: relative;
+    font-weight: 600;
+    color:#f5f6f7;
+    padding: 0.5rem 0 0.5rem 1.25rem;
+}
+
+
+.h1yfs6k1 .hotkey-enabled .hotkey-select {
+    width: 1rem;
+    height: 1rem;
+    border-radius: var(--border-radius);
+    margin-right: 0.5rem;
+    position: relative;
+    background-color: var(--vv18os);
+    border: 1px solid var(--5cxqan);
+}
+.grab {cursor: -webkit-grab; cursor: grab;}

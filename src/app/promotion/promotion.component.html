@@ -1,0 +1,99 @@
+<div class="pagewrapper">
+<ng-container *ngIf="!head">
+  <app-header (ConnEvent)="conPass($event)"></app-header>
+</ng-container>
+<ng-container *ngIf="head">
+  <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+</ng-container>
+<div class="gamewrapper">
+<div class="sidemenu"><app-sidebar></app-sidebar></div>
+
+<div class="gameinnerwhl">
+	<div class="my-2 text-uppercase">Promotions</div>
+	<div class="orangebg p-3">
+		<div class="row d-flex align-items-center">
+			<div class="col-lg-4">
+				<div class="my-2">
+				<h4 class="text-white">GREAT BONUS FOR</h4>
+				<h4 class="yellow-t">EVERY DEPOSIT</h4>
+			    </div>
+			    <div class="my-2 text-white">
+			    	Up to 360%
+			    </div>
+			    <div class="my-2 text-white">
+			    	Available for all players
+			    </div>
+			    <div class="my-2 text-white">
+			    	Before <span class="date h5">6/1/2023</span>
+
+			    </div>
+			</div>
+			<div class="col-lg-8 ">
+				<div class="d-flex row right">
+					<div class="item active"><div class="stage"><div class="mask"></div><div class="front"></div><div class="text ttu bold"><div class="large">180% BONUS</div></div><p class="bonus-name-title">First Deposit</p><div class="effect"><div class="effect-item"></div><div class="effect-item"></div></div><div class="stage__arrow flex-center"><svg width="32" height="24" xmlns="http://www.w3.org/2000/svg" class="icon"><path d="M21.908.814l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09L1.207 3.64a1.866 1.866 0 010-2.715A2.062 2.062 0 013.908.814z"></path></svg></div></div>
+					<button class="ui-button button-normal s-gray" (click)="openModal()"><div class="button-inner">Deposit Now</div></button></div>
+
+					<div class="item"><div class="stage"><div class="mask"></div><div class="front"></div><div class="text ttu bold"><div class="large">180% BONUS</div></div><p class="bonus-name-title">First Deposit</p><div class="effect"><div class="effect-item"></div><div class="effect-item"></div></div><div class="stage__arrow flex-center"><svg width="32" height="24" xmlns="http://www.w3.org/2000/svg" class="icon"><path d="M21.908.814l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09L1.207 3.64a1.866 1.866 0 010-2.715A2.062 2.062 0 013.908.814z"></path></svg></div></div>
+						
+
+						<button class="ui-button button-normal s-gray" ><div class="button-inner">Deposit Now</div></button></div>
+
+					<div class="item "><div class="stage"><div class="mask"></div><div class="front"></div><div class="text ttu bold"><div class="large">180% BONUS</div></div><p class="bonus-name-title">First Deposit</p><div class="effect"><div class="effect-item"></div><div class="effect-item"></div></div><div class="stage__arrow flex-center"><svg width="32" height="24" xmlns="http://www.w3.org/2000/svg" class="icon"><path d="M21.908.814l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09L1.207 3.64a1.866 1.866 0 010-2.715A2.062 2.062 0 013.908.814z"></path></svg></div></div><button class="ui-button button-normal s-gray"><div class="button-inner">Deposit Now</div></button></div>
+
+					<div class="item "><div class="stage"><div class="mask"></div><div class="front"></div><div class="text ttu bold"><div class="large">180% BONUS</div></div><p class="bonus-name-title">First Deposit</p><div class="effect"><div class="effect-item"></div><div class="effect-item"></div></div><div class="stage__arrow flex-center"><svg width="32" height="24" xmlns="http://www.w3.org/2000/svg" class="icon"><path d="M21.908.814l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09-7.879-7.564a1.866 1.866 0 010-2.715 2.062 2.062 0 012.701-.112zm-9 0l.128.112 7.878 7.563a4.662 4.662 0 01.172 6.615l-.172.174-7.878 7.563a2.06 2.06 0 01-2.829 0 1.864 1.864 0 01-.117-2.593l.117-.122 7.879-7.564a.932.932 0 00.083-1.267l-.083-.09L1.207 3.64a1.866 1.866 0 010-2.715A2.062 2.062 0 013.908.814z"></path></svg></div></div><button class="ui-button button-normal s-gray"><div class="button-inner">Deposit Now</div></button></div>
+
+				</div>
+
+
+					
+			</div>
+		</div>
+	</div>
+
+	<div class="darkbg p-2">
+		<div class="row">
+			<ng-container *ngFor="let blog of BlogData;let i = index">
+         <!-- <div class="mt-5 pt-4">
+            <div class="item-head">
+               <p class="time">{{blog.updated_at | date:'yyyy-MM-dd H:mm:ss'}}</p>
+               <p class="title">{{blog.title}}</p>
+            </div>
+            <div class="max-height-content show-more mb-2 ml-2">
+               <div class="item-content" [innerHTML]="blog.message"></div>
+            </div>
+         </div> -->
+				
+
+				<div class="promotion-item" [routerLink]="['/promotion', blog._id]">
+					<a keep-scroll-position="true" class="banner">
+						<img [src]="blog.image || ''" alt="">
+						<div class="desc">
+							<h1><strong>{{blog.title}}</strong></h1>
+							<!-- <h1><span style="color: rgb(245, 219, 77);"><strong>$15,000</strong></span></h1> -->
+						</div>
+					</a>
+					<div class="item-cont">
+						<div class="info">
+							<div class="tit" title="It‘s Time To Hunt for the Casino Multiplier">{{blog.title}}</div>
+							<div class="date">Created at {{blog.updated_at | date:'yyyy-MM-dd H:mm:ss'}}</div>
+						</div>
+						<button class="ui-button button-normal s-conic"><div class="button-inner">View Details</div></button>
+					</div>
+				</div>
+			</ng-container>
+      
+
+
+
+			<!-- <div class="promotion-item"><a href="#" keep-scroll-position="true" class="banner"><img src="https://bc.imgix.net/bc_event/ba/ce/bc/168396318755082.png" alt=""><div class="desc"><h1><strong>CASINO BATTLE</strong></h1><h1><span style="color: rgb(245, 219, 77);"><strong>$15,000</strong></span></h1></div></a><div class="item-cont"><div class="info"><div class="tit" title="It‘s Time To Hunt for the Casino Multiplier">It‘s Time To Hunt for the Casino Multiplier</div><div class="date">Ends at 5/29/2023, 1:02:34 PM</div></div><button class="ui-button button-normal s-conic"><div class="button-inner">View Details</div></button></div></div>
+
+			<div class="promotion-item"><a href="#" keep-scroll-position="true" class="banner"><img src="https://bc.imgix.net/bc_event/ba/ce/bc/168396318755082.png" alt=""><div class="desc"><h1><strong>CASINO BATTLE</strong></h1><h1><span style="color: rgb(245, 219, 77);"><strong>$15,000</strong></span></h1></div></a><div class="item-cont"><div class="info"><div class="tit" title="It‘s Time To Hunt for the Casino Multiplier">It‘s Time To Hunt for the Casino Multiplier</div><div class="date">Ends at 5/29/2023, 1:02:34 PM</div></div><button class="ui-button button-normal s-conic"><div class="button-inner">View Details</div></button></div></div>
+
+			<div class="promotion-item"><a href="#" keep-scroll-position="true" class="banner"><img src="https://bc.imgix.net/bc_event/ba/ce/bc/168396318755082.png" alt=""><div class="desc"><h1><strong>CASINO BATTLE</strong></h1><h1><span style="color: rgb(245, 219, 77);"><strong>$15,000</strong></span></h1></div></a><div class="item-cont"><div class="info"><div class="tit" title="It‘s Time To Hunt for the Casino Multiplier">It‘s Time To Hunt for the Casino Multiplier</div><div class="date">Ends at 5/29/2023, 1:02:34 PM</div></div><button class="ui-button button-normal s-conic"><div class="button-inner">View Details</div></button></div></div> -->
+
+	  </div>
+	</div>
+</div>
+   <app-footer></app-footer>
+</div>
+</div>

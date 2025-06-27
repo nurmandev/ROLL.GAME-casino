@@ -1,0 +1,13 @@
+
+@media(max-width:700px){
+	.gameinnerwhl{
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     height: 80vh;
+     align-items: center;
+}
+.gameinnerwhl img{
+	width: 100%;
+}
+}

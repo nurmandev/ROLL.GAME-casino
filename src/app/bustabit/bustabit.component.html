@@ -1,0 +1,484 @@
+<div class="pagewrapper">
+<!-- header -->
+<ng-container *ngIf="!head">
+   <app-header (ConnEvent)="conPass($event)"></app-header>
+</ng-container>
+<ng-container *ngIf="head">
+   <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+</ng-container>
+<!-- end -->
+<div class="gamewrapper">
+   <div class="sidemenu">
+      <app-sidebar></app-sidebar>
+   </div>
+   <div class="gameinnerwhl">
+      <div class="breadcrumblink"><a class="pointer" routerLink="/casino">RollGame Originals</a> > <span class="pointer">Bustabit</span></div>
+      <div class="d-flex row m-0">
+         <div class="gameinner col-xl p-0">
+            <div  class="greyboxwhl d-flex align-items-center">
+               <div id="dynamic-data" class="text-wrapper xlevelwhl">
+                  <div class=" d-flex flex-row-reverse xlevel">
+                     <div class="greybox bf hov" [ngClass]="list1.bet_result >= 10 ? 'text-warning' : list1.bet_result >= 2 ? 'text-success' : 'text-danger'" [style.animation-delay]="i" *ngFor="let list1 of payoutAllHistory;let i = index" data-toggle="modal" data-target="#exampleCenter2" (click)="Details(list1._id)"><i class="fa-solid fa-circle"></i>{{ (+list1.bet_result).toFixed(2) }}x</div>
+                  </div>
+               </div>
+            </div>
+            <div class="gameinnerboxwhl">
+               <div class="bustabit d-flex justify-content-center">
+                <!-- <div id="container"></div> -->
+                <span class="result">{{ prefix_text }} {{(result*1).toFixed(2)}} {{ type }}</span>
+                  <highcharts-chart
+                  [Highcharts]="Highcharts"
+                  [options]="chartOptions"
+                  ></highcharts-chart>
+               </div>
+                <div class="d-flex flex-column-reverse row col ">
+                  <div class="d-md-flex ">
+                     <div class="form-group col-md-6">
+                        <div class="d-flex justify-content-between p-2 px-2">
+                           <div>Amount</div>
+                           <div>0 BTC</div>
+                        </div>
+                        <div class="formbox d-flex align-items-center justify-content-between">
+                           <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                           <div><input value="100.000000000" class="form-control" name="betamount" required [(ngModel)]="bet_amount" (blur)="bettingamount('none')"></div>
+                           <div class="d-flex">
+                              <div>
+                                 <button class="btn sbtn lbtn" (click)="bettingamount('divide')">/2</button>
+                              </div>
+                              <div>
+                                 <button class="btn sbtn lbtn" (click)="bettingamount('multiply')">X2</button>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="d-flex evenbtn justify-content-between">
+                           <button class="sbtn col lbtn" (click)="bettingamount('10')" >10</button>
+                           <button class="sbtn col lbtn" (click)="bettingamount('100')" >100</button>
+                           <button class="sbtn col lbtn" (click)="bettingamount('1000')" >1000</button>
+                           <button class="sbtn col lbtn" (click)="bettingamount('10000')" >10000</button>
+                        </div>
+                     </div>
+                     <div class="form-group col-md-6">
+                        <div class="d-flex justify-content-between p-2 px-2">
+                           <div>Auto cash out</div>
+                           <div>Chance <span>{{ chance_win_percent | number:'1.2-2' }}%</span></div>
+                        </div>
+                        <div class="formbox d-flex align-items-center justify-content-between cus_bttn">
+                           <div><input value="1.98" class="form-control" name="payout" #payout="ngModel" required [(ngModel)]="pay_out" (blur)="calculatePercentage(payout.value)"></div>
+                           <div class="d-flex"><button class="sbtn lbtn" (click)="bettingpayout('sub')"><img width="15" src="assets/images/arrow-l.svg"></button>
+                        <button class="sbtn lbtn" (click)="bettingpayout('add')"><img width="15"src="assets/images/arrow-r.svg"></button></div>
+                        </div>
+                     </div>
+                     
+                  </div>
+
+                  <div class="col-md-12 col-lg-6 mx-auto">
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" [disabled]="BetLimit" (click)="submitBet()" *ngIf="!BetActive">Bet</button>
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" *ngIf="BetActive && !BetLimit" disabled><span>Bet </span><br><span>(Next round)</span></button>
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" *ngIf="BetActive && BetLimit" [disabled]="(pay_out*1) <= (result*1)" (click)="cashout((result*1).toFixed(2), ActiveBetId)" style="white-space: pre-wrap">{{((pay_out*1) <= (result*1)) ? plunderSecond :  'Cash out '+(result*1).toFixed(2)}}</button>
+                  </div>
+               </div>
+               <div class="d-flex justify-content-between boxgwhl">
+                  <div class="d-flex boxg">
+                     <div (click)="userFav('bustabit')"><i class="fas fa-star" [ngClass]="{'fav':fav_clr==1}"></i>{{fav_count}}</div>
+                        <div (click)="userLike('bustabit')"><i class="fas fa-heart" [ngClass]="{'like':like_clr==1}"></i>{{like_count}}</div>
+                     <!-- <div><i class="fa-solid fa-paper-plane"></i></div> -->
+                  </div>
+                  <div class="d-flex boxg">
+                     <!-- <div title="Music"><i class="fa-solid fa-music"></i></div>
+                     <div title="Sound"><i class="fa-solid fa-volume-off"></i></div>
+                     <div title="Turbo bet"><i class="fa fa-bolt"></i></div>
+                     <div title="Hot keys"><i class="fa-solid fa-keyboard"></i></div>
+                     <div title="Seed"><i class="fa-solid fa-lemon"></i></div>
+                     <div title="Help"><i class="fa-regular fa-circle-question"></i></div> -->
+                     <div title="Hot keys" data-toggle="modal" data-target="#hotKeys"><i class="fa-solid fa-keyboard"></i></div>
+                     <div title="Live Status" data-toggle="modal" data-target="#crashlivechart">
+                        <i class="fa fa-bolt"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="functioninner col-xl functioninner">
+             <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Player</th>
+                           <th>Cash Out</th>
+                           <th>Amount</th>
+                           <th>Profit</th>
+                        </tr>
+                     </thead>
+                     <tbody *ngIf="bettingList.length == 0">
+                         <tr><td class="white-t text-center" colspan="4">No data found</td></tr>
+                     </tbody>
+                     <tbody *ngIf="bettingList.length > 0">
+                        <tr class="font-13" *ngFor="let betUser of bettingList;" >
+                           <td>{{betUser.user_id}}</td>
+                           <td [ngClass]="(((((betUser.auto_cashout*1) <= (result*1)) && !chashouton) || ((betUser.payout*1) <= ((result*1))) && ((betUser.payout*1) !== 0)) && type == 'x') ? 'text-success' : ''">
+                              {{((((betUser.auto_cashout*1) <= ((result*1))) && !chashouton) && type == "x") ? betUser.auto_cashout : ((((betUser.payout*1) <= ((result*1))) && ((betUser.payout*1) !== 0)) && type == "x") ? betUser.payout : "betting"}}</td>
+                           <td>{{betUser.bet_amount}}</td>
+                           <td [ngClass]="(((((betUser.auto_cashout*1) <= (result*1)) && !chashouton) || ((betUser.payout*1) <= ((result*1))) && ((betUser.payout*1) !== 0)) && type == 'x') ? 'text-success' : ((((betUser.auto_cashout*1) > ((result*1)) && !chashouton) || ((betUser.payout*1) > ((result*1))) && ((betUser.payout*1) !== 0)) && type == 'x' && prefix_text == 'Busted @ ') ? 'text-danger' : ''" >
+                              {{((((betUser.auto_cashout*1) <= (result*1)) && prefix_text !=='Starts In ' && !chashouton)) ? (((betUser.auto_cashout*1)*(betUser.bet_amount*1))-(betUser.bet_amount*1)) : ((betUser.payout*1) <= (result*1)) && ((betUser.payout*1) !== 0) ? (((betUser.payout*1)*(betUser.bet_amount*1))-(betUser.bet_amount*1)) : ((((betUser.auto_cashout*1) > (result*1)) || ((betUser.payout*1) > (result*1)) && ((betUser.payout*1) !== 0)) && type == "x" && prefix_text == "Busted @ ") ? '-'+(betUser.bet_amount) : "betting"}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+         </div>
+      </div>
+      
+      <div class="darkbg p-4">
+         <nav>
+            <div class="nav nav-tabs sitetabs tabs1" id="nav-tab" role="tablist">
+               <a class="nav-item nav-link" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">My bets</a>
+               <a class="nav-item nav-link active" id="nav-bets-tab" data-toggle="tab" href="#nav-bets" role="tab" aria-controls="nav-bets" aria-selected="false">History</a>
+            </div>
+         </nav>
+         <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+               <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Game ID</th>
+                           <th>Result</th>
+                           <th>Amount</th>
+                           <th>Payout</th>
+                           <th>Profit</th>
+                        </tr>
+                     </thead>
+                     <tbody *ngIf="Bethistory?.length == 0">
+                        <tr><td class="white-t">No data found</td></tr>
+                     </tbody>
+                     <tbody *ngIf="Bethistory?.length > 0">
+                        <ng-container *ngFor="let betlist of Bethistory; let i = index">
+                           <tr *ngIf="i < 10 || showMoreHis" class="hov" data-toggle="modal" data-target="#exampleCenter2" (click)="Details(betlist._id)">
+                              <td class="white-t">{{ betlist['_id'].substr(0, 8)+"..." }}</td>
+                              <td class="blue-t">{{(betlist.bet_result*1).toFixed(3)}}</td>
+                              <td class="white-t">{{ ((betlist?.users[0]?.bet_amount)*1).toFixed(6) }}</td>
+                              <td class="white-t">{{ ((betlist?.users[0]?.payout)*1).toFixed(2) }}</td>
+                              <td class="white-t" [ngClass]="betlist?.users[0]?.status == 'winner' ? 'text-success' : betlist?.users[0]?.status == 'loser' ? 'text-danger': ''">{{ (betlist?.users[0]?.status == 'loser') ?  '-'+((betlist?.users[0]?.win_lose_amt)*1).toFixed(6) : '+'+((betlist?.users[0]?.win_lose_amt)*1).toFixed(6)}}</td>
+                           </tr>
+                        </ng-container>
+                     </tbody>
+                  </table>
+                  <div *ngIf="Bethistory.length >= 10" class="text-center">
+                     <button (click)="toggleShowMoreHis()" class="sowes" style="color:white">{{ showMoreHis ? 'Show Less' : 'Show More' }}
+                        <span><i class="fas fa-chevron-down ml-2"></i></span>
+                     </button>
+                  </div>
+               </div>
+            </div>
+            <div class="tab-pane fade show active" id="nav-bets" role="tabpanel" aria-labelledby="nav-bets-tab">
+               <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Game ID</th>
+                           <th>Result</th>
+                           <th>Hash</th>
+                        </tr>
+                     </thead>
+                     <tbody *ngIf="allBethistory?.length == 0">
+                        <tr class="text-center"><td class="white-t">No data found</td></tr>
+                     </tbody>
+                     <tbody *ngIf="allBethistory?.length > 0">
+                        <ng-container *ngFor="let betlist of allBethistory; let i = index">
+                           <tr *ngIf="i < 10 || showMore" class="hov" data-toggle="modal" data-target="#exampleCenter2" (click)="Details(betlist._id)">
+                              <td class="white-t">{{ betlist['_id'].substr(0, 8)+"..." }}</td>
+                              <td class="blue-t">{{(betlist.bet_result*1).toFixed(3)}}</td>
+                              <td class="blue-t">{{betlist.server_seed}}</td>
+                           </tr>
+                        </ng-container>
+                     </tbody>
+                  </table>
+                  <div *ngIf="allBethistory.length >= 10" class="text-center">
+                     <button (click)="toggleShowMore()" class="sowes" style="color:white">{{ showMore ? 'Show Less' : 'Show More' }}<span><i class="fas fa-chevron-down ml-2"></i></span></button>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+</div>
+
+<!-- Details -->
+<div class="modal fade" id="exampleCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleCenter2" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title font-weight-bold" id="exampleModalLongTitle">All Players</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div> 
+            <table class="table table-dark lastright modeTable">
+               <thead class="int-tite">
+                  <td>BetId</td>
+                  <td>Player</td>
+                  <td>Payout</td>
+                  <td>Profit</td>
+               </thead>
+               <tbody *ngIf="betResultsDetails?.betList?.length == 0">
+                  <tr class="font-13"><td class="white-t text-center" colspan="4">No data found</td></tr>
+               </tbody>
+               <tbody *ngIf="betResultsDetails?.betList?.length > 0">
+                  <tr class="font-13" *ngFor="let betuser of betResultsDetails.betList;">
+                     <td class="white-t" data-toggle="modal" data-target="#exampleCenter3" data-dismiss="modal" (click)="betUserDetails(betuser)">{{ betuser['_id'].substr(0, 8)+"..." }}</td>
+                     <td class="blue-t">{{betuser.username}}</td>
+                     <td class="white-t">{{(betuser.payout*1).toFixed(2)}} X</td>
+                     <td class="white-t" [ngClass]="betuser.payout == 0 ? 'text-danger' : 'text-success'">{{((betuser.bet_amount*1)*(betuser.payout*1))-(betuser.bet_amount*1)}}
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="exampleCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleCenter3" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="detailForm"> 
+         <div class="ui-scrollview d767b8h">
+            <div class="g1g5nio3">
+               <div class="s1hd7haz game-share">
+               </div>
+               <div class="text-center">
+                  <div class="d-flex justify-content-center mb-2">
+                     <img class="verified" src="assets/images/bet-id.svg" width="20px">
+
+                     <div class="betid ml-2" >Bet Id: {{Det.id}}</div>
+                     <i class="fas fa-copy pl-3 hov" (click)="copyInputMessage(Det.id)"></i>
+                  </div>
+                  <div class="d-flex justify-content-center mb-2">
+                     <span class="mr-2">By</span>
+                     <a href="#/user/profile/12344577" keep-scroll-position="true" class="u1blx6u2 user-info name mr-2">
+                        <div class="name betid mr-2">{{Det.name}}</div>
+                     </a>
+                     <span class="mr-2">On </span>
+                     <div class="rt_time mr-2"> {{ Det.created_at |date:'dd-MM-yy  HH:mm:ss'}}</div>
+                  </div>
+               </div>
+               <div class="items d-flex justify-content-between">
+                  <div class="item-wrap blak-box text-center">
+                     <div class="d-flex justify-content-center">
+                        <img class="coin-icon" src="assets/images/amount.svg" width="20px">
+                     <div class="label flex-center ml-2">Amount</div>
+                     </div>
+                     <div class="cy2znlo coin notranslate number flex-center">
+                        <div class="amount">
+                           <span class="amount-str">{{((Det.bet_amount)*1).toFixed(6)}}
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="item-wrap blak-box text-center">
+                     <div class="d-flex justify-content-center">
+                        <img class="coin-icon" src="assets/images/payout.svg" width="20px">
+                     <div class="label flex-center ml-2">Payout</div>
+                     </div>
+                     <div class="number flex-center">{{((Det.payout)*1).toFixed(2)}} x</div>
+                  </div>
+                  <div class="item-wrap blak-box text-center">
+                     <div class="d-flex justify-content-center">
+                        <img class="coin-icon" src="assets/images/profit.svg" width="20px">
+                     <div class="label flex-center ml-2">Profit</div>
+                     </div>
+                        <div class="cy2znlo coin notranslate number flex-center profit-num has-sign">
+                           <div class="amount">
+                              <span class="amount-str" [ngClass]="(Det.status=='winner') ? 'text-success' : (Det.status == 'loser') ? 'text-danger' : ''">
+                                 {{Det.status=='loser' ? '-'+((Det.pro_amt*1).toFixed(6)) :  '+'+((Det.pro_amt*1).toFixed(6))}}
+                              </span>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+               <div class="game-info-wrap formbox p-2 mx-1 my-2 d-flex justify-content-between align-items-center">
+                  <div class="info-middle d-flex align-items-center">
+                     <div><img class="thumbnail" width="70" alt="game-logo" src="assets/images/crash-g.png">
+                     </div>
+                     <div class="ml-2">
+                        <div class="name betid">Crash</div>
+                        <div>RollGame</div>
+                     </div>
+                  </div>
+                  <button class="ui-button button-normal play">
+                     <a class="button-inner sitebtn" href="ringoffortune">Play Now</a>
+                  </button>
+               </div>
+              <div class="link item-wrap blak-boxz">
+                <a  data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <span class="res">Game Details</span>
+                  <i class="fas fa-caret-down er"></i>
+                </a>
+                  <div class="collapse" id="collapse1">
+                    <div class="cards card-body">
+                        <div class="seed-main">
+                           <div class="ui-input">
+                            <div class="d-flex justify-content-between"><span class="input-label">Server Seed</span><span class="green-t" data-toggle="modal" data-target="#exampleCenter" data-dismiss="modal" aria-label="Close" (click)="confirmedData()" (click)="Seedsetting()" *ngIf="seedset">Seed Settings</span></div>
+                              <div class="input-control" *ngIf="Det.seedstatus==0">
+                                <input class="form-control" type="text" placeholder="The Seed hasn't been revealed yet." readonly>
+                              </div>
+                              <div class="input-control" *ngIf="Det.seedstatus==1">
+                                <input class="form-control" type="text" [value]="Det.withouthashserver">
+                              </div>
+                           </div>
+                           <div class="ui-input">
+                              <div class="input-label">
+                                 <div class="seed-col">
+                                    <div>Server Seed (hash)</div>
+                                 </div>
+                              </div>
+                              <div class="input-control"><input type="text" class="form-control"  readonly=""  [value]="Det.serverSeed"></div>
+                           </div>
+                           <div class="d-flex">
+                              <div class="ui-input col pl-0">
+                                <div class="input-label">Client Seed</div>
+                                <div class="input-control" *ngIf="Det.seedstatus ==0">
+                                  <input type="text" class="form-control" readonly [value]="Det.clientSeed">
+                                </div>
+                                <div class="input-control" *ngIf="Det.seedstatus ==1">
+                                  <input type="text" class="form-control" readonly [value]="Det.withouthashclient">
+                                </div>
+                              </div>
+                              <div class="ui-input col pr-0">
+                                 <div class="input-label">nonce</div>
+                                 <div class="input-control">
+                                  <input type="text" class="form-control"  readonly="" [value]="Det.nounce">
+                                </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="submit" style="color:white !important;">
+                          <button  class="btn sitebtn col-md-12 p-2 mt-3 mb-1" style="font-weight: 600;font-size: 17px;" data-toggle="modal" data-target="#seedVerifyCenter" data-dismiss="modal" aria-label="Close">
+                             <div class="button-inner" (click)="confirmedData()">Verify</div>
+                          </button>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+         </div>
+       </div>
+  </div>
+   </div>
+</div>
+</div>
+
+<div class="modal fade modals1" id="crashlivechart" tabindex="-1" role="dialog" aria-labelledby="crashlivechart" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-dialogs" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-success" id="exampleModalLongTitle">Live Stats</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="link item-wrap blak-boxz">
+            <div class="d-flex justify-content-between" (click)="class()">
+               <div >
+                  <span class="res" [class.custom-class]="shouldAddClass">Bet</span>
+               </div>
+               <div *ngIf="shouldAddClass!=true">
+                  <i class="fas fa-caret-down er"></i> 
+               </div>
+               <div *ngIf="shouldAddClass==true">
+                   <i class="fas fa-caret-up ewe"></i> 
+               </div>
+            </div>
+            <div *ngIf="shouldAddClass==true">
+               <div class="p-4">
+                  <div><input type="checkbox">Bet</div>
+                  <div class="my-3"><input type="checkbox">Wager contest</div>
+                  <div><input type="checkbox">BCD Treasure Box</div>
+               </div>
+            </div>
+         </div>
+         <div class="link item-wrap blak-boxz">
+            <div class="d-flex justify-content-between">
+               <span>Bet</span>
+            <span (click)="getExacttime()"><i class="fas fa-sync-alt" style="color: #000000;"></i></span>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>wagered</div>
+               <div>profit</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div>{{wagered}}</div>
+               <div>{{profits}}</div>
+               </div>
+            </div>
+            <div class="">
+               <div class="wrapperbox gridx" >
+                  <div class="w-100">
+                     <div id="container"></div>
+                  </div>
+               </div>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>Win</div>
+                  <div>loss</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div >{{win_count}}</div>
+                  <div>{{loss_count}}</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- hotKeys -->
+<div class="modal fade" id="hotKeys" tabindex="-1" role="dialog" aria-labelledby="hotKeys" aria-hidden="true" >
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-success" id="exampleModalLongTitle">Hot keys</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="message my-5 text-center frt" style="color:#98a7b5;font-size: 15px;">
+           <div class="ui-scrollview h1yfs6k1 dialog-box">
+            <div class="hotkey-list">
+               <div class="hotkey-item">
+                  <div class="hotkey-txt">Half bet amount</div>
+                  <div class="hotkey-key">A</div>
+               </div>
+               <div class="hotkey-item">
+                  <div class="hotkey-txt">Double bet amount</div>
+                  <div class="hotkey-key">S</div>
+               </div>
+               <div class="hotkey-item">
+                  <div class="hotkey-txt">Make a bet</div>
+                  <div class="hotkey-key">Space</div>
+               </div>
+            </div>
+            <div class="hotkey-enabled mt-1">
+               <div>
+                  <input class="hotkey-select " [(ngModel)]="hotKey" name="hotKeys" type="checkbox" id="gridDeposit" (click)="enableKey(hotKey)">
+               </div>
+               <div>Hotkeys Enabled</div>
+            </div>
+            <div class="mt-3" style="color:green">
+               <span>*Note HotKey's Only Available on Manual Bets</span>
+            </div>
+         </div>
+         </div>
+      </div>
+  </div>
+</div>

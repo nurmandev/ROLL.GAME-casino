@@ -1,0 +1,60 @@
+pre{
+    color: white;
+}
+.cont-bg.active{
+    background: #1e202466 !important;
+    font-weight: 700;
+    color: #fff;
+}
+.cont-bg{
+color: rgb(153 164 176 / 80%);
+}
+.selets{
+    background: rgb(43 44 52 / 0%);
+    border: 1px solid dimgray;
+    color: #fff;
+}
+.opt{
+    color: #111111;
+}
+
+.Iconimg{
+    font-size: 100px;
+    border-radius: 5px;
+}
+
+.heading {
+    font-weight: bolder
+}
+.wordWrap{
+    word-break: break-all;
+}
+@media(max-width:700px){
+     .custom-ww{
+        width: max-content;
+        flex-direction: row;
+     }
+}
+
+.largedropdown,.largedropdown .dropdown-menu,.largedropdown .btn
+{
+  width: 100%;
+
+}
+.largedropdown .dropdown-toggle::after
+{
+  position: absolute;
+    right: 11px;
+    top: 20px;
+}
+.frm {
+  background: #31343c;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.custom-select{
+}
+.hov{
+    cursor: pointer !important;
+}

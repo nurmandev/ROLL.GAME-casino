@@ -1,0 +1,95 @@
+<div class="pagewrapper">
+   <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+         <div class="d-flex flex-column flex-sm-row row m-0">
+            <div class="leftmenubox col">
+               <ul class="navlist">
+                  <li><a routerLink="/general">General</a></li>
+                  <li><a routerLink="/myprivacy" class="select">Privacy</a></li>
+                  <li><a routerLink="/verification">Mail / Phone Number</a></li>
+                  <li><a routerLink="/security" >Security</a></li>
+                  <li><a routerLink="/activesession">Active Sessions</a></li>
+                  <li><a routerLink="/verify">Verify</a></li>
+               </ul>
+            </div>
+            <div class="righsidebox col">
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Hide my gaming data on profile</div>
+                     <div class="small">Even if hidden, your avatar and username are always visible in chatrooms.</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Hide my username from public lists</div>
+                     <div class="small">If hidden, no one can view your profile by clicking on your avatar or username on public rankings or bets list.</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Hide my online presence in private chat</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Allow private messages from strangers</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Refuse any new friend request</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>
+                     <div>Refuse tip from strangers</div>
+                  </div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

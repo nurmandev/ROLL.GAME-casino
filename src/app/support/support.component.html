@@ -1,0 +1,72 @@
+<div class="pagewrapper">
+	<ng-container *ngIf="!head">
+      <app-header (ConnEvent)="conPass($event)"></app-header>
+   	</ng-container>
+   	<ng-container *ngIf="head">
+      <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   	</ng-container>
+	<div class="gamewrapper">
+   		<div class="sidemenu">
+      		<app-sidebar></app-sidebar>
+   		</div>
+   		<div class="gameinnerwhl">
+        <div class="my-2">
+         	<i class="fa-solid green-t mr-1 fa-earth-americas"></i>Live Support</div>
+        	<div class="m-0">
+			    <form #f="ngForm" novalidate autocomplete="off">
+			    	<div class="d-flex">
+			    		
+	    	    	<div class="form-group cus-height col-4">
+	    			  	<label class="white-t font-14">UserName</label>
+	    			  	<input type="text" class="form-control bg-transparent border-474a4c p-2 " name="Username" #q="ngModel" ngModel [class.is-invalid] = "q.invalid && q.touched" pattern="[a-zA-Z ]*" placeholder="Username *" required>
+	    			  	<div *ngIf= "q.errors && (q.valid || q.touched || f.submitted)" class="errMsg">
+                            <span *ngIf="q.errors?.['required']" class="error text-danger">{{"Enter Username"}}</span>
+                            <span *ngIf="q.errors?.['pattern']" class="error text-danger">{{"Enter Valid Username"}}</span>
+                        </div>
+	    			</div>
+			    	<div class="form-group cus-height col-4">
+					  	<label class="white-t font-14">Email</label>
+	    			  	<input type="text" class="form-control bg-transparent border-474a4c p-2 " name="email" #w="ngModel" ngModel [class.is-invalid] = "w.invalid && w.touched" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="email *" required>
+	    			  	<div *ngIf= "w.errors && (w.valid || w.touched || f.submitted)" class="errMsg">
+                            <span *ngIf="w.errors?.['required']" class="error text-danger text-danger">{{"Enter Email"}}</span>
+                            <span *ngIf="w.errors?.['pattern']" class="error text-danger">{{"Enter Valid Email"}}</span>
+                        </div>
+					</div>
+					<div class="form-group cus-height col-4">
+					  	<label class="white-t font-14">Subject</label>
+					  	<select class="user-info1" name="options" class="form-control bg-transparent border-474a4c p-2" aria-label="Small" aria-describedby="inputGroup-sizing-sm" [(ngModel)]="selectedOption" (change)="onOptionSelected()">
+					    	<option *ngFor="let option of Option" >{{ option.category }}</option>
+					  	</select>
+					</div>
+			    	</div>
+
+			    	
+					<div class="form-group px-3">
+						<label  class="white-t font-14">Message </label>
+						 <textarea name="Message" class="form-control bg-transparent border-474a4c p-2 " aria-label="Small" aria-describedby="inputGroup-sizing-sm" rows="6" placeholder="Your message *"  #z="ngModel" [class.is-invalid] = "z.invalid && z.touched" ngModel required [minlength]="3"  pattern="[a-zA-Z ]*"></textarea>
+						<div *ngIf= "z.errors && (z.valid || z.touched || f.submitted)" class="errMsg">
+                            <span *ngIf="z.errors?.['required']" class="error text-danger">{{"Enter Message"}}</span>
+                            <span *ngIf="z.errors?.['pattern']" class="error text-danger">{{"Enter valid Message"}}</span>
+                        </div>
+                    </div>
+					<div class="form-group px-3" >
+						<div  class="white-t cut-clr font-14 mb-2 ">Image </div>
+						<div class="uploadbtnwhl my-2">
+							<input type="file" id="id-front" name="idCardFront" class="d-none " ng-reflect-name="idCardFront" (change)="onFileSelected($event)"><label for="id-front" class="bluebtn text-center smallbtn pointer">Choose File</label></div>
+						<div *ngIf="selectedImage">
+							<img width="400" height="auto" [src]="selectedImage" alt="Selected Image" class="img-fluid">
+						</div>
+						<div  class="white-t text-info cut-clr font-14">Optional * </div>
+					</div>
+		        	<div class="mt-4 px-3">
+		                <button type="button" class="btn btn-outline-warning" [disabled]="f.invalid||!z" (click)="executeAction('signup', f)">SUBMIT</button>
+		            </div>
+			    </form>
+        	</div>
+        </div>
+   	</div>
+   <app-footer></app-footer>
+   	
+</div>
+
+

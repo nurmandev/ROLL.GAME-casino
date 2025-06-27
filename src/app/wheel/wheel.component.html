@@ -1,0 +1,781 @@
+<div class="pagewrapper">
+  <ng-container *ngIf="!head">
+      <app-header (ConnEvent)="conPass($event)"></app-header>
+   </ng-container>
+   <ng-container *ngIf="head">
+      <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+   </ng-container>
+  <div class="gamewrapper">
+    <div class="sidemenu"><app-sidebar></app-sidebar></div>
+    <div class="gameinnerwhl">
+    	<div class="breadcrumblink pointer"><a routerLink="/casino">RollGame Originals</a> > <span class="pointer">Wheel's</span> </div>
+    	<div class="d-flex row m-0">
+    		<div class="gameinner wheelgameinner col p-0">
+          <div  class="greyboxwhl d-flex align-items-center">
+            <!-- <div class="greybox paybox bf">
+              <div><span class="green-t">Bankroll</span><span class="mx-1">ETH</span></div>
+              <div class="text-white">2817495233 <img class="scoin" src="assets/images/coins/eth.svg"></div>
+            </div> -->
+            <div id="dynamic-data" class="text-wrapper xlevelwhl">
+              <div class="d-flex flex-row-reverse navhis xlevel">
+                <div class="greybox bf hov" *ngFor="let list1 of payoutHistory;let i = index" [ngClass]="{'lor':list1.status=='winner'}" [style.animation-delay]="i"(click)="getDetails(list1._id)" data-toggle="modal" data-target="#exampleCenter2" >{{ (+list1.payout).toFixed(2) }}x</div>
+              </div>
+            </div>
+          </div>
+    			<div class="gameinnerboxwhl wheelgame">
+    				<div class="gameinnerwrapper alg ">
+              <div class="parent-div">
+              <ngx-wheel 
+                #wheel
+                [width]='450'
+                [height]='450'
+                [spinDuration]='5'
+                [items]='items'
+                [innerRadius]='100'
+                [spinAmount]='5'
+                [disableSpinOnClick]='true'
+                [textOrientation]='textOrientation'
+                [textAlignment]='textAlignment'
+                pointerStrokeColor='black'
+                pointerFillColor='gold'
+                [idToLandOn]='idToLandOn'
+                (onSpinStart)='before()'
+                (onSpinComplete)='after()'
+                >
+              </ngx-wheel>
+              <span class="pos-cust" [ngClass]="{'wg':this.getColor=='#fff' ,'blg':this.getColor=='#6dc1fd' ,'gd':this.getColor=='#48c029' , 'od':this.getColor=='#f7ab14' , 'pd':this.getColor=='#935adf'}">{{ randonText}}</span>
+              </div>
+
+            </div>
+            <div  class="greyboxwhl bottomx game_select" >
+              <div id="wheels" class="d-flex justify-content-center hoverwhl"  >
+                <div class="d-flex p-2 hoverbox justify-content-center" >
+                  <div class="form-group mx-2" >
+                    <div class="d-flex justify-content-between mb-2 font-weight-bold">
+                      <div class="input-label  text-light">Win Amount</div>
+                      <div class="text-light font-weight-bold">0 INR</div>
+                    </div>
+                    <div class="d-flex">
+                      <div class="p-2" style="background-color:#1e2024">
+                        <img src="assets/images/coins/bnb.svg" class="img-fluid btc">
+                      </div>
+                      <input type="text" class="form-control form-input" [value]="winAmount">
+                    </div>
+                  </div>
+                  <div class="form-group mx-2">
+                    <div class="input-label mb-2 text-light font-weight-bold">chance</div>
+                    <input type="text" class="form-control form-input" [value]="chance">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center itemhwhl" (mouseleave)='out()' >
+              <div *ngFor="let stc of wheelResult" class=" itemh" >
+                <div (mouseenter)='over(stc.val,stc.clr)'  [style.border-bottom]="'5px solid ' + stc.clr" class="greybox  bf pin"  >
+                  <div ></div>
+                  <div >{{stc.val.toFixed(2)}} X</div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between boxgwhl">
+              <div class="d-flex boxg">
+                <div (click)="userFav('wheel')">
+                  <i class="fas fa-star" [ngClass]="{'fav':fav_clr==1}"></i> {{ fav_count}}</div>
+                <div (click)="userLike('wheel')">
+                  <i class="fas fa-heart" [ngClass]="{'like':like_clr==1}"></i>{{ like_count}}</div>
+              </div>
+              <div class="d-flex boxg">
+                <div title="Live Status" data-toggle="modal" data-target="#exampleCenter5">
+                  <i class="fa fa-bolt"></i>
+                </div>
+                <div title="Hot keys" data-toggle="modal" data-target="#hotKeys"><i class="fa-solid fa-keyboard"></i></div>
+                <div title="Seed" data-toggle="modal" data-target="#exampleCenter" (click)="Seedsetting()"><i class="fa-solid fa-lemon"></i></div>
+              </div>
+            </div>
+    		  </div>
+        </div>
+    		<div class="functioninner">
+          <div class="d-block d-md-none" *ngIf="resautoman">
+           <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" [ngClass]="{'disabled-text': checkedout}" (click)="submitBet()">Bet</button>
+          </div>
+          <div class="d-block d-md-none" *ngIf="!resautoman">
+            <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="sumbit_auto_bet()" *ngIf="!disabledHead">Start Auto Bet</button>
+            <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="stop_auto_bet()" *ngIf="disabledHead">Stop Auto Bet</button>
+          </div>
+
+          <ul class="nav nav-tabs sitetabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" [disabled]="disabledHead" (click)="resautoman = true">Manual</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" [disabled]="autodisabled" (click)="resautoman = false">Auto</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent" [ngClass]="{'disabled-text': gameTab}">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      	      <div class="d-flex justify-content-between p-2 px-2">
+            		<div>Amount</div>
+            		<div>0 {{currency}}</div>
+      	      </div>
+      	      <div class="formbox d-flex align-items-center">
+            		<div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+            		<div [ngClass]="{'disabled-text': checkedout}" >
+                  <input value="100.000000000" class="form-control" name="betamount" #betamount="ngModel" required [(ngModel)]="bet_amount" (blur)="bettingamount('none')" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57">
+                </div>
+            		<div [ngClass]="{'disabled-text': checkedout}" >
+                  <button class="btn sbtn lbtn" (click)="bettingamount('divide')">/2</button>
+                </div>
+            		<div [ngClass]="{'disabled-text': checkedout}" >
+                  <button class="btn sbtn lbtn" (click)="bettingamount('multiply')">X2</button>
+                </div>
+            		<div class="dropdown">
+                  <button class="btn sbtn lbtn arrowbtns rangeslider">
+                    <div><img src="assets/images/toparrow.svg"/></div>  
+                    <div><img src="assets/images/downarrow.svg"/></div> 
+                  </button>
+                  <div class="showslider"  >
+                    <ngx-slider [(value)]="value" [options]="options" (userChange)="onSliderChange($event,'manual')" ></ngx-slider>
+                  </div>
+                </div>
+       	      </div>
+             <div class="d-flex evenbtn justify-content-between">
+               <button class="sbtn col lbtn" (click)="bettingamount('1000')">1000</button>
+               <button class="sbtn col lbtn" (click)="bettingamount('10000')">10000</button>
+               <button class="sbtn col lbtn" (click)="bettingamount('100000')">100000</button>
+               <button class="sbtn col lbtn" (click)="bettingamount('1000000')">1000000</button>
+            </div>
+            	<div class="d-flex justify-content-between p-2 px-2">
+            		<div>Segment</div>
+            	</div>
+      	      <div class="input-group mb-3">
+                <div class="p-1 col  d-flex justify-content-between">
+                  <button class="lbtn col sbtn" (click)="change('Low','risk')" >Low</button>
+                  <button class="lbtn col sbtn" (click)="change('Medium','risk')">Medium</button>
+                  <button class="lbtn col sbtn" (click)="change('High','risk')">High</button>
+                </div>
+      	      </div>
+              <div class="d-flex justify-content-between p-2 px-2">
+                <div>Row</div>
+              </div>
+              <div class="px-2 grab">
+                <ngx-slider [(value)]="value3" [options]="options3" (click)="change(value3,'segement')"></ngx-slider>
+             </div>
+              <div class="input-group mb-3">
+
+                <!-- <select #segment  class="form-control" (change)="change(segment.value,'segement')">
+                  <option selected value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="40">40</option>
+                  <option value="50">50</option>
+                </select> -->
+              </div>
+
+              <div class="d-none d-md-block">
+      	       <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" [ngClass]="{'disabled-text': checkedout}" (click)="submitBet()">Bet</button>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>Amount</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center">
+                  <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <input value="100.000000000" class="form-control" required [(ngModel)]="auto_bet_amount" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57" (blur)="auto_bettingamount('none')">
+                  </div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <button class="btn sbtn lbtn" (click)="auto_bettingamount('divide')">/2</button>
+                  </div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <button class="btn sbtn lbtn" (click)="auto_bettingamount('multiply')">X2</button>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn sbtn lbtn arrowbtns rangeslider">
+                      <div><img src="assets/images/toparrow.svg"/></div>  
+                      <div><img src="assets/images/downarrow.svg"/></div> 
+                    </button>
+                    <div class="showslider" [ngClass]="{'disabled-text': disabledHead}">
+                      <ngx-slider [(value)]="value2" [options]="options2" (userChange)="onSliderChange($event,'auto')"></ngx-slider>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex evenbtn justify-content-between">
+               <button class="sbtn col lbtn" (click)="auto_bettingamount('1000')">1000</button>
+               <button class="sbtn col lbtn" (click)="auto_bettingamount('10000')">10000</button>
+               <button class="sbtn col lbtn" (click)="auto_bettingamount('100000')">100000</button>
+               <button class="sbtn col lbtn" (click)="auto_bettingamount('1000000')">1000000</button>
+            </div>
+              </div>
+              <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>Number of Bets</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center">
+                  <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <input value="0" class="form-control" name="numberofbets" required [(ngModel)]="numberofbets" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57" autocomplete="off">
+                  </div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <button class="btn sbtn lbtn" (click)="number_of_bets('infinity')">0</button>
+                  </div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <button class="btn sbtn lbtn" (click)="number_of_bets(10)">10</button>
+                  </div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <button class="btn sbtn lbtn" (click)="number_of_bets(100)">100</button>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>On Win</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center justify-content-between">
+                  <div><div class="btn sbtn lbtn rbox">Reset Increase by</div></div>
+                  <div><input value="0" class="form-control"></div>
+                  <div class="green-t bf">%</div>
+                </div>
+              </div> -->
+              <!-- <div class="d-flex">
+                <div class="ui-input col pl-0">
+                  <div class="input-label p-2">Risk</div>
+                  <div class="input-group mb-3" [ngClass]="{'disabled-text': disabledHead}">
+                    <select  #risks class="form-control" (change)="change(risks.value,'risk')">
+                      <option selected value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                    </select>
+                  </div>
+                </div>
+                </div> -->
+                <div class="d-flex justify-content-between p-2 px-2">
+                <div>Segment</div>
+              </div>
+              <div class="input-group mb-3">
+                <div class="p-1 col  d-flex justify-content-between">
+                  <button class="lbtn col sbtn" (click)="change('Low','risk')" >Low</button>
+                  <button class="lbtn col sbtn" (click)="change('Medium','risk')">Medium</button>
+                  <button class="lbtn col sbtn" (click)="change('High','risk')">High</button>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between p-2 px-2">
+                <div>Row</div>
+              </div>
+              <div class="px-2 grab">
+                <ngx-slider [(value)]="value3" [options]="options3" (click)="change(value3,'segement')"></ngx-slider>
+             </div>
+                <!-- <div class="ui-input col pr-0">
+                  <div class="input-label p-2">Segment</div>
+                  <div class="input-group mb-3" [ngClass]="{'disabled-text': disabledHead}">
+                    <select #segments  class="form-control" (change)="change(segments.value,'segment')">
+                      <option selected value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="30">30</option>
+                      <option value="40">40</option>
+                      <option value="50">50</option>
+                    </select>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="p-1 col  d-flex justify-content-between">
+                      <button class="lbtn col sbtn" (click)="change('Low','risk')" >Low</button>
+                      <button class="lbtn col sbtn" (click)="change('Medium','risk')">Medium</button>
+                      <button class="lbtn col sbtn" (click)="change('High','risk')">High</button>
+                    </div>
+                  </div>
+                </div> -->
+
+              
+              <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>Stop on Win</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center">
+                  <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <input value="0.00000000" class="form-control" name="stop_on_win" required [(ngModel)]="stop_on_win" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57" autocomplete="off">
+                  </div> 
+                </div>
+              </div>
+              <!-- <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>On Close</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center justify-content-between">
+                  <div><div class="btn sbtn lbtn rbox">Reset Increase by</div></div>
+                  <div><input value="0" class="form-control"></div>
+                  <div class="green-t bf">%</div>  
+                </div>
+              </div> -->
+              <div class="form-group">
+                <div class="d-flex justify-content-between p-2 px-2">
+                  <div>Stop on Close</div>
+                  <div>0 {{currency}}</div>
+                </div>
+                <div class="formbox d-flex align-items-center">
+                  <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                  <div [ngClass]="{'disabled-text': disabledHead}">
+                    <input value="0.00000000" class="form-control" name="stop_on_loss" required [(ngModel)]="stop_on_loss" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57" autocomplete="off">
+                  </div> 
+                </div>
+              </div>
+              <div class="form-group lgrey">
+                Use of script is optional and players must take full responsibility for any attendant risks. We will not be held liable in this regard.
+              </div>
+              <div class="d-none d-md-block">
+                <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="sumbit_auto_bet()" *ngIf="!disabledHead">Start Auto Bet</button>
+                <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="stop_auto_bet()" *ngIf="disabledHead">Stop Auto Bet</button>
+              </div>
+            </div>
+          </div>
+    		</div>
+    	</div>
+      <div class="darkbg p-4">
+        <nav>
+          <div class="nav nav-tabs sitetabs tabs1" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All Bets</a>
+            <a class="nav-item nav-link" id="nav-bets-tab" data-toggle="tab" href="#nav-bets" role="tab" aria-controls="nav-bets" aria-selected="false">My Bets</a>
+            <!-- <a class="nav-item nav-link" id="nav-roller-tab" data-toggle="tab" href="#nav-Roller" role="tab" aria-controls="nav-roller" aria-selected="false">High Roller</a>
+            <a class="nav-item nav-link" id="nav-contest-tab" data-toggle="tab" href="#nav-contest" role="tab" aria-controls="nav-contest" aria-selected="false">Wager Contest</a> -->
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+            <div class="table-responsive">
+                     <table class="table table-dark lastright">
+                        <thead>
+                           <tr>
+                              <th>Bet ID</th>
+                              <th>Player</th>
+                              <th>Time</th>
+                              <th>Payout</th>
+                              <th>Profit</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <ng-container *ngFor="let list of allBethistory;let i = index">
+                              <tr *ngIf="i < 10 || showMores">
+                                 <td>{{ list.betid }}</td>
+                                 <td>{{ list.player}}</td>
+                                 <td>{{ list.time | date:'yyyy-MM-dd H:mm:ss'}}</td>
+                                 <td>{{((list.payout)*1).toFixed(2)}} x</td>
+                                 <!-- <td>{{ list.profit }}</td> -->
+                                 <ng-container *ngIf="list.status=='loser'">
+                                   <td [ngClass]="{'winner':list.status=='winner','looser':list.status== 'loser'}">-{{((list.profit)*1).toFixed(6)}}<img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                                 </ng-container>
+                                 <ng-container *ngIf="list.status!='loser'">
+                                   <td [ngClass]="{'winner':list.status=='winner','looser':list.status== 'loser'}">+{{((list.profit)*1).toFixed(6)}}<img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                                 </ng-container>
+                              </tr>
+                              </ng-container>
+                        </tbody>
+                     </table>
+                     <div *ngIf="allBethistory.length >= 10" class="text-center">
+                        <button (click)="toggleShowMore()" class="sowes" style="color:white">{{ showMores ? 'Show Less' : 'Show More' }}
+                           <span><i class="fas fa-chevron-down ml-2"></i></span>
+                        </button>
+                     </div>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="nav-bets" role="tabpanel" aria-labelledby="nav-bets-tab">
+                  <div class="table-responsive">
+                     <table class="table table-dark lastright">
+                        <thead>
+                           <tr>
+                              <th>Bet ID</th>
+                              <th>Bet</th>
+                              <th>Time</th>
+                              <th>Payout</th>
+                              <th>Profit</th>
+                              <!-- <th>Result</th> -->
+                           </tr>
+                        </thead>
+                        <tbody>
+                          <ng-container *ngFor="let list of bethistory;let i = index">
+                            <tr *ngIf="i < 10 || showMoreHis" (click)="getDetails(list._id)" class="hov" data-toggle="modal" data-target="#exampleCenter2">
+                              <td>{{ list._id }}</td>
+                              <td >{{ list.bet_amount }}</td>
+                              <td>{{ list.created_at | date:'yyyy-MM-dd H:mm:ss'}}</td>
+                              <td>{{ list.payout.toFixed(2) }}x</td>
+                              <ng-container *ngIf="list.status=='loser'">
+                                <td [ngClass]="{'winner':list.status=='winner','looser':list.status== 'loser'}">-{{((list.win_lose_amt)*1).toFixed(6)}} <img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                              </ng-container>
+                              <ng-container *ngIf="list.status!='loser'">
+                                <td [ngClass]="{'winner':list.status=='winner','looser':list.status== 'loser'}">+{{((list.win_lose_amt)*1).toFixed(6)}} <img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                              </ng-container>
+                              <!-- <td  [ngClass]="{'winner':list.status=='winner','looser':list.status== 'loser'}">{{ list.status }}</td> -->
+                            </tr>
+                          </ng-container>
+                        </tbody>
+                      </table>
+                      <div *ngIf="bethistory.length >= 10" class="text-center">
+                        <button (click)="toggleShowMoreHis()" class="sowes" style="color:white">{{ showMoreHis ? 'Show Less' : 'Show More' }}
+                           <span><i class="fas fa-chevron-down ml-2"></i></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+        </div>   
+      </div>
+    </div>
+  </div>
+   <app-footer></app-footer>
+  
+</div>
+
+<!-- Details -->
+<div class="modal fade" id="exampleCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleCenter2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Bet Slip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+      </div>
+
+      <div class="detailForm"> 
+         <div class="ui-scrollview d767b8h">
+            <div class="g1g5nio3">
+               <div class="s1hd7haz game-share">
+               </div>
+               <div class="text-center">
+                  <div class="d-flex justify-content-center mb-2">
+                     <img class="verified" src="assets/images/bet-id.svg" width="20px">
+
+                     <div class="betid ml-2" >Bet Id: {{Det_id}}</div>
+                     <i class="fas fa-copy pl-3 hov" (click)="copyInputMessage(Det_id)"></i>
+                  </div>
+                  <div class="d-flex justify-content-center mb-2">
+                     <span class="mr-2">By</span>
+                     <a href="#/user/profile/12344577" keep-scroll-position="true" class="u1blx6u2 user-info name mr-2">
+                        <div class="name betid mr-2">{{Det_name}}</div>
+                     </a>
+                     <span class="mr-2">On </span>
+                     <div class="rt_time mr-2"> {{ Det_created_at |date:'dd-MM-yy  HH:mm:ss'}}</div>
+                  </div>
+               </div>
+               <div class="items d-flex justify-content-between">
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/amount.svg" width="20px">
+                     <div class="label flex-center ml-2">Amount</div>
+                     </div>
+                     <div class="cy2znlo coin notranslate number flex-center">
+                        <div class="amount">
+                           <span class="amount-str">{{((Det_betamount)*1).toFixed(6)}}
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/payout.svg" width="20px">
+                     <div class="label flex-center ml-2">Payout</div>
+                     </div>
+                     <div class="number flex-center">{{((Det_payout)*1).toFixed(2)}} x</div>
+                  </div>
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/profit.svg" width="20px">
+                     <div class="label flex-center ml-2">Profit</div>
+                     </div>
+                        <div class="cy2znlo coin notranslate number flex-center profit-num has-sign">
+                           <div class="amount">
+                              <ng-container *ngIf="Det_status=='winner'">
+                                 <span class="amount-str" [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}"> + {{((Det_pro_amt)*1).toFixed(6)}}
+                                 </span>
+                              </ng-container>
+                              <ng-container *ngIf="Det_status!='winner'">
+                                 <span class="amount-str" [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}"> - {{((Det_pro_amt)*1).toFixed(6)}}
+                                 </span>
+                              </ng-container>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+               <div class="game-info-wrap formbox p-2 mx-1 my-2 d-flex justify-content-between align-items-center">
+                  <div class="info-middle d-flex align-items-center">
+                     <div><img class="thumbnail" width="100" alt="game-logo" src="https://bc.imgix.net/game/image/81c47bf6-3761-451b-b637-c63d0d554dcc.png">
+                     </div>
+                     <div class="ml-2">
+                        <div class="name betid">Wheel</div>
+                        <div>RollGame</div>
+                     </div>
+                  </div>
+                  <button class="ui-button button-normal play">
+                     <a class="button-inner sitebtn" href="wheel">Play Now</a>
+                  </button>
+               </div>
+            </div>
+            <div class="link item-wrap blak-boxz">
+              <a  data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapseExample">
+              <span class="res">Game Details</span><i class="fas fa-caret-down er"></i></a>
+              <div class="collapse" id="collapse1">
+                <div class="cards card-body">
+                  <div class="seed-main">
+                     <div class="ui-input">
+                      <div class="d-flex justify-content-between"><span class="input-label">Server Seed</span><span class="green-t" data-toggle="modal" data-target="#exampleCenter" data-dismiss="modal" aria-label="Close" (click)="confirmedData()" (click)="Seedsetting()" *ngIf="seedset">Seed Settings</span></div>
+                        <!-- <div class="input-label">Server Seed</div> -->
+                      <div class="input-control" *ngIf="Det_seedstatus==0">
+                        <input class="form-control" type="text" placeholder="The Seed hasn't been revealed yet." readonly>
+                      </div>
+                      <div class="input-control" *ngIf="Det_seedstatus==1">
+                        <input class="form-control" type="text" [value]="withouthashserver">
+                      </div>
+                     </div>
+                     <div class="ui-input">
+                        <div class="input-label">
+                           <div class="seed-col">
+                              <div>Server Seed (hash)</div>
+                           </div>
+                        </div>
+                        <div class="input-control"><input type="text" class="form-control"  readonly=""  [value]="Det_serverSeed"></div>
+                     </div>
+                     <div class="d-flex">
+                        <div class="ui-input col pl-0">
+                          <div class="input-label">Client Seed</div>
+                          <div class="input-control" *ngIf="Det_seedstatus==0">
+                            <input type="text" class="form-control" readonly [value]="Det_clientSeed">
+                          </div>
+                          <div class="input-control" *ngIf="Det_seedstatus==1">
+                            <input type="text" class="form-control" readonly [value]="withouthashclient">
+                          </div>
+                         
+                        </div>
+
+                        <div class="ui-input col pr-0">
+                           <div class="input-label">nonce</div>
+                           <div class="input-control">
+                            <input type="text" class="form-control"  readonly="" [value]="Det_nounce">
+                          </div>
+                        </div>
+                     </div>
+                     <div class="d-flex">
+                        <div class="ui-input col pl-0">
+                           <div class="input-label">Risk</div>
+                           <div class="input-control"><input type="text" class="form-control"  readonly="" [value]="Det_risk"></div>
+                        </div>
+                        <div class="ui-input col pr-0">
+                           <div class="input-label">Segment</div>
+                           <div class="input-control">
+                            <input type="text" class="form-control"  readonly="" [value]="Det_segment"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="submit" style="color:white !important;">
+                    <button  class="btn sitebtn col-md-12 p-2 mt-3 mb-1" style="font-weight: 600;font-size: 17px;" data-toggle="modal" data-target="#seedVerifyCenter" data-dismiss="modal" aria-label="Close">
+                       <div class="button-inner" (click)="confirmedData()">Verify</div>
+                    </button>
+                 </div>
+                </div>
+              </div>
+            </div>
+         </div>
+       </div>
+  </div>
+</div>
+</div>
+<!-- end -->
+
+<!-- Seed setting Modal -->
+<div class="modal fade" id="exampleCenter" tabindex="-1" role="dialog" aria-labelledby="exampleCenter" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Seed Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+        <div class="warn">You may use this function to set a new server seed + a new client seed, they can be randomly generated or customized (at least 10 characters), and the number of bets will be reset to zero.</div>
+        <div class="detailForm">
+            <div class="title">Current seeds</div>
+            <div class="ui-input">
+               <div class="input-label">Server Seed (hash)</div>
+               <div class="input-control">
+                  <input type="text" class="w-100" readonly="" [value]="serverSeed" class="form-control" id="bcd">
+               </div>
+            </div>
+            <div class="formFlex">
+               <div class="ui-input d-flex">
+                  <div class="mr-2">
+                     <div class="input-label">Client Seed</div>
+                  <div class="input-control">
+                     <input type="text" class="form-control" class="w-100" readonly="" [value]="clientSeed" class="form-control" id="bcd">
+                  </div>
+                  </div>
+                  <div>
+                     <div class="input-label">Nonce</div>
+                  <div class="input-control">
+                     <input type="text" class="w-100" class="form-control" readonly="" [value]="nounce" id="bcd">
+                  </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="devide"></div>
+      <div class="detailForm">
+         <div class="title">New seeds</div>
+         <div class="ui-input">
+            <div class="input-label">Server Seed (hash)</div>
+            <div class="input-control">
+               <input type="text" class="w-100" class="form-control" placeholder="The seed hasn't been revealed yet" readonly [value]="newserverSeed" id="bcd">
+            </div>
+         </div>
+         <div class="formFlex">
+            <div class="ui-input d-flex">
+               <div class="mr-2">
+                  <div class="input-label">Client Seed</div>
+               <div class="input-control d-flex justify-content-between" >
+                  <div class="d-flex mr-2">
+                     <input type="text" class="form-control" [value]="newclientSeed" readonly id="bcd" style="width:150px">
+                     <span class=" form-control btn sm-btn btn-light rounded-0 float-right" (click)="generateSeed()" id="bcd"><i class="fas fa-sync-alt" ></i></span>
+                  </div>
+                  
+               </div>
+               </div>
+               <div class="">
+                  <div class="input-label">Nonce</div>
+                  <div class="input-control">
+                     <input type="text" class="form-control" class="w-100" readonly="" [value]="0" class="form-control" readonly id="bcd">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="submit" style="color:white !important;">
+         <button (click)="updateHash()" class="btn sitebtn col-md-12 p-2 mt-3 mb-1" style="font-weight: 600;font-size: 17px;">
+            <div class="button-inner">Use New Seeds</div>
+         </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end -->
+<div class="modal fade" id="seedVerifyCenter" tabindex="-1" role="dialog" aria-labelledby="seedVerifyCenterTitle" aria-hidden="true" >
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="message my-5 text-center frt" style="color:#98a7b5;font-size: 15px;">
+            Sorry! You need to set up a new seed before validating the data (the server seed is encrypted)
+         </div>
+         <div class="d-flex justify-content-center">
+            <div class="mr-2" style="color:white !important;">
+            <button  class="btn" style="background:#6b7180 !important;font-size: 17px;min-width: 130px;padding: 10px;color: #fff;">
+               <div class="button-inner" class="close" data-dismiss="modal" aria-label="Close">Cancel</div>
+            </button>
+         </div>
+         <div class="" style="color:white !important;">
+            <button  class="btn sitebtn" style="font-weight: 600;font-size: 17px;padding: 10px !important;" data-toggle="modal" data-target="#exampleCenter" data-dismiss="modal" aria-label="Close">
+               <div class="button-inner" (click)="Seedsetting()" (click)="confirmedData()">Conform</div>
+            </button>
+         </div>
+         </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- live stats -->
+<div class="modal fade modals1" id="exampleCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleCenter5" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-dialogs" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-success" id="exampleModalLongTitle">Live Stats</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="link item-wrap blak-boxz">
+            <div class="d-flex justify-content-between">
+               <span>Bet</span>
+            <span (click)="getExacttime()"><i class="fas fa-sync-alt" style="color: #000000;"></i></span>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>wagered</div>
+               <div>profit</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div>{{wagered}}</div>
+               <div>{{profits}}</div>
+               </div>
+            </div>
+            <div class="">
+               <div class="wrapperbox gridx" >
+                  <div class="w-100">
+                     <div id="container"></div>
+                  </div>
+               </div>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>Win</div>
+                  <div>loss</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div >{{win_count}}</div>
+                  <div>{{loss_count}}</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!--end  -->
+
+
+<!-- hotKeys -->
+<div class="modal fade" id="hotKeys" tabindex="-1" role="dialog" aria-labelledby="hotKeys" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Hot keys</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message my-5 text-center frt" style="color:#98a7b5;font-size: 15px;">
+        <div class="ui-scrollview h1yfs6k1 dialog-box">
+          <div class="hotkey-list">
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Half bet amount</div>
+              <div class="hotkey-key">A</div>
+            </div>
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Double bet amount</div>
+              <div class="hotkey-key">S</div>
+            </div>
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Make a bet</div>
+              <div class="hotkey-key">Space</div>
+            </div>
+          </div>
+          <div class="hotkey-enabled mt-1">
+            <div>
+              <input class="hotkey-select " [(ngModel)]="hotKey" name="hotKeys" type="checkbox" id="gridDeposit" (click)="enableKey(hotKey)">
+            </div>
+          <div>Hotkeys Enabled</div>
+          </div>
+            <div class="mt-3" style="color:green">
+              <span>*Note HotKey's Only Available on Manual Bets</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

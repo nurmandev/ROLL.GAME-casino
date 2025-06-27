@@ -1,0 +1,74 @@
+<div class="pagewrapper">
+   <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+         <div class="d-flex flex-column flex-sm-row row m-0">
+            <!-- <div class="overflow-auto avb"> -->
+            <div class="leftmenubox  col">
+               <ul class="navlist">
+                  <li><a routerLink="/general" class="select">General</a></li>
+                  <li><a routerLink="/myprivacy">Privacy</a></li>
+                  <li><a routerLink="/verification">Mail / Phone Number</a></li>
+                  <li><a routerLink="/security" >Security</a></li>
+                  <li><a routerLink="/activesession">Active Sessions</a></li>
+                  <li><a routerLink="/verify">Verify</a></li>
+               </ul>
+            </div>
+           <!--  </div> -->
+            <div class="righsidebox col">
+               <div class="d-flex border-bottom justify-content-between pt-2 pb-3 align-items-center">
+                  <div>Show full name of currency in Crypto list</div>
+                  <div>
+                     <label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between align-items-center my-3">
+                  <div class="form-group">
+                     <div class="form-label">Currency Settings</div>
+                     <div class="form-input">
+                        <div class="dropdown navbar p-0">
+                           <button type="button" class="btn btn-secondary btnselect dropdown-toggle align-items-center justify-content-between d-flex" data-toggle="dropdown">
+                              <div><img class="mr-1"  width="20" src="assets/images/coins/bnb.svg">BNB</div>
+                           </button>
+                           <div class="dropdown-menu darkbg mwid">
+                              <a class="dropdown-item d-flex coins p-2 text-white  bf align-items-center" href="#"><img class="mr-1"  width="20" src="assets/images/coins/bnb.svg">BNB</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div><label class="switch">
+                     <input type="checkbox">
+                     <span class="slider round"></span>
+                     </label>
+                  </div>
+               </div>
+               <div class="d-flex border-bottom justify-content-between align-items-center my-3">
+                  <div class="form-group">
+                     <div class="form-label">Language</div>
+                     <div class="form-input">
+                        <div class="dropdown navbar p-0">
+                           <button type="button" class="btn btn-secondary btnselect dropdown-toggle align-items-center justify-content-between d-flex" data-toggle="dropdown">
+                              <div>English</div>
+                           </button>
+                           <div class="dropdown-menu darkbg mwid">
+                              <a class="dropdown-item d-flex coins p-2 text-white  bf align-items-center" href="#">German</a>
+                              <a class="dropdown-item d-flex coins p-2 text-white  bf align-items-center" href="#">Spanish</a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

@@ -1,0 +1,19 @@
+<div class="pagewrapper">
+   <ng-container *ngIf="!head">
+      <app-header (ConnEvent)="conPass($event)"></app-header>
+   </ng-container>
+   <ng-container *ngIf="head">
+      <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+   </ng-container>
+   <div class="gamewrapper">
+      	<div class="sidemenu">
+         	<app-sidebar></app-sidebar>
+      	</div>
+      	<div class="gameinnerwhl">
+			<div class="text-center"><img width="50%" src="assets/images/empty.webp"></div>
+			<div class="text-center">Will be updated Soon...</div>
+     	</div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

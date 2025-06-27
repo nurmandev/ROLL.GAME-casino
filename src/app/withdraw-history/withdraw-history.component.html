@@ -1,0 +1,51 @@
+<div class="pagewrapper">
+	<ng-container *ngIf="!head">
+	  	<app-header (ConnEvent)="conPass($event)"></app-header>
+	</ng-container>
+	<ng-container *ngIf="head">
+	  	<app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+	</ng-container>
+	<div class="gamewrapper">
+		<div class="sidemenu"><app-sidebar></app-sidebar></div>
+		<div class="trade-whl-wrapper">
+			<div class="container">
+				<div class="site-card col-md my-5 p-5 ">
+					<h4>Withdraw History</h4>
+					<div class="row mt-5">
+		 				 <table class="table table-striped">
+		            <thead>
+		              <tr>
+		                <th>S.No</th>
+		                <th>Currency</th>
+		                <th>Amount</th>
+		                <th>Transaction ID</th>
+		                <th> Status</th>
+		                <th>Date & Time</th>
+		              </tr>
+		            </thead>
+		            <ng-container>
+		              <tbody *ngIf="withdrawHistory.length == 0">
+		                    <tr><td class="text-white text-center" colspan="6">No records found</td></tr>
+		              </tbody>
+		           </ng-container>
+		            <tbody *ngIf="withdrawHistory.length > 0" class="text-white">
+		                <tr *ngFor="let withdraw of withdrawHistory; let i = index" >
+		                    <td>{{i+((p*10)-10)+1}}</td>
+		                    <td>{{ withdraw['currency'] }}</td>
+		                    <td>{{ withdraw['amount'] }}</td>
+		                    <td class="cursor_pointer" (click)="copyText(withdraw['reference_no'])">{{ withdraw['reference_no'].substr(0, 6)+"..."+withdraw['reference_no'].slice(-6) }}</td>
+		                    <td>{{ withdraw['status'] }}</td>
+		                    <td>{{ withdraw['created_at' ] | date:'yyyy-MM-dd HH:mm:ss ' }}</td>
+		                </tr>
+		            </tbody>   
+		          </table>
+				</div>
+		      <div class="text-right mb-4" *ngIf="withdrawHistory.length > 10">
+		        <div class="text-left pagi d-inline-block ">
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

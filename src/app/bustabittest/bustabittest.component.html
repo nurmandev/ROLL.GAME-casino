@@ -1,0 +1,163 @@
+<div class="pagewrapper">
+<!-- header -->
+<ng-container *ngIf="!head">
+   <app-header (ConnEvent)="conPass($event)"></app-header>
+</ng-container>
+<ng-container *ngIf="head">
+   <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+</ng-container>
+<!-- end -->
+<div class="gamewrapper">
+   <div class="sidemenu">
+      <app-sidebar></app-sidebar>
+   </div>
+   <div class="gameinnerwhl">
+      <div class="breadcrumblink"><a href="#">RollGame Originals</a> > Bustabit</div>
+      <div class="d-flex row m-0">
+         <div class="gameinner col p-0">
+            <div  class="row greyboxwhl d-flex align-items-center">
+               <div class="greybox paybox bf">
+                  <div><span class="green-t">Bankroll</span><span class="mx-1">ETH</span></div>
+                  <div class="text-white">2817495233 <img class="scoin" src="assets/images/coins/eth.svg"></div>
+               </div>
+               <div class="greybox bf">1.63x</div>
+               <div class="greybox bf">1.52x</div>
+               <div class="greybox greenbox bf">5.31x</div>
+               <div class="greybox greenbox bf">8.35x</div>
+               <div class="greybox bf">1.46x</div>
+               <div class="greybox bf">1.78x</div>
+               <div class="greybox bf">3.04x</div>
+               <div class="greybox bf">4.06x</div>
+            </div>
+            <div class="gameinnerboxwhl">
+             <!-- <div id="container"></div> -->
+             <span class="result">{{ prefix_text }} {{(result*1).toFixed(2)}} {{ type }}</span>
+               <button (click)="init()">Init</button>
+               <button (click)="addSerie()">Add Serie</button>
+               <button (click)="removeSerie()">Remove Serie</button>
+               <button (click)="addPoint()">Add Point</button>
+               <button (click)="removePoint()">Remove Point</button>
+               <div class="chart-container">
+                  <div [chart]="chart"></div>
+               </div>
+             
+                <div class="d-flex row col">
+         <div class="form-group col-md-6">
+                     <div class="d-flex justify-content-between p-2 px-2">
+                        <div>Amount</div>
+                        <div>0 BTC</div>
+                     </div>
+                     <div class="formbox d-flex align-items-center justify-content-between">
+                        <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                        <div><input value="100.000000000" class="form-control" name="betamount" required [(ngModel)]="bet_amount" (blur)="bettingamount('none')"></div>
+                        <div class="d-flex">
+                           <div>
+                              <button class="btn sbtn lbtn" (click)="bettingamount('divide')">/2</button>
+                           </div>
+                           <div>
+                              <button class="btn sbtn lbtn" (click)="bettingamount('multiply')">X2</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                     <div class="d-flex justify-content-between p-2 px-2">
+                        <div>Auto cash out</div>
+                        <div>Chance <span>{{ chance_win_percent | number:'1.2-2' }}%</span></div>
+                     </div>
+                     <div class="formbox d-flex align-items-center justify-content-between">
+                        <div><input value="1.98" class="form-control" name="payout" #payout="ngModel" required [(ngModel)]="pay_out" (blur)="calculatePercentage(payout.value)"></div>
+                        <div><button class="btn xbtn">X</button></div>
+                     </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6 mx-auto">
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" [disabled]="BetLimit" (click)="submitBet()" *ngIf="!BetActive">Bet</button>
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" *ngIf="BetActive && !BetLimit" disabled><span>Bet </span><br><span>(Next round)</span></button>
+                  <button class="btn sitebtn col-md-12 p-2 mt-1 mb-3" *ngIf="BetActive && BetLimit" (click)="cashout((result*1).toFixed(2), ActiveBetId)">Cash out {{(result*1).toFixed(2)}}</button>
+
+                  </div>
+               </div>
+               <div class="d-flex justify-content-between boxgwhl">
+                  <div class="d-flex boxg">
+                     <div><i class="fas fa-star"></i> 6735</div>
+                     <div><i class="fas fa-heart"></i> 6334</div>
+                     <div><i class="fa-solid fa-paper-plane"></i></div>
+                  </div>
+                  <div class="d-flex boxg">
+                     <div><i class="fa-solid fa-music"></i></div>
+                     <div><i class="fa-solid fa-volume-off"></i></div>
+                     <div><i class="fa fa-bolt"></i></div>
+                     <div><i class="fa-solid fa-keyboard"></i></div>
+                     <div><i class="fa-solid fa-lemon"></i></div>
+                     <div><i class="fa-regular fa-circle-question"></i></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="functioninner functioninnermwid">
+             <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Player</th>
+                           <th>Cash Out</th>
+                           <th>Amount</th>
+                           <th>Profit</th>
+                        </tr>
+                     </thead>
+                     <tbody *ngIf="bettingList.length == 0">
+                         <tr><td class="white-t" colspan="3">No data found</td></tr>
+                     </tbody>
+                     <tbody *ngIf="bettingList.length > 0">
+                        <tr class="font-13" *ngFor="let betUser of bettingList;" >
+                           <td>{{betUser.user_id}}</td>
+                           <td>{{(((betUser.auto_cashout*1) <= ((result*1))) && type == "x") ? betUser.auto_cashout : "betting"}}</td>
+                           <td>{{betUser.bet_amount}}</td>
+                           
+                           <td>
+                              {{ (((betUser.auto_cashout*1) <= ((result*1))) && type == "x") ? (((betUser.auto_cashout*1)*(betUser.bet_amount*1))-(betUser.bet_amount*1)) : (prefix_text == "Busted @ ") ? (betUser.bet_amount):"betting" }}
+                           </td>
+
+                           <!-- <td>{{(((betUser.auto_cashout*1) <= ((result*1))) && type == "x" && prefix_text == "") ? (((betUser.auto_cashout*1)*(betUser.bet_amount*1))-(betUser.bet_amount*1)) : (((betUser.auto_cashout*1) > ((result*1))) && type == "x" && prefix_text == "Busted @ ") ? (betUser.bet_amount) : "betting"}}</td> -->
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+         </div>
+      </div>
+      
+      <div class="darkbg p-4">
+         <nav>
+            <div class="nav nav-tabs sitetabs tabs1" id="nav-tab" role="tablist">
+               <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">users</a>
+               <a class="nav-item nav-link" id="nav-bets-tab" data-toggle="tab" href="#nav-bets" role="tab" aria-controls="nav-bets" aria-selected="false">History</a>
+            </div>
+         </nav>
+         <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+               <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Users</th>
+                           <th>@</th>
+                           <th>Bet</th>
+                           <th>Profit</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>1234567890</td>
+                           <td>James</td>
+                           <td>8:16 PM</td>
+                           <td>0.00000<img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="nav-bets" role="tabpanel" aria-labelledby="nav-bets-tab">...</div>
+         </div>
+      </div>
+   </div>
+</div>

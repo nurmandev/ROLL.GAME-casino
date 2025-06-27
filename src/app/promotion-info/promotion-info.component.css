@@ -1,0 +1,31 @@
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.orangebg{background: rgb(188 91 36);
+    background: linear-gradient(90deg, rgb(120 57 34) 3%, rgb(189 94 28) 100%);
+}
+
+.blog_img {
+    height:300px;
+    width:600px;
+}
+
+.desc h1 {
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+}
+.desc {
+    padding: 4% 0 0 4.2%;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    top: 0;
+    min-width: 73%;
+    height: 100%;
+}
+
+.desc * {
+    margin: 0;
+}

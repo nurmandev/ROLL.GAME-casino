@@ -1,0 +1,65 @@
+<div class="pagewrapper">
+   <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+         <div class="d-flex flex-column flex-sm-row row m-0">
+            <div class="leftmenubox col">
+               <ul class="navlist">
+                  <li><a routerLink="/general">General</a></li>
+                  <li><a routerLink="/myprivacy">Privacy</a></li>
+                  <li><a routerLink="/verification">Mail / Phone Number</a></li>
+                  <li><a routerLink="/security" >Security</a></li>
+                  <li><a routerLink="/activesession" class="select">Active Sessions</a></li>
+                  <li><a routerLink="/verify">Verify</a></li>
+               </ul>
+            </div>
+            <div class="righsidebox col">
+               <div class="text-white bf mb-3">Sessions Used in Past</div>
+               <div class="table-responsive">
+                  <table class="table table-dark lastright">
+                     <thead>
+                        <tr>
+                           <th>Browser</th>
+                           <th>Device Info</th>
+                           <th>Created At</th>
+                        </tr>
+                     </thead>
+                     <tbody *ngIf="logData.length==0">
+                        <td colspan="2">No Data Found</td>
+                     </tbody>
+                     <tbody *ngFor="let log of logData" style="border: 0px;">
+                        <tr>
+                           <td>{{log.browser}}</td>
+                           <td>{{log.deviceinfo}}</td>
+                           <td>{{log.datetime | date: 'dd/MM/yyyy'}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <div class="d-flex float-right">
+                    <div class="pagelimit ml-2">
+                      <select class="p-2" name="limitpage" #limits="ngModel" [(ngModel)]="limit" (change)="activityLog()">
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
+                        <option>100</option>
+                      </select>
+                    </div>
+                    <div class="paginator d-flex flex-row">
+                      <button color="primary" (click)="paginate('first')" [disabled]="p == 0"> <i class="fas fa-angle-double-left"></i> </button>
+                      <button (click)="paginate('prev')" [disabled]="p == 0"><i class="fas fa-angle-left"></i> </button>
+                      <button (click)="paginate('next')" [disabled]="page == p"> <i class="fas fa-angle-right"></i> </button>
+                      <button (click)="paginate('last')" [disabled]="page == p"> <i class="fas fa-angle-double-right"></i> </button>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

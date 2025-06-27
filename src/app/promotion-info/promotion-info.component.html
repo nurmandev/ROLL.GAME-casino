@@ -1,0 +1,26 @@
+<div class="pagewrapper">
+<ng-container *ngIf="!head">
+  <app-header (ConnEvent)="conPass($event)"></app-header>
+</ng-container>
+<ng-container *ngIf="head">
+  <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+</ng-container>
+<div class="gamewrapper">
+<div class="sidemenu"><app-sidebar></app-sidebar></div>
+
+<div class="gameinnerwhl">
+	<div class="my-2 text-uppercase"><b>Promotions <span> > </span><span class="text-light">Details</span></b></div>
+	<div class="row d-flex text-center">
+		<div class="col-md-12" >
+			<img class="blog_img" [src]="BlogData.image || ''" alt="">
+			<div class="desc">
+				<h1><strong>{{BlogData.title}}</strong></h1>
+			</div>
+		</div>
+	</div>
+	<div><strong>{{BlogData.title}}</strong></div>
+	<div class="item-content" [innerHTML]="BlogData.message"></div>
+</div>
+   <app-footer></app-footer>
+</div>
+</div>

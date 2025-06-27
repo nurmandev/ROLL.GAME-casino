@@ -1,0 +1,353 @@
+<div class="pagewrapper">
+<app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+<div class="gamewrapper">
+   <div class="sidemenu">
+      <app-sidebar></app-sidebar>
+   </div>
+   <div class="gameinnerwhl">
+      <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+      <div class="d-flex flex-column flex-sm-row row m-0">
+         <div class="leftmenubox col">
+            <ul class="navlist">
+               <li><a routerLink="/general">General</a></li>
+               <li><a routerLink="/myprivacy">Privacy</a></li>
+               <li><a routerLink="/verification">Mail / Phone Number</a></li>
+               <li><a routerLink="/security">Security</a></li>
+               <li><a routerLink="/activesession">Active Sessions</a></li>
+               <li><a routerLink="/verify" class="select">Verify</a></li>
+            </ul>
+         </div>
+         <div class="righsidebox col">
+            <h6 class="text-white">Verify Setup</h6>
+            <p>To serve you better we ask that you provide original identifying documents. This will secure your account in cases of account recovery. It also helps to ensure that the gifts or actual rewards you receive are sent to the correct location</p>
+            <p>An acceptable proof of identification includes a photo of your government issued ID card, driver's license and passport. We will reach out to you via email once this process has been completed.</p>
+            <ul class="nav nav-tabs sitetabs greenline" id="myTab" role="tablist">
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link active" [class.active]="activeTab === 'step1'" (click)="changeTab('step1')" type="button" role="tab" aria-controls="step1" aria-selected="true">Step 01</button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link" [class.active]="activeTab === 'step2'" (click)="changeTab('step2')" type="button" role="tab" aria-controls="step2" aria-selected="false">Step 02</button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link" [class.active]="activeTab === 'step3'" (click)="changeTab('step3')" type="button" role="tab" aria-controls="step3" aria-selected="false">Step 03</button>
+               </li>
+               <li class="nav-item" role="presentation">
+                  <button class="nav-link" [class.active]="activeTab === 'step4'" (click)="changeTab('step4')" type="button" role="tab" aria-controls="step4" aria-selected="false">Step 04</button>
+               </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+               <!-- [ngClass]="{'disabled-text': tabdisable}" -->
+               <div *ngIf="activeTab === 'step1'" [ngClass]="{'disabled-text': tabdisable1}">  
+                  <form #profile="ngForm" autocomplete="off" novalidate="novalidate">
+                     <div class="row mt-3">
+                        <div class="form-group col-lg-6">
+                           <label for="exampleInputEmail1">First Name</label>
+                           <input type="text" class="form-control form-input" id="exampleInputEmail1" name="firstname"  placeholder="Enter FirstName" #firstname= "ngModel" [(ngModel)]="userData.firstname" pattern="[a-zA-Z]*" required >
+                           <div *ngIf="firstname.errors && (firstname.valid || firstname.touched || profile.submitted)" class="errMsg">
+                               <span *ngIf="firstname.errors?.['required']" class="error">{{"Enter user Name"}}</span>
+                               <span *ngIf="firstname.errors?.['pattern']" class="error">{{"Enter Valid userName"}}</span>
+                           </div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                           <label for="exampleInputEmail1">Last Name</label>
+                           <input type="text" name="lastname" class="form-control form-input" id="exampleInputEmail1" placeholder="Enter LastName" #lastname= "ngModel" [(ngModel)]="userData.lastname" pattern="[a-zA-Z]*" required>
+                           <div *ngIf="lastname.errors && (lastname.valid || lastname.touched || profile.submitted)" class="errMsg">
+                              <span *ngIf="lastname.errors?.['required']" class="error">{{"Enter user Name"}}</span>
+                              <span *ngIf="lastname.errors?.['pattern']" class="error">{{"Enter Valid userName"}}</span>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="row mt-3">
+                        <div class="form-group col-lg-6">
+                           <label for="exampleInputEmail1">Gender</label>
+                           <select type="password" class="form-control darkinput" name="gender" #gender= "ngModel" [(ngModel)]="userData.gender" required>
+                              <option value="Male">Male</option>
+                              <option value="Female">Female</option>
+                              <option value="Unspecified">Unspecified</option>
+                           </select>
+                        </div>
+                        <div class="form-group col-lg-6">
+                           <label for="exampleInputEmail1">Date of Birth</label>
+                           <input type="text" class="form-control form-input" name="DOB" #dob="ngModel" [(ngModel)]="userData.DOB" [bsConfig]="{ dateInputFormat:'YYYY-MM-DD', isAnimated:true, useUtc:false, containerClass:'theme-dark-blue' }" bsDatepicker required placeholder="YYYY-MM-DD" readonly [maxDate]="maxDate" [minDate]="minDate">
+                        </div>
+                     </div>
+                     <div class="row mt-3">
+                        <div class="col-lg-6">
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Address</label>
+                              <textarea name="address" class="form-control form-input textarea address" id="exampleInputEmail1" placeholder="Enter address" #Add= "ngModel" [(ngModel)]="userData.address" required></textarea>
+                              <div *ngIf= "Add.errors && (Add.valid || Add.touched || profile.submitted)" class="errMsg">
+                                 <span *ngIf="Add.errors?.['required']" class="error">{{"Enter address"}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="col-lg-6 row pr-0">
+                           <div class="form-group col-lg-6 pr-0">
+                              <label for="exampleInputEmail1">ZIP/Postal Code</label>
+                              <input type="text" class="form-control form-input" id="exampleInputEmail1" placeholder="ZIP Code" name="zip_code" #code="ngModel" [(ngModel)]="userData.zip_code" required  pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57">
+                              <div *ngIf= "code.errors && (code.valid || code.touched || profile.submitted)" class="errMsg">
+                                 <span *ngIf="code.errors?.['required']" class="error">{{"Enter ZIP Code"}}</span>
+                                 <span *ngIf="code.errors?.['pattern']" class="error">{{"Enter valid ZIP Code"}}</span>
+                              </div>
+                           </div>
+                           <div class="form-group col-lg-6 pr-0">
+                              <label for="exampleInputEmail1">City</label>
+                              <input type="text" name="city" class="form-control form-input" id="exampleInputEmail1" placeholder="Enter City" #city= "ngModel" [(ngModel)]="userData.city" pattern="[a-zA-Z]*" required>
+                              <div *ngIf="city.errors && (city.valid || city.touched || profile.submitted)" class="errMsg">
+                                 <span *ngIf="city.errors?.['required']" class="error">{{"Enter City Name"}}</span>
+                                 <span *ngIf="city.errors?.['pattern']" class="error">{{"Enter Valid City Name"}}</span>
+                              </div>
+                           </div>
+                           <div class="form-group col-lg-12 pr-0">
+                              <label for="exampleInputEmail1">Country</label>
+                              <select type="password" class="form-control darkinput" name="country" #country= "ngModel" [(ngModel)]="userData.country" required>
+                                 <option value="">{{"Select Country"}}</option>
+                                 <option *ngFor="let c of cntry" value="{{c.name}}">{{c.name}}</option>
+                              </select>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="text-center"><button id="step2-tab" data-toggle="tab" data-target="#step2" type="button" role="tab" aria-controls="step2" aria-selected="false" class="btn sitebtn" (click)="executeAction(profile, 'profile')" (click)="goToNextTab('step2')">Next</button></div>
+                  </form>
+               </div>
+               <div *ngIf="activeTab === 'step2'" [ngClass]="{'disabled-text': tabdisable2}">
+                  <div class="text-white bf text-center my-4">Choose either one</div>
+                  <ul class="nav nav-tabs sitetabs justify-content-center mb-3 col-md-6 mx-auto" id="myTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="idcard-tab" data-toggle="tab" data-target="#idcard" type="button" role="tab" aria-controls="idcard" aria-selected="true">ID Card</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="idpassport-tab" data-toggle="tab" data-target="#idpassport" type="button" role="tab" aria-controls="idpassport" aria-selected="false">Passport</button>
+                     </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                     <div class="tab-pane fade show active" id="idcard" role="tabpanel" aria-labelledby="idcard-tab">
+                        <p class="text-center">Please upload a valid government-issued ID document or driving license. It must contain your full name, date of birth, your photo and the document's expiration date.</p>
+                        <div class="d-flex row justify-content-center">
+                           <div class="col text-center">
+                              <div class="text-center my-1">Front Side</div>
+                              <img class="idproof" [src]="idFrtImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="file" id="id-front" class="d-none" name="idCardFront" #idCardFront= "ngModel" [(ngModel)]="proof.IdFront" (change)="onFileSteptwo($event.target, 'id_card_front')">
+                                <label for="id-front" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof1MBErr || !proofErr.proof1TypeErr ) && idCardFront.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof1MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof1TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                           <div class="col text-center">
+                              <div class="text-center my-1">Back  Side</div>
+                              <img class="idproof" [src]="idBackImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="file" id="id-back" class="d-none"  name="idCardBack" #idCardBack= "ngModel" [(ngModel)]="proof.IdBack" (change)="onFileSteptwo($event.target, 'id_card_back')">
+                                 <label for="id-back" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof2MBErr || !proofErr.proof2TypeErr ) && idCardBack.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof2MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof2TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="text-center"><button class="btn sitebtn" id="step3-tab" data-toggle="tab" data-target="#step3" type="button" role="tab" aria-controls="step3" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('IdCard')" (click)="goToNextTab('step3')">Next</button></div>
+                     </div>
+                     <div class="tab-pane fade" id="idpassport" role="tabpanel" aria-labelledby="idpassport-tab">
+                        <p class="text-center">Please upload the personal page of your passport, which includes your photo, name, date of birth, passport number and other personal information. Please make sure your passport is within the validity period.</p>
+                        <div class="d-flex row justify-content-center">
+                           <div class="col text-center">
+                              <div class="text-center my-1">Passport info page</div>
+                              <img class="idproof" [src]="PassportImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="File" id="id-passport" class="d-none" name="passportInfo" #passportInfo= "ngModel" [(ngModel)]="proof.passpport" (change)="onFileSteptwo($event.target, 'passport')">
+                                 <label for="id-passport" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof3MBErr || !proofErr.proof3TypeErr ) && passportInfo.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof3MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof3TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="text-center"><button class="btn sitebtn" id="step3-tab" data-toggle="tab" data-target="#step3" type="button" role="tab" aria-controls="step3" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('Passport')" (click)="goToNextTab('step3')">Next</button></div>
+                     </div>
+                  </div>
+               </div>
+               <!-- <div class="tab-pane fade show active" id="step1" role="tabpanel" aria-labelledby="step1-tab">
+                  <div class="text-center"><button id="step2-tab" data-toggle="tab" data-target="#step2" type="button" role="tab" aria-controls="step2" aria-selected="false" class="btn sitebtn" (click)="executeAction(profile, 'profile')">Next</button></div>
+               </div> -->
+               <!-- <div class="tab-pane fade" id="step2" role="tabpanel" aria-labelledby="step2-tab"> -->
+                  <!-- <div class="text-white bf text-center my-4">Choose either one</div>
+                  <ul class="nav nav-tabs sitetabs justify-content-center mb-3 col-md-6 mx-auto" id="myTab" role="tablist">
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="idcard-tab" data-toggle="tab" data-target="#idcard" type="button" role="tab" aria-controls="idcard" aria-selected="true">ID Card</button>
+                     </li>
+                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="idpassport-tab" data-toggle="tab" data-target="#idpassport" type="button" role="tab" aria-controls="idpassport" aria-selected="false">Passport</button>
+                     </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                     <div class="tab-pane fade show active" id="idcard" role="tabpanel" aria-labelledby="idcard-tab">
+                        <p class="text-center">Please upload a valid government-issued ID document or driving license. It must contain your full name, date of birth, your photo and the document's expiration date.</p>
+                        <div class="d-flex row justify-content-center">
+                           <div class="col text-center">
+                              <div class="text-center my-1">Front Side</div>
+                              <img class="idproof" [src]="idFrtImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="file" id="id-front" class="d-none" name="idCardFront" #idCardFront= "ngModel" [(ngModel)]="proof.IdFront" (change)="onFileSteptwo($event.target, 'id_card_front')">
+                                <label for="id-front" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof1MBErr || !proofErr.proof1TypeErr ) && idCardFront.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof1MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof1TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                           <div class="col text-center">
+                              <div class="text-center my-1">Back  Side</div>
+                              <img class="idproof" [src]="idBackImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="file" id="id-back" class="d-none"  name="idCardBack" #idCardBack= "ngModel" [(ngModel)]="proof.IdBack" (change)="onFileSteptwo($event.target, 'id_card_back')">
+                                 <label for="id-back" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof2MBErr || !proofErr.proof2TypeErr ) && idCardBack.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof2MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof2TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="text-center"><button class="btn sitebtn" id="step3-tab" data-toggle="tab" data-target="#step3" type="button" role="tab" aria-controls="step3" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('IdCard')">Next</button></div>
+                     </div>
+                     <div class="tab-pane fade" id="idpassport" role="tabpanel" aria-labelledby="idpassport-tab">
+                        <p class="text-center">Please upload the personal page of your passport, which includes your photo, name, date of birth, passport number and other personal information. Please make sure your passport is within the validity period.</p>
+                        <div class="d-flex row justify-content-center">
+                           <div class="col text-center">
+                              <div class="text-center my-1">Passport info page</div>
+                              <img class="idproof" [src]="PassportImg">
+                              <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                              <div class="uploadbtnwhl my-2">
+                                 <input type="File" id="id-passport" class="d-none" name="passportInfo" #passportInfo= "ngModel" [(ngModel)]="proof.passpport" (change)="onFileSteptwo($event.target, 'passport')">
+                                 <label for="id-passport" class="bluebtn text-center smallbtn">Choose File</label>
+                              </div>
+                              <div *ngIf="((proofErr.proof3MBErr || !proofErr.proof3TypeErr ) && passportInfo.valid)" class="errMsg">
+                                <span *ngIf="proofErr.proof3MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                                <span *ngIf="!proofErr.proof3TypeErr" class="error">{{"Invalid format"}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="text-center"><button class="btn sitebtn" id="step3-tab" data-toggle="tab" data-target="#step3" type="button" role="tab" aria-controls="step3" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('Passport')">Next</button></div>
+                     </div>
+                  </div> -->
+               <!-- </div> -->
+               <div *ngIf="activeTab === 'step3'" [ngClass]="{'disabled-text': tabdisable3}">
+                  <p class="text-center mt-3">Please upload proof of residence for the last three months, such as utility bill, bank statement, government-issued letter and ID (different from the ID provided), etc.</p>
+                  <div class="d-flex row justify-content-center">
+                     <div class="col text-center">
+                        <div class="text-center my-1">Proof of Residence</div>
+                        <img class="idproof" [src]="ResidenceImg">
+                        <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                        <div class="uploadbtnwhl my-2">
+                           <input type="File" id="id-residence" class="d-none" name="residenceInfo" #residenceInfo= "ngModel" [(ngModel)]="proof.residence" (change)="onFileSteptwo($event.target, 'residence')">
+                           <label for="id-residence" class="bluebtn text-center smallbtn">Choose File</label>
+                        </div>
+                        <div *ngIf="((proofErr.proof4MBErr || !proofErr.proof4TypeErr ) && residenceInfo.valid)" class="errMsg">
+                          <span *ngIf="proofErr.proof4MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                          <span *ngIf="!proofErr.proof4TypeErr" class="error">{{"Invalid format"}}</span>
+                        </div>
+                        <button id="step4-tab" data-toggle="tab" data-target="#step4" type="button" role="tab" aria-controls="step4" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('residence')" (click)="goToNextTab('step4')">Next</button>
+                     </div>
+                  </div>  
+               </div>
+               <!-- <div class="tab-pane fade" id="step3" role="tabpanel" aria-labelledby="step3-tab"> -->
+                  <!-- <p class="text-center mt-3">Please upload proof of residence for the last three months, such as utility bill, bank statement, government-issued letter and ID (different from the ID provided), etc.</p>
+                  <div class="d-flex row justify-content-center">
+                     <div class="col text-center">
+                        <div class="text-center my-1">Proof of Residence</div>
+                        <img class="idproof" [src]="ResidenceImg">
+                        <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                        <div class="uploadbtnwhl my-2">
+                           <input type="File" id="id-residence" class="d-none" name="residenceInfo" #residenceInfo= "ngModel" [(ngModel)]="proof.residence" (change)="onFileSteptwo($event.target, 'residence')">
+                           <label for="id-residence" class="bluebtn text-center smallbtn">Choose File</label>
+                        </div>
+                        <div *ngIf="((proofErr.proof4MBErr || !proofErr.proof4TypeErr ) && residenceInfo.valid)" class="errMsg">
+                          <span *ngIf="proofErr.proof4MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                          <span *ngIf="!proofErr.proof4TypeErr" class="error">{{"Invalid format"}}</span>
+                        </div>
+                        <button id="step4-tab" data-toggle="tab" data-target="#step4" type="button" role="tab" aria-controls="step4" aria-selected="false" class="btn sitebtn" (click)="verifyStep2('residence')">Next</button>
+                     </div>
+                  </div> -->
+               <!-- </div> -->
+               <div *ngIf="activeTab === 'step4'" [ngClass]="{'disabled-text': tabdisable4}">
+                  <p class="text-center mt-3">Please upload a photo of yourself. In the photo you need to hold your passport or ID, and a piece of paper with "Roll.GAME", your username and the date on it. Please make sure your face and the information you hold are clear.</p>
+                  <div class="d-flex row justify-content-center">
+                     <div class="col text-center">
+                        <div class="text-center my-1 d-flex justify-content-center">
+                           <div class="">Your Photo</div>
+                           <div class="mx-3 btn btn-link p-0 " data-toggle="modal" data-target="#staticBackdrop">Your References</div>
+                        </div>
+                        <img class="idproof" [src]="ReferencesImg">
+                        <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                        <div class="uploadbtnwhl my-2">
+                           <input type="File" id="id-photo" class="d-none" name="referencesInfo" #referencesInfo= "ngModel" [(ngModel)]="proof.references" (change)="onFileSteptwo($event.target, 'references')">
+                           <label for="id-photo" class="bluebtn text-center smallbtn">Choose File</label>
+                        </div>
+                        <div *ngIf="((proofErr.proof5MBErr || !proofErr.proof5TypeErr ) && referencesInfo.valid)" class="errMsg">
+                          <span *ngIf="proofErr.proof5MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                          <span *ngIf="!proofErr.proof5TypeErr" class="error">{{"Invalid format"}}</span>
+                        </div>
+                        <button class="btn sitebtn" (click)="verifyStep2('references')">Submit</button>
+                     </div>
+                  </div>
+               </div>
+               <!-- <div class="tab-pane fade" id="step4" role="tabpanel" aria-labelledby="contact-tab">
+                  <p class="text-center mt-3">Please upload a photo of yourself. In the photo you need to hold your passport or ID, and a piece of paper with "Roll.GAME", your username and the date on it. Please make sure your face and the information you hold are clear.</p>
+                  <div class="d-flex row justify-content-center">
+                     <div class="col text-center">
+                        <div class="text-center my-1 d-flex justify-content-center">
+                           <div class="">Your Photo</div>
+                           <div class="mx-3 btn btn-link p-0 " data-toggle="modal" data-target="#staticBackdrop">Your References</div>
+                        </div>
+                        <img class="idproof" [src]="ReferencesImg">
+                        <div class="my-2">Front ( jpg, png ) File size limit 1MB</div>
+                        <div class="uploadbtnwhl my-2">
+                           <input type="File" id="id-photo" class="d-none" name="referencesInfo" #referencesInfo= "ngModel" [(ngModel)]="proof.references" (change)="onFileSteptwo($event.target, 'references')">
+                           <label for="id-photo" class="bluebtn text-center smallbtn">Choose File</label>
+                        </div>
+                        <div *ngIf="((proofErr.proof5MBErr || !proofErr.proof5TypeErr ) && referencesInfo.valid)" class="errMsg">
+                          <span *ngIf="proofErr.proof5MBErr" class="error">{{"Maximum file size is 2mb"}}</span>
+                          <span *ngIf="!proofErr.proof5TypeErr" class="error">{{"Invalid format"}}</span>
+                        </div>
+                        <button class="btn sitebtn" (click)="verifyStep2('references')">Submit</button>
+                     </div>
+                  </div>
+               </div> -->
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Your Photo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <img class="img-fluid" src="assets/images/example-photo.png">
+            <div class="text-center">The left is the correct case, the right is the wrong case.</div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+         </div>
+      </div>
+   </div>
+</div>

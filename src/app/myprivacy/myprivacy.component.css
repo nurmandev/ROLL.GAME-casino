@@ -1,0 +1,21 @@
+@media(max-width:700px){
+  .leftmenubox {
+    background: #31343C;
+    padding: 20px;
+    border-radius: 4px;
+    max-width: 100%;
+    min-height:  97px;
+    overflow-x: auto;
+  }
+  .avb{
+    width: max-content;
+    overflow-x: auto;
+  }
+  .leftmenubox ul{
+      display: flex;
+      width: max-content;
+  }
+  .righsidebox{
+    margin-left: 0px;
+  }
+}

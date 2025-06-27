@@ -1,0 +1,989 @@
+<div class="pagewrapper">
+   <ng-container *ngIf="!head">
+     <app-header (ConnEvent)="conPass($event)"></app-header>
+   </ng-container>
+   <ng-container *ngIf="head">
+     <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+   </ng-container>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="breadcrumblink"><a class="pointer" routerLink="/casino">RollGame Originals</a> > <span class="pointer">Roulette</span></div>
+         <div class="d-flex row m-0">
+            <div class="gameinner col p-0">
+               <div  class="greyboxwhl d-flex align-items-center">
+                  <!-- <div class="greybox paybox bf">
+                     <div><span class="green-t">Bankroll</span><span class="mx-1">ETH</span></div>
+                     <div class="text-white">2817495233 <img class="scoin" src="assets/images/coins/eth.svg"></div>
+                  </div> -->
+                  <div id="dynamic-data" class="text-wrapper xlevelwhl">
+                     <div class="  d-flex flex-row-reverse xlevel">
+                        <div class="greybox bf hov" [ngClass]="{'lor':list1.status=='winner'}" [style.animation-delay]="i"  *ngFor="let list1 of payoutHistory;let i = index" (click)="getDetails(list1._id)" data-toggle="modal" data-target="#exampleCenter2">{{list1.bet_result}}</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="gameinnerboxwhl minesgame">
+                  <div class="gameinnerwrapper">
+                     <div class="gridbox">
+                      <!-- started -->
+                      <div class="container">
+                        <div id="notification"*ngIf="winpop">
+                          <div class="nSpan">
+                            <span class="nsnumber" style="color: red;">30</span>
+                            <span> Win</span>
+                            <div class="nsWin">
+                              <div class="nsWinBlock">Bet: 100</div>
+                              <div class="nsWinBlock">Win: 3500</div>
+                              <div class="nsWinBlock">Payout: 3600</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="winboxwhl">
+                        <div class="box chckbox win-box" *ngIf="winnerpop">
+                          <h2 class="t red mb-0 green-t">{{(returnAmt*1).toFixed(6)}}<span><img src="assets/images/win-box.webp" class="img-fluid"></span></h2>
+                          <p class="coinsub"><span class="x">×</span><span>{{(payOut*1).toFixed(2)}}</span></p>
+                       </div>
+                        <div class="box chckbox tie-box" *ngIf="tiedpop">
+                          <h2 class="t red mb-0 green-t">{{"TIED"}}</h2>
+                       </div>
+                      </div>
+                        <div class="wheelwhl">
+                        <div class="wheel" [ngStyle]="wheelStyle" >
+                          <div class="outerRim"></div>
+                          <div id="sect1" class="sect"><span class="single">0</span><div class="block"></div></div>
+                          <div id="sect2" class="sect"><span class="double">32</span><div class="block"></div></div>
+                          <div id="sect3" class="sect"><span class="double">15</span><div class="block"></div></div>
+                          <div id="sect4" class="sect"><span class="double">19</span><div class="block"></div></div>
+                          <div id="sect5" class="sect"><span class="single">4</span><div class="block"></div></div>
+                          <div id="sect6" class="sect"><span class="double">21</span><div class="block"></div></div>
+                          <div id="sect7" class="sect"><span class="single">2</span><div class="block"></div></div>
+                          <div id="sect8" class="sect"><span class="double">25</span><div class="block"></div></div>
+                          <div id="sect9" class="sect"><span class="double">17</span><div class="block"></div></div>
+                          <div id="sect10" class="sect"><span class="double">34</span><div class="block"></div></div>
+                          <div id="sect11" class="sect"><span class="single">6</span><div class="block"></div></div>
+                          <div id="sect12" class="sect"><span class="double">27</span><div class="block"></div></div>
+                          <div id="sect13" class="sect"><span class="double">13</span><div class="block"></div></div>
+                          <div id="sect14" class="sect"><span class="double">36</span><div class="block"></div></div>
+                          <div id="sect15" class="sect"><span class="double">11</span><div class="block"></div></div>
+                          <div id="sect16" class="sect"><span class="double">30</span><div class="block"></div></div>
+                          <div id="sect17" class="sect"><span class="single">8</span><div class="block"></div></div>
+                          <div id="sect18" class="sect"><span class="double">23</span><div class="block"></div></div>
+                          <div id="sect19" class="sect"><span class="double">10</span><div class="block"></div></div>
+                          <div id="sect20" class="sect"><span class="single">5</span><div class="block"></div></div>
+                          <div id="sect21" class="sect"><span class="double">24</span><div class="block"></div></div>
+                          <div id="sect22" class="sect"><span class="double">16</span><div class="block"></div></div>
+                          <div id="sect23" class="sect"><span class="double">33</span><div class="block"></div></div>
+                          <div id="sect24" class="sect"><span class="single">1</span><div class="block"></div></div>
+                          <div id="sect25" class="sect"><span class="double">20</span><div class="block"></div></div>
+                          <div id="sect26" class="sect"><span class="double">14</span><div class="block"></div></div>
+                          <div id="sect27" class="sect"><span class="double">31</span><div class="block"></div></div>
+                          <div id="sect28" class="sect"><span class="single">9</span><div class="block"></div></div>
+                          <div id="sect29" class="sect"><span class="double">22</span><div class="block"></div></div>
+                          <div id="sect30" class="sect"><span class="double">18</span><div class="block"></div></div>
+                          <div id="sect31" class="sect"><span class="double">29</span><div class="block"></div></div>
+                          <div id="sect32" class="sect"><span class="single">7</span><div class="block"></div></div>
+                          <div id="sect33" class="sect"><span class="double">28</span><div class="block"></div></div>
+                          <div id="sect34" class="sect"><span class="double">12</span><div class="block"></div></div>
+                          <div id="sect35" class="sect"><span class="double">35</span><div class="block"></div></div>
+                          <div id="sect36" class="sect"><span class="single">3</span><div class="block"></div></div>
+                          <div id="sect37" class="sect"><span class="double">26</span><div class="block"></div></div>
+                          <div class="pocketsRim"></div>
+                          <div class="ballTrack" [ngStyle]="BallStyle" [@flipState]="spin"><div class="ball"></div></div>
+                          <div class="pockets"></div>
+                          <div class="cone"></div>
+                        </div>
+                        
+                        <div class="turret">
+                            <img width="150" src="assets/images/centerrotate.svg">
+                          </div>
+                        </div>
+                        <div id="betting_board">
+                          <div class="winning_lines">
+                            <div id="wlttb_top" class="wlttb">
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                            </div>
+                            <div id="wlttb_1" class="wlttb">
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                            </div>
+                            <div id="wlttb_2" class="wlttb">
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                            </div>
+                            <div id="wlttb_3" class="wlttb">
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                              <div class="ttbbetblock"></div>
+                            </div>
+                            <div id="wlrtl_1" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_2" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_3" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_4" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_5" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_6" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_7" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_8" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_9" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_10" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlrtl_11" class="wlrtl">
+                              <div class="rtlbb1"></div>
+                              <div class="rtlbb2"></div>
+                              <div class="rtlbb3"></div>
+                            </div>
+                            <div id="wlcb_1" class="wlcb">
+                              <div id="cbbb_1" class="cbbb"></div>
+                              <div id="cbbb_2" class="cbbb"></div>
+                              <div id="cbbb_3" class="cbbb"></div>
+                              <div id="cbbb_4" class="cbbb"></div>
+                              <div id="cbbb_5" class="cbbb"></div>
+                              <div id="cbbb_6" class="cbbb"></div>
+                              <div id="cbbb_7" class="cbbb"></div>
+                              <div id="cbbb_8" class="cbbb"></div>
+                              <div id="cbbb_9" class="cbbb"></div>
+                              <div id="cbbb_10" class="cbbb"></div>
+                              <div id="cbbb_11" class="cbbb"></div>
+                            </div>
+                            <div id="wlcb_2" class="wlcb">
+                              <div id="cbbb_12" class="cbbb"></div>
+                              <div id="cbbb_13" class="cbbb"></div>
+                              <div id="cbbb_14" class="cbbb"></div>
+                              <div id="cbbb_15" class="cbbb"></div>
+                              <div id="cbbb_16" class="cbbb"></div>
+                              <div id="cbbb_17" class="cbbb"></div>
+                              <div id="cbbb_18" class="cbbb"></div>
+                              <div id="cbbb_19" class="cbbb"></div>
+                              <div id="cbbb_20" class="cbbb"></div>
+                              <div id="cbbb_21" class="cbbb"></div>
+                              <div id="cbbb_22" class="cbbb"></div></div>
+                            </div>
+                            <div class="bbtop">
+                              <div class="coinchip bbtoptwo  pointer" id="Nubhalf1" (click)="betclick(1, 'half')"><span>1 to 18</span><div [ngClass]="betcoins.half1 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.half1}}" ><span class="chipSpan">{{betcoins.half1}}</span></div></div>
+                              <div class="coinchip bbtoptwo  pointer" id="Nubhalf2" (click)="betclick(2, 'half')"><span>19 to 36</span><div [ngClass]="betcoins.half2 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.half2}}"><span class="chipSpan">{{betcoins.half2}}</span></div></div>
+                            </div>
+                            <!-- chipselect -->
+                            <div class="number_board">
+                              <div class="coinchip number_0  pointer" id="Nub0" (click)="betclick(0, 'single')"> <div class="nbn">0</div><div [ngClass]="betcoins.num0 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num0}}"><span class="chipSpan">{{betcoins.num0}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub3" (click)="betclick(3, 'single')"><div class="nbn">3</div><div [ngClass]="betcoins.num3 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num3}}"><span class="chipSpan">{{betcoins.num3}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub6" (click)="betclick(6, 'single')"><div class="nbn">6</div><div [ngClass]="betcoins.num6 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num6}}"><span class="chipSpan">{{betcoins.num6}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub9" (click)="betclick(9, 'single')"><div class="nbn">9</div><div [ngClass]="betcoins.num9 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num9}}"><span class="chipSpan">{{betcoins.num9}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub12" (click)="betclick(12, 'single')"><div class="nbn">12</div><div [ngClass]="betcoins.num12 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num12}}"><span class="chipSpan">{{betcoins.num12}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub15" (click)="betclick(15, 'single')"><div class="nbn">15</div><div [ngClass]="betcoins.num15 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num15}}"><span class="chipSpan">{{betcoins.num15}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub18" (click)="betclick(18, 'single')"><div class="nbn">18</div><div [ngClass]="betcoins.num18 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num18}}"><span class="chipSpan">{{betcoins.num18}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub21" (click)="betclick(21, 'single')"><div class="nbn">21</div><div [ngClass]="betcoins.num21 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num21}}"><span class="chipSpan">{{betcoins.num21}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub24" (click)="betclick(24, 'single')"><div class="nbn">24</div><div [ngClass]="betcoins.num24 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num24}}"><span class="chipSpan">{{betcoins.num24}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub27" (click)="betclick(27, 'single')"><div class="nbn">27</div><div [ngClass]="betcoins.num27 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num27}}"><span class="chipSpan">{{betcoins.num27}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub30" (click)="betclick(30, 'single')"><div class="nbn">30</div><div [ngClass]="betcoins.num30 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num30}}"><span class="chipSpan">{{betcoins.num30}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub33" (click)="betclick(33, 'single')"><div class="nbn" >33</div><div [ngClass]="betcoins.num33 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num33}}"><span class="chipSpan">{{betcoins.num33}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub36" (click)="betclick(36, 'single')"><div class="nbn">36</div><div [ngClass]="betcoins.num36 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num36}}"><span class="chipSpan">{{betcoins.num36}}</span></div></div>
+                              <div class="coinchip tt1_block  pointer" id="Nubrow1" (click)="betclick(1, 'row')"><div class="nbn">2:1</div><div [ngClass]="betcoins.row1 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.row1}}"><span class="chipSpan">{{betcoins.row1}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub2" (click)="betclick(2, 'single')"><div class="nbn">2</div><div [ngClass]="betcoins.num2 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num2}}"><span class="chipSpan">{{betcoins.num2}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub5" (click)="betclick(5, 'single')"><div class="nbn">5</div><div [ngClass]="betcoins.num5 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num5}}"><span class="chipSpan">{{betcoins.num5}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub8" (click)="betclick(8, 'single')"><div class="nbn">8</div><div [ngClass]="betcoins.num8 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num8}}"><span class="chipSpan">{{betcoins.num8}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub11" (click)="betclick(11, 'single')"><div class="nbn">11</div><div [ngClass]="betcoins.num11 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num11}}"><span class="chipSpan">{{betcoins.num11}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub14" (click)="betclick(14, 'single')"><div class="nbn">14</div><div [ngClass]="betcoins.num14 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num11}}"><span class="chipSpan">{{betcoins.num14}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub17" (click)="betclick(17, 'single')"><div class="nbn">17</div><div [ngClass]="betcoins.num17 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num17}}"><span class="chipSpan">{{betcoins.num17}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub20" (click)="betclick(20, 'single')"><div class="nbn">20</div><div [ngClass]="betcoins.num20 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num20}}"><span class="chipSpan">{{betcoins.num20}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub23" (click)="betclick(23, 'single')"><div class="nbn">23</div><div [ngClass]="betcoins.num23 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num23}}"><span class="chipSpan">{{betcoins.num23}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub26" (click)="betclick(26, 'single')"><div class="nbn">26</div><div [ngClass]="betcoins.num26 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num26}}"><span class="chipSpan">{{betcoins.num26}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub29" (click)="betclick(29, 'single')"><div class="nbn">29</div><div [ngClass]="betcoins.num29 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num29}}"><span class="chipSpan">{{betcoins.num29}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub32" (click)="betclick(32, 'single')"><div class="nbn" >32</div><div [ngClass]="betcoins.num32 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num32}}"><span class="chipSpan">{{betcoins.num32}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub35" (click)="betclick(35, 'single')"><div class="nbn">35</div><div [ngClass]="betcoins.num35 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num35}}"><span class="chipSpan">{{betcoins.num35}}</span></div></div>
+                              <div class="coinchip tt1_block  pointer" id="Nubrow2" (click)="betclick(2, 'row')"><div class="nbn">2:1</div><div [ngClass]="betcoins.row2 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.row2}}"><span class="chipSpan">{{betcoins.row2}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub1" (click)="betclick(1, 'single')"><div class="nbn">1</div><div [ngClass]="betcoins.num1 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num1}}"><span class="chipSpan">{{betcoins.num1}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub4" (click)="betclick(4, 'single')"><div class="nbn">4</div><div [ngClass]="betcoins.num4 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num4}}"><span class="chipSpan">{{betcoins.num4}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub7" (click)="betclick(7, 'single')"><div class="nbn">7</div><div [ngClass]="betcoins.num7 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num7}}"><span class="chipSpan">{{betcoins.num7}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub10" (click)="betclick(10, 'single')"><div class="nbn">10</div><div [ngClass]="betcoins.num10 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num10}}"><span class="chipSpan">{{betcoins.num10}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub13" (click)="betclick(13, 'single')"><div class="nbn">13</div><div [ngClass]="betcoins.num13 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num13}}"><span class="chipSpan">{{betcoins.num13}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub16" (click)="betclick(16, 'single')"><div class="nbn">16</div><div [ngClass]="betcoins.num16 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num16}}"><span class="chipSpan">{{betcoins.num16}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub19" (click)="betclick(19, 'single')"><div class="nbn">19</div><div [ngClass]="betcoins.num19 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num19}}"><span class="chipSpan">{{betcoins.num19}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub22" (click)="betclick(22, 'single')"><div class="nbn">22</div><div [ngClass]="betcoins.num22 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num22}}"><span class="chipSpan">{{betcoins.num22}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub25" (click)="betclick(25, 'single')"><div class="nbn">25</div><div [ngClass]="betcoins.num25 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num25}}"><span class="chipSpan">{{betcoins.num25}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub28" (click)="betclick(28, 'single')"><div class="nbn">28</div><div [ngClass]="betcoins.num28 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num28}}"><span class="chipSpan">{{betcoins.num28}}</span></div></div>
+                              <div class="coinchip number_block  pointer blackNum" id="Nub31" (click)="betclick(31, 'single')"><div class="nbn">31</div><div [ngClass]="betcoins.num31 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num31}}"><span class="chipSpan">{{betcoins.num31}}</span></div></div>
+                              <div class="coinchip number_block  pointer redNum" id="Nub34" (click)="betclick(34, 'single')"><div class="nbn">34</div><div [ngClass]="betcoins.num34 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.num34}}"><span class="chipSpan">{{betcoins.num34}}</span></div></div>
+                              <div class="coinchip tt1_block  pointer" id="Nubrow3" (click)="betclick(3, 'row')"><div class="nbn">2:1</div><div [ngClass]="betcoins.row3 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.row3}}"><span class="chipSpan">{{betcoins.row3}}</span></div></div>
+                            </div>
+                            <div class="bo3_board">
+                              <div class="coinchip bo3_block  pointer" id="Nubseg1" (click)="betclick(1, 'segment')"><span>1 to 12</span><div [ngClass]="betcoins.seg1 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.seg1}}"><span class="chipSpan">{{betcoins.seg1}}</span></div></div>
+                              <div class="coinchip bo3_block  pointer" id="Nubseg2" (click)="betclick(2, 'segment')"><span>13 to 24</span><div [ngClass]="betcoins.seg2 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.seg2}}"><span class="chipSpan">{{betcoins.seg2}}</span></div></div>
+                              <div class="coinchip bo3_block  pointer" id="Nubseg3" (click)="betclick(3, 'segment')"><span>25 to 36 </span><div [ngClass]="betcoins.seg3 < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.seg3}}"><span class="chipSpan">{{betcoins.seg3}}</span></div></div>
+                            </div>
+                            <div class="oto_board">
+                              <div class="coinchip oto_block  pointer" id="Nubeven" (click)="betclick('even', 'type')"><span>EVEN</span><div [ngClass]="betcoins.even < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.even}}"><span class="chipSpan">{{betcoins.even}}</span></div></div>
+                              <div class="coinchip oto_block  pointer Nubred" id="Nubred" (click)="betclick('red', 'type')"><span> RED</span><div [ngClass]="betcoins.red < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.red}}"><span class="chipSpan">{{betcoins.red}}</span></div></div>
+                              <div class="coinchip oto_block  pointer Nubblack" id="Nubblack" (click)="betclick('black', 'type')"><span>BLACK</span><div [ngClass]="betcoins.black < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.black}}"><span class="chipSpan">{{betcoins.black}}</span></div></div>
+                              <div class="coinchip oto_block  pointer" id="Nubodd" (click)="betclick('odd', 'type')"><span> ODD </span><div [ngClass]="betcoins.odd < 1000 ? 'chip blue' : 'chip red'" title="{{betcoins.odd}}"><span class="chipSpan">{{betcoins.odd}}</span></div></div>
+                            </div>
+                          </div>
+                        </div>
+                     </div>
+                     <div class="greyboxwhl bottomx">
+                        <div class="d-flex justify-content-center">
+                        </div>
+                     </div>
+                     <div class="greyboxwhl bottomx game_select">
+                     </div>
+                      <div class="d-flex justify-content-between boxgwhl">
+                        <div class="d-flex boxg">
+                           <div (click)="userFav('roulette')"><i class="fas fa-star" [ngClass]="{'fav':fav_clr==1}"></i> {{ fav_count}}</div>
+                           <div (click)="userLike('roulette')"><i class="fas fa-heart" [ngClass]="{'like':like_clr==1}"></i> {{ like_count}}</div>
+                           <!-- <div><i class="fa-solid fa-paper-plane"></i></div> -->
+                        </div>
+                        <div class="d-flex boxg">
+                           <!-- <div title="Music"><i class="fa-solid fa-music"></i></div>
+                           <div title="Sound"><i class="fa-solid fa-volume-off"></i></div>
+                           <div title="Turbo bet"><i class="fa fa-bolt"></i></div> -->
+                           <div title="Live Status" data-toggle="modal" data-target="#roulettelivechart">
+                             <i class="fa fa-bolt"></i>
+                          </div>
+                          <div title="Hot keys" data-toggle="modal" data-target="#hotKeys"><i class="fa-solid fa-keyboard"></i></div>
+                           <!-- <div title="Hot keys"><i class="fa-solid fa-keyboard"></i></div> -->
+                           <div title="Seed" data-toggle="modal" data-target="#exampleCenter" (click)="Seedsetting()"><i class="fa-solid fa-lemon"></i></div>
+                           <!-- <div title="Help" data-toggle="modal" data-target="#exampleCenter1"><i class="fa-regular fa-circle-question"></i></div> -->
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="functioninner">
+              <div class="d-block d-md-none" *ngIf="resautoman">
+                 <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" *ngIf="betactive" (click)="submitBet()">Bet</button>
+                 <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" *ngIf="!betactive" disabled>Bet</button>
+                 <button class="btn btn-secondary col d-block p-2 mt-3 mr-1" [disabled]="activebet" (click)="clearData()">Clear</button>
+             </div>
+              <div class="d-block d-md-none" *ngIf="!resautoman">
+                 <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="sumbit_auto_bet()" [disabled]="!autobetactive" *ngIf="auto_bet">Start Auto Bet</button>
+                 <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="stop_auto_bet()" *ngIf="!auto_bet">Stop Auto Bet</button> 
+                 <button class="btn btn-secondary col d-block p-2 mt-3 mr-1"[disabled]="autoactive" (click)="clearData()">Clear</button>
+               </div>
+               <ul class="nav nav-tabs sitetabs justify-content-center" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" [disabled]="autoactive" (click)="resautoman = true">Manual</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false" [disabled]="activebet" (click)="resautoman = false">Auto</button>
+                  </li>
+               </ul>
+               <div class="tab-content" id="myTabContent" [ngClass]="{'disabled-text': gameTab}">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <p class="mt-2 pt-2">Chip value: {{coin}}</p>
+                     <div class="d-flex justify-content-between p-2 px-2 inputbg">
+                      <div class="w-100 d-flex " style="gap:20px;">
+                        <button class="number_block chipselect cointok3" [disabled]="activebet" (click)="coinswitch(1)">
+                          <div class="nbn">1</div>
+                          <div class="chip blue">
+                            <span class="chipSpan">1</span>
+                          </div>
+                        </button>
+                        <button class="number_block chipselect cointok4" [disabled]="activebet" (click)="coinswitch(10)">
+                          <div class="nbn">1</div>
+                          <div class="chip blue">
+                            <span class="chipSpan">10</span>
+                          </div>
+                        </button>
+                        <button class="number_block chipselect cointok1 cdChipActive" [disabled]="activebet" (click)="coinswitch(100)">
+                          <div class="nbn">1</div>
+                          <div class="chip blue">
+                            <span class="chipSpan">100</span>
+                          </div>
+                        </button>
+                        <button class="number_block chipselect cointok2" [disabled]="activebet" (click)="coinswitch(1000)">
+                          <div class="nbn">1</div>
+                          <div class="chip red">
+                            <span class="chipSpan">1000</span>
+                          </div>
+                        </button>
+                      </div>
+                     </div>
+                     <div class="d-flex justify-content-between p-2 px-2 ">
+                        <div>Amount</div>
+                        <div>0 {{currency}} {{betcoins.numb1}}</div>
+                     </div>
+                     <div class="formbox d-flex justify-content-between align-items-center">
+                        <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                        <div>
+                           <input value="{{bet_amount | number: '1.6-6'}}" class="form-control" disabled name="betamount" required (blur)="bettingamount('none')"> <!-- [(ngModel)]="bet_amount" -->
+                        </div>
+                        <div>
+                           <button class="btn sbtn lbtn" [disabled]="!betactive" (click)="bettingamount('divide')">1/2</button>
+                           <button class="btn sbtn lbtn" [disabled]="!betactive" (click)="bettingamount('multiply')">2x</button>
+                        </div>
+                     </div>
+                     <div class="d-none d-md-block">
+                       <button class="btn btn-secondary col d-block p-2 mt-3 mr-1" [disabled]="activebet" (click)="clearData()">Clear</button>
+                       <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" *ngIf="betactive" (click)="submitBet()">Bet</button>
+                       <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" *ngIf="!betactive" disabled>Bet</button>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                   <div class="form-group">
+                      <p class="mt-2 pt-2">Chip value: {{coin}}</p>
+                    <div class="d-flex justify-content-between p-2 px-2 inputbg mt-2">
+                      <div class="w-100 d-flex " style="gap:20px;">
+                      <button class="number_block chipselect cointok3" [disabled]="activebet" (click)="coinswitch(1)">
+                        <div class="nbn">1</div>
+                        <div class="chip blue">
+                          <span class="chipSpan">1</span>
+                        </div>
+                      </button>
+                      <button class="number_block chipselect cointok4" [disabled]="activebet" (click)="coinswitch(10)">
+                        <div class="nbn">1</div>
+                        <div class="chip blue">
+                          <span class="chipSpan">10</span>
+                        </div>
+                      </button>
+                      <button class="number_block chipselect cointok1 cdChipActive" [disabled]="autoactive" (click)="coinswitch(100)">
+                        <div class="nbn">1</div>
+                        <div class="chip blue">
+                          <span class="chipSpan">100</span>
+                        </div>
+                      </button>
+                      <button class="number_block chipselect cointok2" [disabled]="autoactive" (click)="coinswitch(1000)">
+                        <div class="nbn">1</div>
+                        <div class="chip red">
+                          <span class="chipSpan">1000</span>
+                        </div>
+                      </button>
+                    </div>
+                      </div>
+                      <div class="d-flex justify-content-between p-2 px-2">
+                         <div>Amount</div>
+                         <div>0 {{currency}}</div>
+                      </div>
+                      <div class="formbox d-flex align-items-center">
+                         <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                         <div><input value="{{auto_bet_amount | number: '1.6-6'}}"  class="form-control" disabled required (blur)="bettingamount('none')"> <!-- [(ngModel)]="auto_bet_amount" -->
+                         </div>
+                         <div><button class="btn sbtn lbtn" [disabled]="!autobetactive" (click)="bettingamount('divide')">1/2</button></div>
+                         <div><button class="btn sbtn lbtn" [disabled]="!autobetactive"  (click)="bettingamount('multiply')">2x</button></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <div class="d-flex justify-content-between p-2 px-2">
+                         <div>Number of Bets</div>
+                      </div>
+                      <div class="formbox d-flex align-items-center">
+                         <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                         <div>
+                           <input value="0" class="form-control" name="numberofbets" [disabled]="autoactive" required [(ngModel)]="numberofbets" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57">
+                         </div>
+                         <div><button class="btn sbtn lbtn" [disabled]="autoactive" (click)="number_of_bets('infinity')">0</button></div>
+                         <div><button class="btn sbtn lbtn" [disabled]="autoactive" (click)="number_of_bets(10)">10</button></div>
+                         <div><button class="btn sbtn lbtn" [disabled]="autoactive" (click)="number_of_bets(100)">100</button></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <div class="d-flex justify-content-between p-2 px-2">
+                         <div>Stop on Win</div>
+                         <div>0 {{currency}}</div>
+                      </div>
+                      <div class="formbox d-flex align-items-center">
+                         <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                         <div><input value="0.00000000" class="form-control" name="stop_on_win" [disabled]="autoactive" required [(ngModel)]="stop_on_win" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57"></div>
+                      </div>
+                   </div>
+                   <div class="form-group">
+                      <div class="d-flex justify-content-between p-2 px-2">
+                         <div>Stop on Close</div>
+                         <div>0 {{currency}}</div>
+                      </div>
+                      <div class="formbox d-flex align-items-center">
+                         <div class="coinpic"><img src="assets/images/coins/bnb.svg"></div>
+                         <div><input value="0.00000000" class="form-control" name="stop_on_loss" [disabled]="autoactive" required [(ngModel)]="stop_on_loss" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57"></div>
+                      </div>
+                   </div>
+                   <div class="form-group lgrey">
+                      Use of script is optional and players must take full responsibility for any attendant risks. We will not be held liable in this regard.
+                   </div>
+                   <div class="d-none d-md-block">
+                     <button class="btn btn-secondary col d-block p-2 mt-3 mr-1"[disabled]="autoactive" (click)="clearData()">Clear</button>
+                     <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="sumbit_auto_bet()" [disabled]="!autobetactive" *ngIf="auto_bet">Start Auto Bet</button>
+                     <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1" (click)="stop_auto_bet()" *ngIf="!auto_bet">Stop Auto Bet</button> 
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+       <div class="darkbg p-4">
+          <nav>
+             <div class="nav nav-tabs sitetabs tabs1" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All Bets</a>
+                <a class="nav-item nav-link" id="nav-bets-tab" data-toggle="tab" href="#nav-bets" role="tab" aria-controls="nav-bets" aria-selected="false">My Bets</a>
+             </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+        <div class="table-responsive">
+          <table class="table table-dark lastright">
+            <thead>
+              <tr>
+                <th>Bet ID</th>
+                <th>Player</th>
+                <th>Time</th>
+                <th>Payout</th>
+                <th>Profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let list of allBethistory;let i = index">
+              <tr *ngIf="i < 10 || showMores">
+                <td>{{ list.betid }}</td>
+                <td>{{ list.player}}</td>
+                <td>{{ list.time | date:'yyyy-MM-dd H:mm:ss'}}</td>
+                <td>{{ list.payout.toFixed(2) }}x</td>
+                <!-- <td>{{ list.profit }}</td> -->
+                <ng-container *ngIf="list.status=='loser'">
+                  <td [ngClass]="{'winner':list.status=='winner' || list.status=='tied','looser':list.status== 'loser'}">-{{((list.profit)*1).toFixed(6)}} <img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                </ng-container>
+                <ng-container *ngIf="list.status!='loser'">
+                  <td [ngClass]="{'winner':list.status=='winner' || list.status=='tied','looser':list.status== 'loser'}">+{{((list.profit)*1).toFixed(6)}}<img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                </ng-container>
+              </tr>
+              </ng-container>
+            </tbody>
+            </table>
+            <div *ngIf="allBethistory.length >= 10" class="text-center">
+              <button (click)="toggleShowMore()" class="sowes" style="color:white">{{ showMores ? 'Show Less' : 'Show More' }}
+                <span><i class="fas fa-chevron-down ml-2"></i></span>
+              </button>
+            </div>
+          </div>
+      </div>
+      <div class="tab-pane fade" id="nav-bets" role="tabpanel" aria-labelledby="nav-bets-tab">
+        <div class="table-responsive">
+          <table class="table table-dark lastright">
+            <thead>
+               <tr>
+                  <th>Bet ID</th>
+                  <th>Bet</th>
+                  <th>Time</th>
+                  <th>Payout</th>
+                  <th>Profit</th>
+               </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let list of bethistory;let i = index  ">
+                <tr *ngIf="i < 10 || showMoreHis" (click)="getDetails(list._id)" class="hov" data-toggle="modal" data-target="#exampleCenter2">
+                  <td>{{ list._id }}</td>
+                  <td >{{ list.bet_amount }}</td>
+                  <td>{{ list.created_at | date:'yyyy-MM-dd H:mm:ss'}}</td>
+                  <td>{{ list.payout.toFixed(2) }}x</td>
+                  <ng-container *ngIf="list.status=='loser'">
+                    <td [ngClass]="{'winner':list.status=='winner' || list.status=='tied','looser':list.status== 'loser'}">-{{((list.win_lose_amt)*1).toFixed(6)}}<img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                  </ng-container>
+                  <ng-container *ngIf="list.status!='loser'">
+                    <td [ngClass]="{'winner':list.status=='winner' || list.status=='tied','looser':list.status== 'loser'}">+{{((list.win_lose_amt)*1).toFixed(6)}} <img width="20" class="ml-1" src="assets/images/coins/bnb.svg"></td>
+                  </ng-container>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <div *ngIf="bethistory.length >= 10" class="text-center">
+            <button (click)="toggleShowMoreHis()" class="sowes" style="color:white">{{ showMoreHis ? 'Show Less' : 'Show More' }}
+               <span><i class="fas fa-chevron-down ml-2"></i></span>
+            </button>
+          </div>
+        </div>
+  </div>
+  <div class="tab-pane fade" id="nav-roller" role="tabpanel" aria-labelledby="nav-roller-tab">...</div>
+  <div class="tab-pane fade" id="nav-contest" role="tabpanel" aria-labelledby="nav-contest-tab">contest</div>
+</div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>
+
+<!-- Seed setting Modal -->
+<div class="modal fade" id="exampleCenter" tabindex="-1" role="dialog" aria-labelledby="exampleCenter" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Seed Settings</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+        <div class="warn">You may use this function to set a new server seed + a new client seed, they can be randomly generated or customized (at least 10 characters), and the number of bets will be reset to zero.</div>
+        <div class="detailForm">
+            <div class="title">Current seeds</div>
+            <div class="ui-input">
+               <div class="input-label">Server Seed (hash)</div>
+               <div class="input-control">
+                  <input type="text" class="w-100" readonly="" [value]="serverSeed" class="form-control" id="bcd">
+               </div>
+            </div>
+            <div class="formFlex">
+               <div class="ui-input d-flex">
+                  <div class="mr-2">
+                     <div class="input-label">Client Seed</div>
+                  <div class="input-control">
+                     <input type="text" class="form-control" class="w-100" readonly="" [value]="clientSeed" class="form-control" id="bcd">
+                  </div>
+                  </div>
+                  <div>
+                  <div class="input-label">Nonce</div>
+                  <div class="input-control">
+                     <input type="text" class="w-100" class="form-control" readonly="" [value]="nounce" id="bcd">
+                  </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="devide m-0"></div>
+      <div class="detailForm">
+         <div class="title">New seeds</div>
+         <div class="ui-input">
+            <div class="input-label">Server Seed (hash)</div>
+            <div class="input-control">
+               <input type="text" class="w-100" class="form-control" placeholder="The seed hasn't been revealed yet" readonly [value]="newserverSeed" id="bcd">
+            </div>
+         </div>
+         <div class="formFlex">
+            <div class="ui-input d-flex">
+               <div class="mr-2">
+                  <div class="input-label">Client Seed</div>
+               <div class="input-control d-flex justify-content-between" >
+                  <div class="d-flex mr-2">
+                     <input type="text" class="form-control" [value]="newclientSeed" readonly id="bcd" style="width:150px">
+                     <span class=" form-control btn sm-btn btn-light rounded-0 float-right" (click)="generateSeed()" id="bcd"><i class="fas fa-sync-alt" ></i></span>
+                  </div>
+                  
+               </div>
+               </div>
+               <div class="">
+                  <div class="input-label">Nonce</div>
+                  <div class="input-control">
+                     <input type="text" class="form-control" class="w-100" readonly="" [value]="0" class="form-control" readonly id="bcd">
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div  style="color:white !important;">
+         <button (click)="updateHash()" class="btn sitebtn col-md-12 p-2 mt-3 mb-1" style="font-weight: 600;font-size: 17px;">
+            <div class="button-inner">Use New Seeds</div>
+         </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end -->
+
+<!-- Details -->
+<div class="modal fade" id="exampleCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleCenter2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+      </div>
+
+      <div class="detailForm"> 
+         <div class="ui-scrollview d767b8h">
+            <div class="g1g5nio3">
+               <div class="s1hd7haz game-share">
+               </div>
+               <div class="text-center">
+                  <div class="d-flex justify-content-center mb-2">
+                     <img class="verified" src="assets/images/bet-id.svg" width="20px">
+
+                     <div class="betid ml-2" >Bet Id: {{Det_id}}</div>
+                     <i class="fas fa-copy pl-3" (click)="copyInputMessage(Det_id)"></i>
+                  </div>
+                  <div class="d-flex justify-content-center mb-2">
+                     <span class="mr-2">By</span>
+                     <a href="#/user/profile/12344577" keep-scroll-position="true" class="u1blx6u2 user-info name mr-2">
+                        <div class="name betid mr-2">{{Det_name}}</div>
+                     </a>
+                     <span class="mr-2">On </span>
+                     <div class="rt_time mr-2"> {{ Det_created_at |date:'dd-MM-yy  HH:mm:ss'}}</div>
+                  </div>
+               </div>
+               <div class="items d-flex justify-content-between">
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/amount.svg" width="20px">
+                     <div class="label flex-center ml-2">Amount</div>
+                     </div>
+                     <div class="cy2znlo coin notranslate number flex-center">
+                        <div class="amount">
+                           <span class="amount-str">{{((Det_betamount)*1).toFixed(6)}}
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/payout.svg" width="20px">
+                     <div class="label flex-center ml-2">Payout</div>
+                     </div>
+                     <div class="number flex-center">{{((Det_payout)*1).toFixed(2)}} x</div>
+                  </div>
+                  <div class="item-wrap blak-box">
+                     <div class="d-flex text-center">
+                        <img class="coin-icon" src="assets/images/profit.svg" width="20px">
+                     <div class="label flex-center ml-2">Profit</div>
+                     </div>
+                        <div class="cy2znlo coin notranslate number flex-center profit-num has-sign">
+                           <div class="amount">
+                              <ng-container *ngIf="Det_status=='winner'">
+                                 <span class="amount-str" [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}"> + {{((Det_pro_amt)*1).toFixed(6)}}
+                                 </span>
+                              </ng-container>
+                              <ng-container *ngIf="Det_status!='winner'">
+                                 <span class="amount-str" [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}"> - {{((Det_pro_amt)*1).toFixed(6)}}
+                                 </span>
+                              </ng-container>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+               <div class="game-info-wrap formbox p-2 mx-1 my-2 d-flex justify-content-between align-items-center">
+                  <div class="info-middle d-flex align-items-center">
+                     <div><img class="thumbnail" width="70" alt="game-logo" src="https://bc.imgix.net/game/image/d3e67e6b-d882-4d34-8ff3-a4ff6c388d4c.png">
+                     </div>
+                     <div class="ml-2">
+                        <div class="name betid">Roulette</div>
+                        <div>RollGame</div>
+                     </div>
+                  </div>
+                  <button class="ui-button button-normal play">
+                     <a class="button-inner sitebtn" href="ringoffortune">Play Now</a>
+                  </button>
+               </div>
+               <div class="rotateTable">  
+                <div id="resbetting_board">
+                  <div class="result_lines">
+                  <div class="bbtop">
+                    <div class="resultcoin resbbtoptwo chipresultselect" id="reshalf1"><span>1 to 18</span><div [ngClass]="resultcoins.half1 < 1000 ? 'chipresult blue' : 'chipresult red'" ><span class="chipSpanresult">{{resultcoins.half1}}</span></div></div>
+                    <div class="resultcoin resbbtoptwo" id="reshalf2"><span>19 to 36</span><div [ngClass]="resultcoins.half2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.half2}}</span></div></div>
+                  </div>
+                  <div class="resnumber_board">
+                    <div class="resultcoin resnumber_0" id="res0"> <div class="nbn">0</div><div [ngClass]="resultcoins.num0 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num0}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res3"><div class="nbn">3</div><div [ngClass]="resultcoins.num3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num3}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res6"><div class="nbn">6</div><div [ngClass]="resultcoins.num6 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num6}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res9"><div class="nbn">9</div><div [ngClass]="resultcoins.num9 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num9}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res12"><div class="nbn">12</div><div [ngClass]="resultcoins.num12 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num12}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res15"><div class="nbn">15</div><div [ngClass]="resultcoins.num15 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num15}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res18"><div class="nbn">18</div><div [ngClass]="resultcoins.num18 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num18}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res21"><div class="nbn">21</div><div [ngClass]="resultcoins.num21 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num21}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res24"><div class="nbn">24</div><div [ngClass]="resultcoins.num24 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num24}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res27"><div class="nbn">27</div><div [ngClass]="resultcoins.num27 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num27}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res30"><div class="nbn">30</div><div [ngClass]="resultcoins.num30 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num30}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res33"><div class="nbn" >33</div><div [ngClass]="resultcoins.num33 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num33}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res36"><div class="nbn">36</div><div [ngClass]="resultcoins.num36 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num36}}</span></div></div>
+                    <div class="resultcoin resrestt1_block" id="resrow1"><div class="nbn">2:1</div><div [ngClass]="resultcoins.row1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row1}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res2"><div class="nbn">2</div><div [ngClass]="resultcoins.num2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num2}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res5"><div class="nbn">5</div><div [ngClass]="resultcoins.num5 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num5}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res8"><div class="nbn">8</div><div [ngClass]="resultcoins.num8 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num8}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res11"><div class="nbn">11</div><div [ngClass]="resultcoins.num11 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num11}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res14"><div class="nbn">14</div><div [ngClass]="resultcoins.num14 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num14}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res17"><div class="nbn">17</div><div [ngClass]="resultcoins.num17 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num17}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res20"><div class="nbn">20</div><div [ngClass]="resultcoins.num20 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num20}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res23"><div class="nbn">23</div><div [ngClass]="resultcoins.num23 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num23}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res26"><div class="nbn">26</div><div [ngClass]="resultcoins.num26 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num26}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res29"><div class="nbn">29</div><div [ngClass]="resultcoins.num29 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num29}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res32"><div class="nbn" >32</div><div [ngClass]="resultcoins.num32 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num32}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res35"><div class="nbn">35</div><div [ngClass]="resultcoins.num35 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num35}}</span></div></div>
+                    <div class="resultcoin resrestt1_block" id="resrow2"><div class="nbn">2:1</div><div [ngClass]="resultcoins.row2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row2}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res1"><div class="nbn">1</div><div [ngClass]="resultcoins.num1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num1}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res4"><div class="nbn">4</div><div [ngClass]="resultcoins.num4 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num4}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res7"><div class="nbn">7</div><div [ngClass]="resultcoins.num7 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num7}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res10"><div class="nbn">10</div><div [ngClass]="resultcoins.num10 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num10}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res13"><div class="nbn">13</div><div [ngClass]="resultcoins.num13 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num13}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res16"><div class="nbn">16</div><div [ngClass]="resultcoins.num16 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num16}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res19"><div class="nbn">19</div><div [ngClass]="resultcoins.num19 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num19}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res22"><div class="nbn">22</div><div [ngClass]="resultcoins.num22 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num22}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res25"><div class="nbn">25</div><div [ngClass]="resultcoins.num25 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num25}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res28"><div class="nbn">28</div><div [ngClass]="resultcoins.num28 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num28}}</span></div></div>
+                    <div class="resultcoin resnumber_block blackNum" id="res31"><div class="nbn">31</div><div [ngClass]="resultcoins.num31 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num31}}</span></div></div>
+                    <div class="resultcoin resnumber_block redNum" id="res34"><div class="nbn">34</div><div [ngClass]="resultcoins.num34 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num34}}</span></div></div>
+                    <div class="resultcoin resrestt1_block" id="resrow3"><div class="nbn">2:1</div><div [ngClass]="resultcoins.row3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row3}}</span></div></div>
+                  </div>
+                  <div class="resbo3_board">
+                    <div class="resultcoin resbo3_block" id="resseg1"><span>1 to 12</span><div [ngClass]="resultcoins.seg1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg1}}</span></div></div>
+                    <div class="resultcoin resbo3_block" id="resseg2"><span>13 to 24</span><div [ngClass]="resultcoins.seg2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg2}}</span></div></div>
+                    <div class="resultcoin resbo3_block" id="resseg3"><span>25 to 36 </span><div [ngClass]="resultcoins.seg3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg3}}</span></div></div>
+                  </div>
+                  <div class="resoto_board">
+                    <div class="resultcoin resoto_block" id="reseven"><span>EVEN</span><div [ngClass]="resultcoins.even < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.even}}</span></div></div>
+                    <div class="resultcoin resoto_block Nubred" id="resred"><span> RED</span><div [ngClass]="resultcoins.red < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.red}}</span></div></div>
+                    <div class="resultcoin resoto_block Nubblack" id="resblack"><span>BLACK</span><div [ngClass]="resultcoins.black < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.black}}</span></div></div>
+                    <div class="resultcoin resoto_block" id="resodd"><span> ODD </span><div [ngClass]="resultcoins.odd < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.odd}}</span></div></div>
+                  </div>
+                  </div>
+                </div>
+               </div>
+            <div class="seed-main">
+               <div class="ui-input">
+                <div class="d-flex justify-content-between"><span class="input-label">Server Seed</span><span class="green-t" data-toggle="modal" data-target="#exampleCenter" data-dismiss="modal" aria-label="Close" (click)="confirmedData()" (click)="Seedsetting()" *ngIf="seedset">Seed Settings</span></div>
+                  <div class="input-control" *ngIf="Det_seedstatus==0">
+                    <input class="form-control" type="text" placeholder="The Seed hasn't been revealed yet." readonly>
+                  </div>
+                  <div class="input-control" *ngIf="Det_seedstatus==1">
+                    <input class="form-control" type="text" [value]="withouthashserver">
+                  </div>
+               </div>
+               <div class="ui-input">
+                  <div class="input-label">
+                     <div class="seed-col">
+                        <div>Server Seed (hash)</div>
+                     </div>
+                  </div>
+                  <div class="input-control"><input type="text" class="form-control"  readonly=""  [value]="Det_serverSeed"></div>
+               </div>
+               <div class="d-flex">
+                  <div class="ui-input col pl-0">
+                     <div class="input-label">Client Seed</div>
+                     <div class="input-control">
+                      <div class="input-control" *ngIf="Det_seedstatus==0">
+                        <input type="text" class="form-control" readonly [value]="Det_clientSeed">
+                     </div>
+                     <div class="input-control" *ngIf="Det_seedstatus==1">
+                        <input type="text" class="form-control" readonly [value]="withouthashclient">
+                     </div>
+                  </div>
+                  <div class="ui-input col pr-0">
+                     <div class="input-label">nonce</div>
+                     <div class="input-control">
+                      <input type="text" class="form-control"  readonly="" [value]="Det_nounce">
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="submit" style="color:white !important;">
+            <button  class="btn sitebtn col-md-12 p-2 mt-3 mb-1" style="font-weight: 600;font-size: 17px;" data-toggle="modal" data-target="#seedVerifyCenter" data-dismiss="modal" aria-label="Close">
+               <div class="button-inner" (click)="confirmedData()">Verify</div>
+            </button>
+         </div>
+       </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- end -->
+<div class="modal fade" id="seedVerifyCenter" tabindex="-1" role="dialog" aria-labelledby="seedVerifyCenterTitle" aria-hidden="true" >
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="message my-5 text-center frt" style="color:#98a7b5;font-size: 15px;">
+            Sorry! You need to set up a new seed before validating the data (the server seed is encrypted)
+         </div>
+         <div class="d-flex justify-content-center">
+            <div class="mr-2" style="color:white !important;">
+            <button  class="btn" style="background:#6b7180 !important;font-size: 17px;min-width: 130px;padding: 10px;color: #fff;">
+               <div class="button-inner" class="close" data-dismiss="modal" aria-label="Close">Cancel</div>
+            </button>
+         </div>
+         <div class="" style="color:white !important;">
+            <button  class="btn sitebtn" style="font-weight: 600;font-size: 17px;padding: 10px !important;" data-toggle="modal" data-target="#exampleCenter" data-dismiss="modal" aria-label="Close">
+               <div class="button-inner" (click)="Seedsetting()" (click)="confirmedData()">Confirm</div>
+            </button>
+         </div>
+         </div>
+      </div>
+  </div>
+</div>
+</div>
+<div class="modal fade modals1" id="roulettelivechart" tabindex="-1" role="dialog" aria-labelledby="roulettelivechart" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered modal-dialogs" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title text-success" id="exampleModalLongTitle">Live Stats</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="link item-wrap blak-boxz">
+            <div class="d-flex justify-content-between" (click)="class()">
+               <div >
+                  <span class="res" [class.custom-class]="shouldAddClass">Bet</span>
+               </div>
+               <div *ngIf="shouldAddClass!=true">
+                  <i class="fas fa-caret-down er"></i> 
+               </div>
+               <div *ngIf="shouldAddClass==true">
+                   <i class="fas fa-caret-up ewe"></i> 
+               </div>
+            </div>
+            <div *ngIf="shouldAddClass==true">
+               <div class="p-4">
+                  <div><input type="checkbox">Bet</div>
+                  <div class="my-3"><input type="checkbox">Wager contest</div>
+                  <div><input type="checkbox">BCD Treasure Box</div>
+               </div>
+            </div>
+         </div>
+         <div class="link item-wrap blak-boxz">
+            <div class="d-flex justify-content-between">
+               <span>Bet</span>
+            <span (click)="getExacttime()"><i class="fas fa-sync-alt" style="color: #000000;"></i></span>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>wagered</div>
+               <div>profit</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div>{{wagered}}</div>
+               <div>{{profits}}</div>
+               </div>
+            </div>
+            <div class="">
+               <div class="wrapperbox gridx" >
+                  <div class="w-100">
+                     <div id="container"></div>
+                  </div>
+               </div>
+            </div>
+            <div class=""> 
+               <div class="d-flex justify-content-between my-2">
+                  <div>Win</div>
+                  <div>loss</div>
+               </div>
+               <div class="d-flex justify-content-between">
+                  <div >{{win_count}}</div>
+                  <div>{{loss_count}}</div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<!-- hotKeys -->
+<div class="modal fade" id="hotKeys" tabindex="-1" role="dialog" aria-labelledby="hotKeys" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Hot keys</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="message my-5 text-center frt" style="color:#98a7b5;font-size: 15px;">
+        <div class="ui-scrollview h1yfs6k1 dialog-box">
+          <div class="hotkey-list">
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Half bet amount</div>
+              <div class="hotkey-key">A</div>
+            </div>
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Double bet amount</div>
+              <div class="hotkey-key">S</div>
+            </div>
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Make a bet</div>
+              <div class="hotkey-key">Space</div>
+            </div>
+            <div class="hotkey-item">
+              <div class="hotkey-txt">Clear Table</div>
+              <div class="hotkey-key">E</div>
+            </div>
+          </div>
+          <div class="hotkey-enabled mt-1">
+            <div>
+              <input class="hotkey-select " [(ngModel)]="hotKey" name="hotKeys" type="checkbox" id="gridDeposit" (click)="enableKey(hotKey)">
+            </div>
+            <div>Hotkeys Enabled</div>
+          </div>
+          <div class="mt-3" style="color:green">
+            <span>*Note HotKey's Only Available on Manual Bets</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

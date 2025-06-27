@@ -1,0 +1,181 @@
+#slotMachine {
+    margin: 70px auto;
+    position: relative;
+    width: 416px;
+    height: 280px;
+}
+#slotSplash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: 200px;
+  background: #000 url(/assets/images/splash.webp);
+  background-size: cover;
+}
+.slotamt
+{
+      position: relative;
+        border: 5px solid #c5bba9;
+    background: #50350d;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 0;
+    padding: 6px;
+    font-size: 17px;
+    color: #e1cc37;
+}
+.swordbg
+{
+  background:#aed9f3 url(/assets/images/sword_game/swordtree.svg);
+  background-size: cover;
+      background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center top;
+
+}
+.slotrun
+{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    height: 190px;
+    transform: scale(1.5);
+    height:173px;
+    overflow: hidden;
+    margin: 40px;
+    left: -40px;
+    background:#5f5649;
+}
+.slotrun::after
+{
+    border: 5px solid #625643;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(2px 4px 6px black);
+}
+#slotTrigger:after,.slotTriggerDisabled:after {position:absolute; content:"";
+  background-image:url(/assets/images/spinner.svg);
+  background-size: 40px;
+  background-repeat: no-repeat; background-position:center;
+  width: 40px;
+  height: 40px;
+  left: 50px;
+}
+.slotTriggerDisabled:after {cursor: disabled;
+  -webkit-animation:spin 0.2s linear infinite;
+  -moz-animation:spin 0.2s linear infinite;
+  animation:spin 0.2s linear infinite;}
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+#slotSplash a {
+  display: block;
+  overflow: hidden;
+  width: 65px;
+  height: 22px;
+  left: 219px;
+  top: 100px;
+  color: #fff;
+  position: absolute;
+  z-index: 999;
+  background: #58c034;
+  border-radius: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  padding-top: 2px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.gameboxrow .lbtn.sbtn {
+    background: #504634;
+    color: #b3a48b !important;
+}
+
+div.wheel {
+  position: absolute;
+  width: 82px;
+  height: 185px;
+  overflow: hidden;
+  top:4px;
+}
+div.wheel img {
+  position: absolute;
+  top: -4px;
+  left: 0px;
+  width: 82px;
+}
+#wheelOverlay {
+  position: absolute;
+  top: 24px;
+  left: 14px;
+  display: none;
+}
+#wheel1 {
+  left: 0px;
+}
+#wheel2 {
+  left: 84px;
+}
+#wheel3 {
+  left: 168px;
+}
+#wheel4 {
+  left: 252px;
+}
+#wheel5 {
+  left: 336px;
+}
+.gameboxrow
+{
+    xbackground: #1f2024;
+
+
+}
+.gameboxrow > div {
+    xborder: 7px solid #17181b;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin: 5px;
+    background: #383227;
+    border-radius: 6px;
+    color: #aba192;
+}
+/*#slotCredits {
+  position: absolute;
+  top: 6px;
+  left: 30px;
+  width: 80px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-align: right;
+  color: #78ff00;
+}*/
+/*#slotTrigger {
+  display: block;
+  position: absolute;
+  width: 37px;
+  height: 17px;
+  overflow: hidden;
+  text-indent: -1000px;
+  top: 90px;
+  left: 77px;
+  background: url(/assets/images/button.jpg) top no-repeat;
+  cursor: default;
+}*/
+#slotTrigger.slotTriggerDown {
+  background-position: 0px -17px;
+}
+#slotTrigger.slotTriggerDisabled {
+  background-position: 0px -34px;
+  xdisplay: none;
+}
+.slotSpinAnimation {
+  display: none;
+}
+input:focus{
+  color: #fff !important;
+}

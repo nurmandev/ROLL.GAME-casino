@@ -1,0 +1,288 @@
+.item:nth-child(1) .stage::after {
+    background-image: url(/assets/images/bg1.svg);
+}
+.right .item:nth-child(2) .stage::after {
+    background-image: url(/assets/images/bg2.svg);
+}
+.right .item:nth-child(3) .stage::after {
+    background-image: url(/assets/images/bg3.svg);
+}
+.right .item:nth-child(4) .stage::after {
+    background-image: url(/assets/images/bg4.svg);
+}
+.right .item {
+    flex: 1 1 0%;
+    margin-right: 1.125rem;
+    text-align: center;
+    position: relative;
+}
+.right .stage .front {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    background: no-repeat center bottom/ 100% auto;
+}
+.right .item:nth-child(1) .mask {
+    background-image: url(/assets/images/light1.png);
+}
+.item:nth-child(1) .mask::after {
+    background-image: url(/assets/images/mask1.png);
+}
+.right .item:nth-child(1) .front {
+    background-image: url(/assets/images/front1.png);
+}
+.right .item:nth-child(2) .front {
+    background-image: url(/assets/images/front2.webp);
+}
+.right .item:nth-child(3) .front {
+    background-image: url(/assets/images/front3.png);
+}
+.right .item:nth-child(4) .front {
+    background-image: url(/assets/images/front4.webp);
+}
+
+
+.right .stage {
+    position: relative;
+    z-index: 2;
+    border-radius: var(--border-radius);
+    line-height: normal;
+    padding-top: 119.6%;
+    color: rgb(34, 35, 41);
+    top: 0.625rem;
+    transition: top 0.2s ease-in 0s;
+    }
+.right .stage .text {
+    position: absolute;
+    top: 0.875rem;
+    left: 0px;
+    right: 0px;
+    color: rgb(34, 35, 41);
+    line-height: normal;
+    font-weight: 600;
+}
+.right .stage .bonus-name-title {
+    position: absolute;
+    bottom: 0.875rem;
+    z-index: 6;
+    font-weight: 600;
+    width: 100%;
+    white-space: nowrap;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+.right .stage .mask {
+    position: absolute;
+    top: 0.1875rem;
+    left: 0.1875rem;
+    right: 0.1875rem;
+    height: 80%;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    background: center center / contain no-repeat;
+    z-index: 0;
+}
+.right .item.active .mask::after {
+    animation: 5s linear 0s infinite normal none running depositrotate-d170p6kq;
+}
+.right .stage .mask::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding-top: 100%;
+    transform: scale(2.2) translateY(18%);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+ .right .item:nth-child(1) .stage::after {
+    background-image: url(/assets/images/bg1.svg);
+}
+.right .stage::after {
+    content: "";
+    position: absolute;
+    inset: 0px 0px 1.5rem;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100%;
+}
+.right .stage .effect-item {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: url(/assets/images/effect-coin.webp) center center / contain no-repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    animation: 1s linear 0s infinite alternate none running depositbounce-d170p6kq;
+}
+.right .stage .effect-item {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: url(/assets/images/effect-coin.webp) center center / contain no-repeat;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    animation: 1s linear 0s infinite alternate none running depositbounce-d170p6kq;
+}
+.right .stage .effect {
+    position: absolute;
+    inset: 0px;
+    z-index: 5;
+    display: none;
+}
+.right .item.active .stage .effect {
+    display: block;
+}
+.right .stage .effect-item:last-child {
+    top: unset;
+    bottom: 0.625rem;
+    background-image: url(/assets/images/effect-coin-left.png);
+    right: unset;
+    left: 0px;
+}
+.right .item.active .ui-button {
+    opacity: 1;
+    transform: scale(1);
+}
+.right .ui-button {
+    width: 8.875rem;
+    height: 2.75rem;
+    margin: 0px auto;
+    color: rgb(34, 35, 41);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s ease-out 0s;
+    position: relative;
+    z-index: 3;
+}
+.right .stage__arrow {
+    position: absolute;
+    top: 40%;
+    right: -1.75rem;
+    width: 2.375rem;
+    height: 2.375rem;
+    border-radius: var(--border-radius);
+    background: #222329;
+    z-index: 3;
+}
+.right .item.active .icon {
+    fill: #ffd444;
+}
+.right .stage__arrow .icon {
+    fill: #9e9e9e;
+    -webkit-transform: scale(.6);
+    -ms-transform: scale(.6);
+    transform: scale(.6);
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.right .item:hover:not(.mobile) .stage,  .right .item.active .stage {
+    top: -0.625rem;
+}
+.right .item:nth-child(1) .ui-button {
+    background-image: conic-gradient(from 1turn, rgb(241, 149, 17), rgb(246, 199, 34));
+}
+.orangebg{background: rgb(188 91 36);
+    background: linear-gradient(90deg, rgb(120 57 34) 3%, rgb(189 94 28) 100%);
+}
+.promotion-item {
+    width: 49.5%;
+    background: var(--1shw9w4);
+    margin-top: 0.75rem;
+    padding: 0.5rem;
+    position: relative;
+}
+.promotion-item .banner {
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+.promotion-item .banner img {
+    position: absolute;
+    height: 140%;
+    right: 0;
+    bottom: 0;
+    display: inline-block;
+    vertical-align: top;
+}
+.promotion-item .banner .desc h1 {
+    font-size: 1.375rem;
+    line-height: 2.25rem;
+}
+.promotion-item .banner .desc {
+    padding: 4% 0 0 4.2%;
+    position: absolute;
+    color: #fff;
+    left: 0;
+    top: 0;
+    min-width: 60%;
+    height: 100%;
+}
+.promotion-item .banner:after {
+    content: "";
+    display: block;
+    padding-top: 38%;
+}
+.promotion-item .banner .desc * {
+    margin: 0;
+}
+.promotion-item .banner .desc * {
+    margin: 0;
+}
+@-webkit-keyframes depositrotate-d170p6kq {
+    0% {
+        transform: scale(2.2) translateY(18%) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(2.2) translateY(18%) rotate(360deg);
+    }
+}
+
+@keyframes depositrotate-d170p6kq {
+    0% {
+        transform: scale(2.2) translateY(18%) rotate(0deg);
+    }
+
+    100% {
+        transform: scale(2.2) translateY(18%) rotate(360deg);
+    }
+}
+@-webkit-keyframes depositbounce-d170p6kq {
+    0% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+@keyframes depositbounce-d170p6kq {
+    0% {
+        transform: translateY(-5px);
+    }
+
+    50% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+}

@@ -1,0 +1,323 @@
+<div class="pagewrapper">
+<app-innerheader></app-innerheader>
+<div class="gamewrapper">
+<div class="sidemenu"><app-sidebar></app-sidebar></div>
+
+<div class="gameinnerwhl">
+	<div class="breadcrumblink"><a class="pointer">RollGame Originals</a> > <span class="pointer">Sword</span></div>
+	<div class="d-flex row m-0">
+		<div class="gameinner col p-0 swordbg">
+      <div  class="row greyboxwhl d-flex align-items-center">
+        <div class="greybox paybox bf">
+          <div><span class="green-t">Bankroll</span><span class="mx-1">ETH</span></div>
+          <div class="text-white">2817495233 <img class="scoin" src="assets/images/coins/eth.svg"></div>
+        </div>
+        <div class="d-flex ml-auto">
+        <div class="greybox bf d-flex align-items-center"><span class="circles grey mr-1"></span>2.00x</div>
+        <div class="greybox bf d-flex align-items-center"><span class="circles purple mr-1"></span>3.00x</div>
+        <div class="greybox bf d-flex align-items-center"><span class="circles orange mr-1"></span>6.00x</div>
+        <div class="greybox bf d-flex align-items-center"><span class="circles green mr-1"></span>99.00x</div>
+        
+      </div>
+      </div>
+		<div class="gameinnerboxwhl minesgame">
+			<div class="gameinnerwrapper">
+               <div id="slotMachine">
+               	<div class="text-center slotamt"  id="slotCredits">Total Win Amount </div>
+		<div class="slotrun">
+        <div id="wheel1" class="wheel">
+            <img src="assets/images/sword1.svg" alt="" />
+            <img src="assets/images/ani.gif" alt="" class="slotSpinAnimation" />
+        </div>
+        <div id="wheel2" class="wheel">
+            <img src="assets/images/sword2.svg" alt="" />
+            <img src="assets/images/ani.gif" alt="" class="slotSpinAnimation" />
+        </div>
+        <div id="wheel3" class="wheel">
+            <img src="assets/images/sword3.svg" alt="" />
+            <img src="assets/images/ani.gif" alt="" class="slotSpinAnimation" />
+        </div>
+        <div id="wheel4" class="wheel">
+            <img src="assets/images/sword3.svg" alt="" />
+            <img src="assets/images/ani.gif" alt="" class="slotSpinAnimation" />
+        </div>
+        <div id="wheel5" class="wheel">
+            <img src="assets/images/sword3.svg" alt="" />
+            <img src="assets/images/ani.gif" alt="" class="slotSpinAnimation" />
+        </div>
+        <p id="slotSplash">
+			<a href="#">start</a>
+		</p>
+        </div>
+        
+        <img src="assets/images/over.png" alt="" id="wheelOverlay" />
+		
+    </div>
+    <div class="d-flex   justify-content-between gameboxrow">
+      <div class="col">
+        <select class="form-control">
+          <option>ETH</option>
+        </select>
+      </div>
+          <div class="col " ><span class="">Win Amount 15</span></div>
+          <div class="col  d-flex align-items-center" >
+                      <div class="mr-2">Bet</div>
+                      <div class="mr-2">200</div>
+                      <div class="d-flex">
+                        <div><button class="btn sbtn lbtn">Max</button></div>
+                          <div><button class="btn sbtn lbtn">X2</button></div>
+                          <div><button class="btn sbtn lbtn">/2</button></div>
+                          <div><button class="btn sbtn lbtn">Min</button></div>
+                      </div>
+                      </div>
+          <div class="col" id="slotTrigger"><span>SPIN</span></div>
+
+    
+        </div>
+            </div>
+		</div>
+		<div class="d-flex justify-content-between boxgwhl">
+       <div class="d-flex boxg">
+        <div><i class="fas fa-star"></i> 6735</div>
+        <div><i class="fas fa-heart"></i> 6334</div>
+        <div><i class="fa-solid fa-paper-plane"></i></div>
+       </div>
+      
+      <div class="d-flex boxg">
+        <div><i class="fa-solid fa-music"></i></div>
+        <div><i class="fa-solid fa-volume-off"></i></div>
+        <div><i class="fa fa-bolt"></i></div>
+        <div><i class="fa-solid fa-keyboard"></i></div>
+        <div><i class="fa-solid fa-lemon"></i></div>
+        <div><i class="fa-regular fa-circle-question"></i></div>
+      </div>
+      </div>
+  </div>
+		<div class="functioninner">
+<ul class="nav nav-tabs sitetabs justify-content-center" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Manual</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Auto</button>
+  </li>
+  
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+  	<div class="d-flex justify-content-between p-2 px-2">
+  		<div>Amount</div>
+  		<div>0 BTC</div>
+  	</div>
+  	<div class="formbox d-flex align-items-center mb-1">
+  		<div class="coinpic"><span class="circles grey"></span></div>
+  		<div><input value="100.000000000" class="form-control"></div>
+  		<div><button class="btn sbtn lbtn">/2</button></div>
+  		<div><button class="btn sbtn lbtn">X2</button></div>
+  		<div class="dropdown"><button class="btn sbtn lbtn arrowbtns rangeslider">
+      <div><img src="assets/images/toparrow.svg"/></div>  
+      <div><img src="assets/images/downarrow.svg"/></div> 
+      </button>
+      <div class="showslider">
+         <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+        </div>
+    </div>        
+  	</div>
+  	<div class="formbox d-flex align-items-center mb-1">
+  		<div class="coinpic"><span class="circles purple"></span></div>
+  		<div><input value="100.000000000" class="form-control"></div>
+  		<div><button class="btn sbtn lbtn">/2</button></div>
+  		<div><button class="btn sbtn lbtn">X2</button></div>
+  		<div class="dropdown"><button class="btn sbtn lbtn arrowbtns rangeslider">
+      <div><img src="assets/images/toparrow.svg"/></div>  
+      <div><img src="assets/images/downarrow.svg"/></div> 
+      </button>
+      <div class="showslider">
+         <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+        </div>
+    </div>        
+  	</div>
+  	<div class="formbox d-flex align-items-center mb-1">
+  		<div class="coinpic"><span class="circles orange"></span></div>
+  		<div><input value="100.000000000" class="form-control"></div>
+  		<div><button class="btn sbtn lbtn">/2</button></div>
+  		<div><button class="btn sbtn lbtn">X2</button></div>
+  		<div class="dropdown"><button class="btn sbtn lbtn arrowbtns rangeslider">
+      <div><img src="assets/images/toparrow.svg"/></div>  
+      <div><img src="assets/images/downarrow.svg"/></div> 
+      </button>
+      <div class="showslider">
+         <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+        </div>
+    </div>        
+  	</div>
+  	<div class="formbox d-flex align-items-center">
+  		<div class="coinpic"><span class="circles green"></span></div>
+  		<div><input value="100.000000000" class="form-control"></div>
+  		<div><button class="btn sbtn lbtn">/2</button></div>
+  		<div><button class="btn sbtn lbtn">X2</button></div>
+  		<div class="dropdown"><button class="btn sbtn lbtn arrowbtns rangeslider">
+      <div><img src="assets/images/toparrow.svg"/></div>  
+      <div><img src="assets/images/downarrow.svg"/></div> 
+      </button>
+      <div class="showslider">
+         <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+        </div>
+    </div>        
+  	</div>
+
+  	<div class="d-flex justify-content-between p-2 px-2">
+  		<div>Payout</div>
+  		<div>Chance <span>50.00000%</span></div>
+  	</div>
+  	<div class="formbox d-flex align-items-center justify-content-between">
+  		<div><input value="1.98" class="form-control"></div>
+  		<div><button class="btn xbtn">X</button></div>
+  	</div>
+  	<button class="btn sitebtn col-md-12 p-2 mt-3 mb-1">Bet</button>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>Amount</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center">
+      <div class="coinpic"><span class="circles grey"></span></div>
+      <div><input value="100.000000000" class="form-control"></div>
+      <div><button class="btn sbtn lbtn">/2</button></div>
+      <div><button class="btn sbtn lbtn">X2</button></div>
+      <div class="dropdown"><button class="btn sbtn lbtn arrowbtns rangeslider">
+      <div><img src="assets/images/toparrow.svg"/></div>  
+      <div><img src="assets/images/downarrow.svg"/></div> 
+      </button>
+      <div class="showslider">
+         <ngx-slider [(value)]="value2" [options]="options2"></ngx-slider>
+        </div>
+    </div>
+            
+      
+      
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>Number of Bets</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center">
+      <div class="coinpic"><img src="assets/images/coins/btc.svg"></div>
+      <div><input value="100.000000000" class="form-control"></div>
+      <div><button class="btn sbtn lbtn">0</button></div>
+      <div><button class="btn sbtn lbtn">10</button></div>
+      <div><button class="btn sbtn lbtn">100</button></div>
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>On Win</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center justify-content-between">
+      <div><div class="btn sbtn lbtn rbox">Reset Increase by</div></div>
+      
+      <div><input value="0" class="form-control"></div>
+      <div class="green-t bf">%</div>
+     
+            
+      
+      
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>Stop on Win</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center">
+      <div class="coinpic"><img src="assets/images/coins/btc.svg"></div>
+      <div><input value="100.000000000" class="form-control"></div> 
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>On Close</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center justify-content-between">
+      <div><div class="btn sbtn lbtn rbox">Reset Increase by</div></div>
+      
+      <div><input value="0" class="form-control"></div>
+      <div class="green-t bf">%</div>
+     
+            
+      
+      
+    </div>
+    </div>
+    <div class="form-group">
+    <div class="d-flex justify-content-between p-2 px-2">
+      <div>Stop on Close</div>
+      <div>0 BTC</div>
+    </div>
+    <div class="formbox d-flex align-items-center">
+      <div class="coinpic"><img src="assets/images/coins/btc.svg"></div>
+      <div><input value="100.000000000" class="form-control"></div> 
+    </div>
+    </div>
+    <div class="form-group lgrey">
+      Use of script is optional and players must take full responsibility for any attendant risks. We will not be held liable in this regard.
+    </div>
+    <button class="btn sitebtn col-md-12 p-2 mt-3 mb-1">Start Auto Bet</button>
+  </div>
+  
+</div>
+		</div>
+	</div>
+<br/>
+  <div class="darkbg p-4">
+    <nav>
+  <div class="nav nav-tabs sitetabs tabs1" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all" aria-selected="true">All Bets</a>
+    <a class="nav-item nav-link" id="nav-bets-tab" data-toggle="tab" href="#nav-bets" role="tab" aria-controls="nav-bets" aria-selected="false">My Bets</a>
+    <a class="nav-item nav-link" id="nav-roller-tab" data-toggle="tab" href="#nav-Roller" role="tab" aria-controls="nav-roller" aria-selected="false">High Roller</a>
+    <a class="nav-item nav-link" id="nav-contest-tab" data-toggle="tab" href="#nav-contest" role="tab" aria-controls="nav-contest" aria-selected="false">Wager Contest</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+    <div class="table-responsive">
+      <table class="table table-dark lastright">
+        <thead>
+          <tr>
+            <th>Bet ID</th>
+            <th>Player</th>
+            <th>Time</th>
+            <th>Payout</th>
+            <th>Profit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1234567890</td>
+            <td>James</td>
+            <td>8:16 PM</td>
+            <td>0.00x</td>
+            <td>0.00000<img width="20" class="ml-1" src="assets/images/coins/btc.svg"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="nav-bets" role="tabpanel" aria-labelledby="nav-bets-tab">...</div>
+  <div class="tab-pane fade" id="nav-roller" role="tabpanel" aria-labelledby="nav-roller-tab">...</div>
+  <div class="tab-pane fade" id="nav-contest" role="tabpanel" aria-labelledby="nav-contest-tab">contest</div>
+</div>
+    
+  </div>
+
+</div>
+  
+
+</div>
+</div>

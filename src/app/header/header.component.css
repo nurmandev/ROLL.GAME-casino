@@ -1,0 +1,54 @@
+.headertopwhl {
+    position: relative;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    padding-top: 5px;
+}
+.headertop{
+
+}
+.gametopmenus{width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 1430px;}
+.gametopmenus ul{padding: 0px; margin: 0px; display: flex !important;}
+.gametopmenus ul li{float: left; list-style: none;}
+.gametopmenus ul li a{display: block; padding:12px 8px !important;color:#98a7b5; padding: 10px 12px !important;}
+.gametopmenus ul li a.select{background: #2d3035;border-radius: 2px;color:#fff;}
+.gametopmenus ul{display: flex; align-items: center; height: 52px;}
+
+.adj{
+    width: 190%;
+    margin-top: 97px;
+    margin-left: -190px;
+}
+input:focus{
+  color: #fff !important;
+}
+
+::ng-deep #google_translate_element select.goog-te-combo {
+  margin: 4px 0;
+    color: white;
+    background: #39373e;
+    padding: 4px;
+    border: 1px solid transparent;
+}
+.moblogowhl{display: none;}
+.moblogo img{max-width: 120px;}
+@media(max-width: 767px)
+{
+  .gametopmenus .mr-auto.mobx{display:none !important;}
+  .moblogowhl{display: block;}
+  .desklogo{display: none;}
+   .moblogowhl .moblogo{width: 40px;}
+   .gametopmenus ul li a{padding: 4px 10px !important;}
+   .gametopmenus ul li a.nav-link.btn{ padding: 8px 20px !important; }
+}
+.hov{
+    cursor: pointer !important;
+}

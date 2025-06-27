@@ -1,0 +1,178 @@
+<footer>
+  <div class="gameinnerwhl">
+    <div class="row m-0">
+      <div class="col-lg-2">
+        <h6>Casino</h6>
+        <ul>
+          <li><a routerLink="/limbo">Limbo</a></li>
+          <li><a routerLink="/bustabit">Bustabit</a></li>
+          <li><a routerLink="/dice">Dice</a></li>
+          <li><a routerLink="/coinflip">CoinFlip</a></li>
+          <li><a routerLink="/keno">Keno</a></li>
+          <li><a routerLink="/mines">Mines</a></li>
+          <li><a routerLink="/ringoffortune">Ring of Fortune</a></li>
+          <li><a routerLink="/roulette">Roulette</a></li>
+          <li><a routerLink="/sword">Sword</a></li>
+          <li><a routerLink="/caveofplunder">Cave of Plunder</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <h6>Sports</h6>
+        <ul>
+          <li><a routerLink="/sports">Sports Home</a></li>
+          <li><a routerLink="/sports">Live</a></li>
+          <li><a routerLink="/sports">Rules</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <h6>Promo</h6>
+        <ul>
+          <li><a href="#">VIP Club</a></li>
+          <li *ngIf="head"><a routerLink="/affiliate">Affiliate</a></li>
+          <li><a routerLink="/promotion">Promotions</a></li>
+          <li class="hov" *ngIf="head" (click)="openModel()">
+            <a>Refer a Friend</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <h6>Support/Legal</h6>
+        <ul>
+          <li class="hov"><a (click)="helpCent()">Help center</a></li>
+          <li>
+            <a
+              routerLink="/provably-fair"
+              [queryParams]="{ type: 'fair' }"
+              queryParamsHandling="merge"
+              >Fairness</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/provably-fair"
+              [queryParams]="{ type: 'faq' }"
+              queryParamsHandling="merge"
+              >FAQ</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/provably-fair"
+              [queryParams]="{ type: 'policy' }"
+              queryParamsHandling="merge"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/provably-fair"
+              [queryParams]="{ type: 'terms' }"
+              queryParamsHandling="merge"
+              >Terms of Service</a
+            >
+          </li>
+          <li><a routerLink="/support">Live Support</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <h6>About Us</h6>
+        <ul>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Work with Us</a></li>
+          <li><a href="#">Business Contacts</a></li>
+          <li><a href="#">Help Desk</a></li>
+          <li><a href="#">Verify Resprentative</a></li>
+          <li><a href="#">Hashbet</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2">
+        <h6>Join Our Community</h6>
+        <ul class="socialicons">
+          <li>
+            <a href="#"><img src="assets/images/telegram.webp" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="assets/images/github.webp" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="assets/images/twitter.webp" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="assets/images/facebook.webp" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="assets/images/discord.webp" /></a>
+          </li>
+          <li>
+            <a href="#"><img src="assets/images/bitcoin.webp" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <hr />
+    <br />
+    <h5 class="text-white mb-3">Accepted Networks</h5>
+    <ul class="cryptoicons">
+      <li class="bitcoinicon hov"></li>
+      <li class="ethereumicon hov"></li>
+      <li class="dogeicon hov"></li>
+      <li class="rippleicon hov"></li>
+      <li class="cardaicon hov"></li>
+      <li class="polkadoticon hov"></li>
+      <li class="tronicon hov"></li>
+      <li class="bscicon hov"></li>
+      <li class="avalancheicon hov"></li>
+      <li class="solanaicon hov"></li>
+      <li class="polygonicon hov"></li>
+      <li class="arbitrumicon hov"></li>
+      <li class="optimismicon hov"></li>
+      <li class="cronosicon hov"></li>
+      <li class="fantomicon hov"></li>
+      <li class="thorchainicon hov"></li>
+      <li class="cosmosomicon hov"></li>
+      <li class="nearicon hov"></li>
+    </ul>
+    <br /><br />
+    <h5 class="text-white mb-3">Sponsorship and Gaming Responsibilities</h5>
+    <div class="justify-content-center sponsorlogos row d-flex">
+      <div class="hov"><img src="assets/images/sigma.png" /></div>
+      <div class="hov"><img src="assets/images/cloudnine.webp" /></div>
+      <div class="hov"><img src="assets/images/afa.webp" /></div>
+      <div class="hov"><img src="assets/images/verify.webp" /></div>
+      <div class="hov"><img src="assets/images/respon.webp" /></div>
+      <div class="hov"><img src="assets/images/eighteen.png" /></div>
+    </div>
+    <hr />
+    <br />
+    <div class="row m-0 justify-content-between">
+      <div class="col-lg-5">
+        <div class="hov">
+          <img class="mb-3" width="150" src="assets/images/logo.svg" />
+        </div>
+        <p class="small">
+          <span
+            >A multi-award winning crypto casino. With a player-centric
+            approach, </span
+          ><span>ROLL.GAME</span
+          ><span>
+            is able to satisfy millions of gamblers across the globe. </span
+          ><span>ROLL.GAME</span
+          ><span>
+            has its priority set on its community, ensuring an everlasting and
+            endlessly entertaining gambling experience.</span
+          >
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <p class="small">
+          Roll.game is operated by BlockDance B.V. (Commercial register of
+          Curaçao no.158182, Emancipatie Boulevard Dominico F. "Don" Martina 31,
+          Curaçao) under a sublicense CIL pursuant to Master gaming License
+          #5536/JAZ.
+        </p>
+        <div class="my-3">©2025 ROLL.GAME ALL RIGHTS RESERVED</div>
+        <div>1BTC=₹24,18,943.26</div>
+      </div>
+    </div>
+  </div>
+</footer>

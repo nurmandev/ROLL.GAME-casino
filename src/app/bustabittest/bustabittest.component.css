@@ -1,0 +1,21 @@
+#myModal {
+  overflow-y: hidden;
+}
+.modal-header {
+  cursor: move;
+}
+
+.highcharts-exporting-group{
+  display: none;
+}
+
+.result{
+    position: absolute;
+    top: 250px;
+    font-size: 40px;
+    font-weight: bold;
+}
+highcharts-chart
+{
+  width: 100%;
+}

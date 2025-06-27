@@ -1,0 +1,184 @@
+<div class="pagewrapper">
+  <ng-container *ngIf="!head">
+    <app-header (ConnEvent)="conPass($event)"></app-header>
+	</ng-container>
+
+ 	<ng-container *ngIf="head">
+    <app-innerheader [balance]="balance" (currBal)="CurrBal($event)" (ConnEvent)="conPass($event)"></app-innerheader>
+ 	</ng-container>
+ 	<div class="gamewrapper">
+   	<div class="sidemenu"> <app-sidebar></app-sidebar> </div>
+  </div>
+  <div class="gameinnerwhl">
+      <!-- <div class="rows" style="gap:20px;">
+         <ng-container *ngFor="let data of favTable">
+            <div class="carouselsection alg">
+               <a class="hov" (click)="url(data.gameName)" >
+                  <img [src]="data.Image"  width="100%" height="200">
+                  <div class="darkbg font-weight-bold p-1">
+                     <div class="p-2 d-flex justify-content-between align-items-center wg">
+                        <div class=" greyt text-uppercase lgrey">RollGame Original</div>
+                        <div class="infoicon">
+                           <img src="assets/images/app-info-icon.svg">
+                           <div class="appinfobox lgrey">
+                              <div class="darkformbox d-flex justify-content-between">
+                                 <div>RTP:</div>
+                                 <div><span class="green-t">95.66%</span></div>
+                              </div>
+                              <div class="darkformbox d-flex justify-content-between">
+                                 <div>Recently Biggest Win:</div>
+                                 <div><span>883.18X</span></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </a>
+            </div>
+         </ng-container>
+      </div> -->
+      <div class="my-3 topslide">
+         <owl-carousel-o  [options]="customOptions1">
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide1.png" />
+               </a>
+            </ng-template>
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide2.png" />
+               </a>
+            </ng-template>
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide3.png" />
+               </a>
+            </ng-template>
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide4.png" />
+               </a>
+            </ng-template>
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide1.png" />
+               </a>
+            </ng-template>
+            <ng-template carouselSlide>
+               <a href="#"><img src="assets/images/slide2.png" />
+               </a>
+            </ng-template>
+         </owl-carousel-o>
+      </div>
+      <div class="carouselsection">
+         <div class="d-flex justify-content-between d-flex  text-white my-3 mt-5">
+            <div class="h4">Top Rated Games</div>
+            <div class="viewbtn pointer" routerLink="/casino">View All</div>
+         </div>
+         <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let data of favTable">
+               <ng-template carouselSlide>
+                  <a class="hov" (click)="url(data.gameName)">
+                     <div class="h-cus">  
+                        <img [src]="data.Image"  width="100%" height="200">
+                     </div>
+                     <div class="darkbg">
+                        <div class="p-2 d-flex justify-content-between align-items-center">
+                           <div class=" greyt text-uppercase lgrey">RollGame Original</div>
+                           <div class="infoicon">
+                              <img src="assets/images/app-info-icon.svg">
+                              <div class="appinfobox lgrey">
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>RTP:</div>
+                                    <div><span class="green-t">95.66%</span></div>
+                                 </div>
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>Recently Biggest Win:</div>
+                                    <div><span>883.18X</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="p-2 text-center">
+                        <button class="btn bluebtn">Play Now</button>
+                     </div>
+                     </div>
+                  </a>
+               </ng-template>
+            </ng-container>
+         </owl-carousel-o>
+      </div>
+      <div class="carouselsection">
+         <div class="d-flex justify-content-between d-flex  text-white my-3 mt-5">
+            <div class="h4">Recent Big Wins</div>
+            <div class="viewbtn pointer" routerLink="/casino">View All</div>
+         </div>
+         <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let data of secfavTable">
+               <ng-template carouselSlide>
+                  <a class="hov" (click)="url(data.gameName)">
+                     <div class="h-cus">  
+                        <img [src]="data.Image"  width="100%" height="200">
+                     </div>
+                     <div class="darkbg">
+                        <div class="p-2 d-flex justify-content-between align-items-center">
+                           <div class=" greyt text-uppercase lgrey">RollGame Original</div>
+                           <div class="infoicon">
+                              <img src="assets/images/app-info-icon.svg">
+                              <div class="appinfobox lgrey">
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>RTP:</div>
+                                    <div><span class="green-t">95.66%</span></div>
+                                 </div>
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>Recently Biggest Win:</div>
+                                    <div><span>883.18X</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="p-2 text-center">
+                        <button class="btn bluebtn">Play Now</button>
+                     </div>
+                     </div>
+                  </a>
+               </ng-template>
+            </ng-container>
+         </owl-carousel-o>
+      </div>
+      <div class="carouselsection">
+         <div class="d-flex justify-content-between d-flex  text-white my-3 mt-5">
+            <div class="h4">Recent Big Wins</div>
+            <div class="viewbtn pointer" routerLink="/casino">View All</div>
+         </div>
+         <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let data of thirdFavTable">
+               <ng-template carouselSlide>
+                  <a class="hov" (click)="url(data.gameName)">
+                     <div class="h-cus">  
+                        <img [src]="data.Image"  width="100%" height="200">
+                     </div>
+                     <div class="darkbg">
+                        <div class="p-2 d-flex justify-content-between align-items-center">
+                           <div class=" greyt text-uppercase lgrey">RollGame Original</div>
+                           <div class="infoicon">
+                              <img src="assets/images/app-info-icon.svg">
+                              <div class="appinfobox lgrey">
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>RTP:</div>
+                                    <div><span class="green-t">95.66%</span></div>
+                                 </div>
+                                 <div class="darkformbox d-flex justify-content-between">
+                                    <div>Recently Biggest Win:</div>
+                                    <div><span>883.18X</span></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="p-2 text-center">
+                        <button class="btn bluebtn">Play Now</button>
+                     </div>
+                     </div>
+                  </a>
+               </ng-template>
+            </ng-container>
+         </owl-carousel-o>
+      </div>
+      <app-footer></app-footer>
+  </div>
+</div>

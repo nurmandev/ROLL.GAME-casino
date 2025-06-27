@@ -1,0 +1,393 @@
+<div class="pagewrapper">
+   <ng-container *ngIf="!head">
+      <app-header (ConnEvent)="conPass($event)"></app-header>
+   </ng-container>
+   <ng-container *ngIf="head">
+      <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   </ng-container>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2 text-uppercase">WALLET</div>
+         <div class="row">
+            <div class="col-md-2 overflow-auto">
+               <div class="nav flex-sm-column nav-pills custom-ww" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a class="nav-link cont-bg active" id="balance-tab" data-toggle="pill" href="#balance" role="tab" aria-controls="balance" aria-selected="true">Balance</a>
+                  <a class="nav-link cont-bg" id="deposit-data-tab" data-toggle="pill" href="#deposit-data" role="tab" aria-controls="deposit-data" aria-selected="false">Deposit-data</a>
+
+                  <a class="nav-link cont-bg" id="withdraw-data-tab" data-toggle="pill" href="#withdraw-data" role="tab" aria-controls="withdraw-data" aria-selected="false">Withdraw-data</a>
+                  <a class="nav-link cont-bg" id="trx-tab" data-toggle="pill" href="#trx" role="tab" aria-controls="trx" aria-selected="false">Transaction</a>
+               </div>
+            </div>
+            <div class="col-md-8">
+               <div class="tab-content"
+                  id="v-pills-tabContent">
+                  <div class="tab-pane fade frm show active" id="balance" role="tabpanel"
+                     aria-labelledby="balance-tab">
+                     <div class="d-flex justify-content-between mt-2">
+                     	<div class="ml-3">
+                     		<input type="checkbox" class="form-check-input" id="exampleCheck1" name= "agree" #agree= "ngModel" ngModel (click)="HideZero($event.target)" required>
+                     		<label for="exampleCheck1">Hide 0 Balance</label>
+                     	</div>
+                     	<div>
+                     		<input class="form-control darkinput mr-sm-2" type="search" placeholder="Search Currency" aria-label="Search" name="searchbox" #searchbox='ngModel' ngModel required [(ngModel)]="searchVal" (ngModelChange)="SearchPair($event)" autocomplete="off">
+                     	</div>
+                     </div>
+                     <div>Crypto Currency</div>
+                     <div class="mt-3"> 
+								<table class="table table-dark lastright">
+	                        <tbody>
+	                           <ng-container *ngFor="let bal of balData;let i = index">
+	                              <tr class="hov">
+	                                 <td><span><img src="assets/images/coins/bnb.svg" width="20"></span><span> {{ bal.currency }}</span></td>
+	                                 <td *ngIf="bal.status !== 1" colspan="3">{{ (bal.amount*1).toFixed(6) }}</td>
+	                                 <td *ngIf="bal.status == 1" >
+	                                 	<div>{{ (bal.amount*1).toFixed(6) }}</div>
+	                                 	<div *ngIf="convertToNumber(bal.locked) !== 0" data-toggle="modal" data-target="#rakeback1" (click)="getlocked(bal.currency)"><span class="mr-2"><i class="fa fa-lock"></i></span><span>{{ (convertToNumber(bal.locked)*1).toFixed(6) }}</span></div>
+	                                 </td>
+		                     	     <td *ngIf="bal.status == 1" class="text-success" (click)="cngDep(bal.currency)" data-toggle="pill" href="#deposit-data" role="tab" aria-controls="deposit-data" aria-selected="false">Deposit</td>
+		                     		 <td *ngIf="bal.status == 1" class="text-success" (click)="cngWith(bal.currency)" data-toggle="pill" href="#deposit-data" role="tab" aria-controls="deposit-data" aria-selected="false">Withdraw</td>
+	                              </tr>
+	                           </ng-container>
+	                        </tbody>
+	                    </table>
+                     </div>
+                  </div>
+                  <div class="tab-pane fade frm" id="deposit-data" role="tabpanel"
+                     aria-labelledby="deposit-data-tab">
+                        <div class="form-group">
+                           	<div class="d-flex justify-content-between p-2 px-2">
+                              	<div >Deposit Currency</div>
+                              	<div>Need to view privious <span class="text-success pointer" routerLink="/deposit/history" data-dismiss="modal" aria-label="Close">History</span></div>
+                           	</div>
+                           <div class="dropdown p-0 navbar largedropdown">
+                              <div class="btn btn-dark pl-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <div class="px-2 d-flex align-items-center justify-content-between">
+                                    <div class="coinpic pl-0 btn sbtn rbox te pointer"><img src="assets/images/coins/bnb.svg"><span class="text-white ml-1">{{WithCurr}}</span></div>
+                                    <div class="text-right">
+                                       <div class="text-white">{{(withBal*1).toFixed(6)}} </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="dropdown-menu midrop" aria-labelledby="dropdownMenuButton">
+                                 <div class="px-2 d-flex align-items-center justify-content-between pointer" *ngFor="let c of walletData" (click)="selectwithcurr(c)">
+                                    <div class="coinpic pl-0 btn sbtn rbox te"><img src="assets/images/coins/bnb.svg"><span class="text-white">{{c.currency}}</span></div>
+                                    <div class="text-right">
+                                       <div class="text-white">{{(c.amount*1).toFixed(6)}} </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="d-flex justify-content-between p-2 px-2">
+                           <div >Trending Coins</div>
+                        </div>
+                        <ul class="listcoins">
+                           <li><a class="coinpic pointer" (click)="onselectcurr('BNB')"><img src="assets/images/coins/bnb.svg">BNB</a></li>
+                           <li><a class="coinpic pointer" (click)="onselectcurr('BUSD')"><img src="assets/images/coins/busd.svg">BUSD</a></li>
+                        </ul>
+                        <div class="form-group">
+                           <div class="d-flex justify-content-between p-2 px-2">
+                              <div >Choose Network</div>
+                           </div>
+                           <div class="dropdown p-0 navbar largedropdown">
+                              <div class="btn btn-dark pl-0 dropdown-toggle" type="button" id="dropdownNetwork" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <div class="px-2 d-flex align-items-center justify-content-between">
+                                    <div class="coinpic pl-0 btn sbtn rbox te"><span class="text-white ml-1">{{network}}</span></div>
+                                    <div class="text-right">
+                                       <div class="text-white"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="dropdown-menu midrop" aria-labelledby="dropdownNetwork">
+                                 <div class="px-2 d-flex align-items-center justify-content-between pointer">
+                                    <div class="coinpic pl-0 btn sbtn rbox te"><span class="text-white">{{network}}</span></div>
+                                    <div class="text-right">
+                                       <div class="text-white"></div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+		               <div class="form-group">
+		                  <div class="d-flex flex-column flex-md-row align-items-center justify-content-between" style="gap:10px;">
+		                     <div class="pointer1">
+		                        <div>
+		                        Deposit Address ( Note: Only <span class="green-t">Bitcoin</span>)
+		                        <span class="green-t">{{addfirst}}</span>{{addmidd}}<span class="green-t">{{addlast}}</span>
+		                        </div>
+		                        <button type="button" class="btn mt-3 btn-dark" (click)="copyInputMessage(address)">Copy</button>
+		                     </div>		                     
+		                     <div class="qrcodepic"><img width="120" [src] ="Qrcode ||''" ></div>
+		                  </div>
+		               </div>
+                  </div>
+                  <div class="tab-pane fade frm" id="withdraw-data" role="tabpanel"
+                     aria-labelledby="withdraw-data-tab">
+	                     <form #withdrawform="ngForm" autocomplete="off" novalidate >
+	                     <div class="form-group">
+	                        <div class="d-flex justify-content-between p-2 px-2">
+	                           <div >Withdraw amount</div>
+	                           <div>Need to view privious <span class="text-success pointer" routerLink="/withdraw/history" data-dismiss="modal" aria-label="Close">History</span></div>
+	                        </div>
+	                        <div class="dropdown p-0 navbar largedropdown">
+	                           <div class="btn btn-dark pl-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                              <div class="px-2 d-flex align-items-center justify-content-between pointer">
+	                                 <div class="coinpic pl-0 btn sbtn rbox te"><img src="assets/images/coins/bnb.svg"><span class="text-white ml-1">{{WithCurr}}</span></div>
+	                                 <div class="text-right">
+	                                    <div class="text-white">{{(withBal*1).toFixed(6)}} </div>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                           <div class="dropdown-menu midrop pointer" aria-labelledby="dropdownMenuButton">
+	                              <div class="px-2 d-flex align-items-center justify-content-between" *ngFor="let c of walletData" (click)="selectwithcurr(c)">
+	                                 <div class="coinpic pl-0 btn sbtn rbox te"><img src="assets/images/coins/bnb.svg"><span class="text-white">{{c.currency}}</span></div>
+	                                 <div class="text-right">
+	                                    <div class="text-white">{{(c.amount*1).toFixed(6)}} </div>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+	                     </div>
+	                     <div class="form-group">
+	                        <div class="d-flex justify-content-between p-2 px-2">
+	                           <div >Choose Network</div>
+	                        </div>
+	                        <div class="dropdown p-0 navbar largedropdown">
+	                           <div class="btn btn-dark pl-0 dropdown-toggle" type="button" id="dropdownNetwork" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	                              <div class="px-2 d-flex align-items-center justify-content-between">
+	                                 <div class="coinpic pl-0 btn sbtn rbox te pointer"><span class="text-white ml-1">{{network}}</span></div>
+	                                 <div class="text-right">
+	                                    <div class="text-white"></div>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                           <div class="dropdown-menu midrop" aria-labelledby="dropdownNetwork">
+	                              <div class="px-2 d-flex align-items-center justify-content-between">
+	                                 <div class="coinpic pl-0 btn sbtn rbox te"><span class="text-white">{{network}}</span></div>
+	                                 <div class="text-right">
+	                                    <div class="text-white"></div>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+	                     </div>
+	                     <div class="form-group">
+	                        <div class="d-flex justify-content-between p-2 px-2">
+	                           <div >Withdrawal Address<span class="green-t">(Note: Only Bitcoin):</span></div>
+	                        </div>
+	                        <div class="formbox d-flex align-items-center justify-content-between">
+	                           <input class="form-control darkinput" placeholder="Enter Withdraw Address" name="address" #withaddr="ngModel" required [(ngModel)]="withaddress" type="text" />
+	                        </div>
+	                     </div>
+	                     <div class="form-group">
+	                        <div class="d-flex justify-content-between p-2 px-2">
+	                           <div >Withdraw amount</div>
+	                           <div >Min: {{(min_withdraw*1).toFixed(6)}}</div>
+	                        </div>
+	                        <div class="justify-content-between">
+	                           <div class="formbox d-flex align-items-center justify-content-between">
+	                              <div><input class="form-control" name="withdrawAmt" #withamount="ngModel" required [(ngModel)]="with_amount" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? (this.value.indexOf('.') === -1) : event.charCode >= 48 && event.charCode <= 57" (ngModelChange)="withdrawAmt($event)" (change) = "with_amount = with_amount.trim()"></div>
+	                              <div class="d-flex">
+	                                 <div><button class="btn sbtn lbtn" (click)="withinit('25')">25%</button></div>
+	                                 <div><button class="btn sbtn lbtn" (click)="withinit('50')">50%</button></div>
+	                                 <div><button class="btn sbtn lbtn" (click)="withinit('max')">Max</button></div>
+	                              </div>
+	                           </div>
+	                        </div>
+	                     </div>
+	                     <div class="d-flex justify-content-between">
+	                        <div></div>
+	                        <div>= {{totalwith}}</div>
+	                     </div>
+	                     <div class="text-center p-2 px-2">
+	                        <div>Fee <span>{{withdraw_fee}}% {{WithCurr}}</span></div>
+	                     </div>
+	                  </form>
+	                  <div class="text-center p-2 px-2">
+	                     <div [ngClass]="{'disabled-text': !checkBtn}">
+	                        <button class="btn sitebtn col-md-8 p-2 my-3 mb-1" (click)="executeAction(withdrawform, 'withdraw')">Confirm</button>
+	                     </div>
+	                  </div>
+                  </div>
+                  <div class="tab-pane fade frm" id="trx" role="tabpanel" aria-labelledby="trx-tab">
+                    	<div>
+                    		<select class="custom-select selets"  (click)="historyData($event.target)">
+                    			<option value ="deposit">Deposit</option>
+                    			<option value ="withdraw">Withdraw</option>
+                    		</select>
+                    	</div>
+                    	<div *ngIf="historyName=='deposit'">
+                    		<div class="container">
+							    <div class="site-card col-md">
+							      <div class=" mt-4 table-responsive">
+							        <table class="table table-dark lastright">
+							          <thead>
+							            <tr>
+							              <th>S.No</th>
+							              <th>Currency</th>
+							              <th>Amount</th>
+							              <th>Transaction ID</th>
+							              <th>status</th>
+							              <th>Data & Time</th>
+							            </tr>
+							          </thead>
+							          <ng-container>
+							            <tbody *ngIf="depositHistory.length == 0">
+							               <tr><td class="text-white text-center" colspan="6">No records found</td></tr>
+							            </tbody>
+							         </ng-container>
+							            <tbody *ngIf="depositHistory.length > 0" class="text-white">
+							               <tr *ngFor="let deposit of depositHistory; let i = index" >
+							                  <td>{{i+((q*10)-10)+1}}</td>
+							                  <td>{{ deposit['currency'] }}</td>
+							                  <td>{{ deposit['amount'] }}</td>
+							                  <td class="cursor_pointer" (click)="copyText(deposit['reference_no'])">{{ deposit['reference_no'].substr(0, 6)+"..."+deposit['reference_no'].slice(-6) }}</td>
+							                  <td>{{ deposit['status'] }}</td>
+							                  <td>{{ deposit['created_at' ] | date:'yyyy-MM-dd HH:mm:ss ' }}</td>
+							               </tr>
+							            </tbody>
+							        </table>
+							      </div>
+							      <div class="text-right mb-4" *ngIf="depositHistory.length > 10">
+							        <div class="text-left pagi d-inline-block ">
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+                    	</div>
+							<div *ngIf="historyName == 'withdraw'">
+								<div class="container">
+									<div class="site-card col-md">
+										<div class="row mt-4">
+							 				<table class="table table-striped">
+								            <thead>
+								              <tr>
+								                <th>S.No</th>
+								                <th>Currency</th>
+								                <th>Amount</th>
+								                <th>Transaction ID</th>
+								                <th> Status</th>
+								                <th>Date & Time</th>
+								              </tr>
+								            </thead>
+								            <ng-container>
+								              <tbody *ngIf="withdrawHistory.length == 0">
+								                    <tr><td class="text-white text-center" colspan="6">No records found</td></tr>
+								              </tbody>
+								           </ng-container>
+								            <tbody *ngIf="withdrawHistory.length > 0" class="text-white">
+								                <tr *ngFor="let withdraw of withdrawHistory; let i = index" >
+								                    <td>{{i+((q*10)-10)+1}}</td>
+								                    <td>{{ withdraw['currency'] }}</td>
+								                    <td>{{ withdraw['amount'] }}</td>
+								                    <td class="cursor_pointer" (click)="copyText(withdraw['reference_no'])">{{ withdraw['reference_no'].substr(0, 6)+"..."+withdraw['reference_no'].slice(-6) }}</td>
+								                    <td>{{ withdraw['status'] }}</td>
+								                    <td>{{ withdraw['created_at' ] | date:'yyyy-MM-dd HH:mm:ss ' }}</td>
+								                </tr>
+								            </tbody>   
+							          </table>
+										</div>
+								      <div class="text-right mb-4" *ngIf="withdrawHistory.length > 10">
+								        <div class="text-left pagi d-inline-block ">
+								        </div>
+								      </div>
+									</div>
+								</div>
+							</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+</div>
+
+<div class="modal fade" id="rakeback1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header border-0">
+            <h5 class="modal-title">Rakeback</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div>
+           <div class="text-center">
+              <p>Unlocked RGC</p>
+              <p>{{lockedData.amount}} {{lockedData.currency}}</p>
+              <button class="btn btn-warning col-md-6 offset" [disabled]='userwages <= 207800' (click)="unlockbal(lockedData.currency)">Claim</button>
+              <p class="p-2">Minimum to claim <span class="text-white">5RGC</span></p>
+           </div>
+           <div class="d-flex justify-content-between unlock"> 
+               <span>Locked RGC :</span>
+               <span class="text-white">{{lockedData.locked}} {{lockedData.currency}}</span>
+            </div>
+           <div class="text-center m-3">
+               <p class="font-weight-bold text-light">How to claim</p>
+            </div>
+           <div>
+               <div class="text-white">unlock amount = warger amount*1%*<b>20%</b></div>
+               <div>
+                  you still need to warger about $ 20,7800 more in order to reach minimum unlockable amount of 5RGC. 
+                  <!-- <span class="text-success">view details</span> -->
+               </div>
+               <hr>
+               <div class="row">
+                  <div class="col-md-2"></div>
+                  <button class="btn btn-info col-md-4 mr-2" routerLink="/casino" data-dismiss="modal">Go to Casino</button>
+                  <button class="btn btn-success col-md-4" routerLink="/sports" data-dismiss="modal">GO to Sports</button>
+               </div>
+           </div>
+           <div class="mt-3 text-center">
+              <button class="btn btn-secondary" data-toggle="modal" data-target="#bonusHis1" data-dismiss="modal" (click)="bonusData()">RGC Bonus History</button>
+           </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="modal fade" id="bonusHis1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header border-0">
+            <h5 class="modal-title">Bonus History</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <table class="table table-dark borderlight tablecls">
+            <thead>
+               <tr>
+                  <th class="text-left">Date</th>
+                  <th class="text-center">Type</th>
+                  <th class="text-right">Amount</th>
+               </tr>
+            </thead>
+            <tbody *ngIf="bonusVal.length!=0">
+               <ng-container *ngFor="let bonus of bonusVal">
+                   <tr class="hov">
+                     <td class="text-left">{{ bonus.created_at | date:'yyyy-MM-dd H:mm:ss' }}</td>
+                     <td class="text-center text-uppercase">{{ bonus.type }}</td>
+                     <td class="text-right"><span>{{bonus.bonus}} </span><span> {{bonus.currency}}</span></td>
+                   </tr>
+               </ng-container>   
+            </tbody>
+            <tbody *ngIf="bonusVal.length==0">
+               <tr ><td colspan='3' class="text-center">No data found</td></tr>
+            </tbody>
+         </table>
+         <div class="d-flex justify-content-between">
+            <div class="pagelimit"></div>
+            <div class="paginator d-flex flex-row">
+               <div> Total {{totalCount}}</div>
+               <button class="ml-3" (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+               <button class="ml-3" (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

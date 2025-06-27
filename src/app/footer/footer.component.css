@@ -1,0 +1,33 @@
+footer {
+    background: #1e2024;
+    margin-top: 50px;
+    padding: 15px 0;
+}footer h6{color: #fff; margin-bottom: 30px;}
+footer ul {padding: 0px; display: inline-block;}
+footer ul li{list-style: none; margin: 6px 0px;}
+footer ul li a{color: #98a7b5}
+footer ul.socialicons{display: inline-block;}
+footer ul.socialicons img{width: 40px;}
+footer ul.socialicons li a{padding: 0px; margin: 5px 10px;margin-left: 0px;}
+.cryptoicons li{background-size: 205px 164px !important;width: 40px;height: 40px;background: url(/assets/images/cryptos.webp) no-repeat top left; float: left; margin: 5px 10px !important;}
+.bitcoinicon{background-position: 0px -41px !important;}
+.ethereumicon{background-position: -82px -82px !important;}
+.dogeicon{background-position: -41px -82px !important;}
+.rippleicon{background-position: -164px -82px !important;}
+.cardaicon{background-position: -82px 0px !important;}
+.polkadoticon{background-position: -41px -123px !important;}
+.tronicon{background-position: -164px -41px !important;}
+.bscicon{background-position: -41px -41px !important;}
+.avalancheicon{background-position: -41px 0px !important;}
+.solanaicon{background-position: -123px -123px !important;}
+.polygonicon{background-position: -82px -123px !important;}		
+.arbitrumicon{background-position: 0px 0px !important;}
+.optimismicon{background-position: 0px -123px !important;}
+.cronosiconicon{background-position: 0px -82px !important;}
+.fantomicon{background-position: -123px 0px !important;}
+.thorchainicon{background-position: -164px 0px !important;}
+.cosmoso{background-position: -82px -41px !important;}
+.nearicon{background-position: -123	px -82px !important;}
+.hov{
+    cursor: pointer !important;
+}

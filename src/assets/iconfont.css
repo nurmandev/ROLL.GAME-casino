@@ -1,0 +1,143 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?rmgg91');
+  src:  url('fonts/icomoon.eot?rmgg91#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?rmgg91') format('truetype'),
+    url('fonts/icomoon.woff?rmgg91') format('woff'),
+    url('fonts/icomoon.svg?rmgg91#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-ringfortune:before {
+  content: "\e919";
+  color: #67707b;
+}
+.icon-bustabit:before {
+  content: "\e910";
+  color: #67707b;
+}
+.icon-caveofplunder:before {
+  content: "\e911";
+  color: #6f6f6f;
+}
+.icon-dice:before {
+  content: "\e912";
+  color: #67707b;
+}
+.icon-coinflip:before {
+  content: "\e913";
+  color: #67707b;
+}
+.icon-crash:before {
+  content: "\e914";
+  color: #67707b;
+}
+.icon-keno:before {
+  content: "\e915";
+  color: #67707b;
+}
+.icon-limbo:before {
+  content: "\e916";
+  color: #6f6f6f;
+}
+.icon-mines:before {
+  content: "\e917";
+  color: #67707b;
+}
+.icon-plinko:before {
+  content: "\e918";
+  color: #67707b;
+}
+.icon-roulette:before {
+  content: "\e91a";
+  color: #67707b;
+}
+.icon-sword:before {
+  content: "\e91b";
+  color: #67707b;
+}
+.icon-wheels:before {
+  content: "\e91c";
+  color: #67707b;
+}
+.icon-affiliate:before {
+  content: "\e900";
+  color: #98a7b5;
+}
+.icon-menu:before {
+  content: "\e901";
+  color: #98a7b5;
+}
+.icon-gift:before {
+  content: "\e902";
+  color: #98a7b5;
+}
+.icon-users:before {
+  content: "\e903";
+  color: #98a7b5;
+}
+.icon-globe:before {
+  content: "\e904";
+  color: #98a7b5;
+}
+.icon-support:before {
+  content: "\e905";
+  color: #98a7b5;
+}
+.icon-lottery:before {
+  content: "\e906";
+  color: #98a7b5;
+}
+.icon-casino:before {
+  content: "\e907";
+  color: #98a7b5;
+}
+.icon-promotions:before {
+  content: "\e908";
+  color: #98a7b5;
+}
+.icon-menu-provably-fair:before {
+  content: "\e909";
+  color: #98a7b5;
+}
+.icon-membership:before {
+  content: "\e90a";
+  color: #98a7b5;
+}
+.icon-sports:before {
+  content: "\e90b";
+  color: #98a7b5;
+}
+.icon-vip:before {
+  content: "\e90c";
+  color: #98a7b5;
+}
+.icon-chat:before {
+  content: "\e90d";
+  color: #98a7b5;
+}
+.icon-topmenu-mail:before {
+  content: "\e90e";
+  color: #98a7b5;
+}
+.icon-notification:before {
+  content: "\e90f";
+  color: #98a7b5;
+}

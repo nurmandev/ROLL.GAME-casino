@@ -1,0 +1,59 @@
+.darkbtn
+{
+	    background: #434752;
+    border: 0;
+    color: #60c130;
+    text-transform: uppercase;
+    height: 40px;
+}
+.yellow-t
+{
+	color: #ffca00;
+}
+.titlebox
+{
+	background: #434752;
+	margin: -20px;
+}
+.bluebtn1 {
+    background-color: #5617cb;
+    color: #fff !important;
+    background-image: conic-gradient(from 1turn,#8447F6,#5617CB);
+    padding: 10px 25px;
+    min-width: 100px;
+}
+.totreward
+{
+	background-image: url(/assets/images/money.svg);
+	    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 120px;
+}
+.greenlink{
+	color: #5dbf30;
+    font-weight: 500;
+    padding-right: 18px;
+    background-image: url(/assets/images/arrow-right.svg);
+    background-repeat: no-repeat;
+    background-position: center right;
+    background-size: 12px;
+}
+.referbanner
+{
+	    background-image: url(/assets/images/referbanner.png);
+    padding: 40px 20px;
+    background-size: cover;
+}
+.refelink{
+    width: 135%;
+}
+
+.wages1{
+    color: white;
+    font-size: 40px;
+    padding: 15px;
+}
+.commupop {
+  border: 1px solid gray;
+  padding: 13px;
+}

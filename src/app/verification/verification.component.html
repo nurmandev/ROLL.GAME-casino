@@ -1,0 +1,45 @@
+<div class="pagewrapper">
+   <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+         <div class="d-flex flex-column flex-sm-row row m-0">
+            <div class="leftmenubox col">
+               <ul class="navlist">
+                  <li><a routerLink="/general">General</a></li>
+                  <li><a routerLink="/myprivacy">Privacy</a></li>
+                  <li><a routerLink="/verification" class="select">Mail / Phone Number</a></li>
+                  <li><a routerLink="/security" >Security</a></li>
+                  <li><a routerLink="/activesession">Active Sessions</a></li>
+                  <li><a routerLink="/verify">Verify</a></li>
+               </ul>
+            </div>
+            <div class="righsidebox col">
+               <div class="d-flex flex-column flex-sm-row row justify-content-between gap-c">
+                  <div class="col border-right">
+                     <h6 class="text-white">E-mail Verification</h6>
+                     <p class="mh100">According to the security policy of RollGAME, the registered email cannot be changed.</p>
+                     <div class="form-input">
+                        <input type="text" class="form-control" placeholder="useremail@email.com" name="">
+                     </div>
+                     <button class="btn sitebtn mt-3 smallbtn">Verify</button>
+                  </div>
+                  <div class="col">
+                     <h6 class="text-white">Phone Number</h6>
+                     <p class="mh100">Add Phone Number as your second login method.</p>
+                     <div class="form-input">
+                        <input type="text" class="form-control" placeholder="Enter Your Phone Number" name="">
+                     </div>
+                     <button class="btn sitebtn mt-3 smallbtn">Confirm</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

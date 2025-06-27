@@ -1,0 +1,124 @@
+<div class="pagewrapper">
+   <app-innerheader (ConnEvent)="conPass($event)"></app-innerheader>
+   <div class="gamewrapper">
+      <div class="sidemenu">
+         <app-sidebar></app-sidebar>
+      </div>
+      <div class="gameinnerwhl">
+         <div class="my-2"><i class="fa-solid green-t mr-1 fa-earth-americas"></i>Global Settings</div>
+         <div class="d-flex flex-column flex-sm-row row m-0">
+            <div class="leftmenubox col">
+               <ul class="navlist">
+                  <li><a routerLink="/general">General</a></li>
+                  <li><a routerLink="/myprivacy">Privacy</a></li>
+                  <li><a routerLink="/verification">Mail / Phone Number</a></li>
+                  <li><a routerLink="/security" class="select">Security</a></li>
+                  <li><a routerLink="/activesession">Active Sessions</a></li>
+                  <li><a routerLink="/verify">Verify</a></li>
+               </ul>
+            </div>
+            <div class="righsidebox col">
+               <div class="d-flex row justify-content-between">
+                  <form #chgepwd="ngForm" autocomplete="off">
+                     <div class="col border-right">
+                        <h6 class="text-white">Change Password</h6>
+                        <div class="form-group col-xl-11 p-0 mt-3">
+                           <label for="oldPassword">Old address</label>
+                           <input type="password" class="form-control form-input" id="oldPassword" aria-describedby="emailHelp" name="oldPassword" [(ngModel)]="users.oldpass" placeholder="Enter Old Password" (ngModelChange)="oldPass($event)" #oldPassword="ngModel" required>
+                           <div *ngIf="oldPassword.errors && (oldPassword.valid || oldPassword.touched)" class="errMsg">
+                              <span *ngIf="oldPassword.errors['required']">{{"Enter Old Password"}}</span>
+                           </div>
+                           <div *ngIf="((oldpassmatch) && oldPassword.valid)" class="errMsg">
+                              <span *ngIf="oldpassmatch">{{"Wrong password"}}</span>
+                           </div>
+                        </div>
+                        <div class="form-group col-xl-11 p-0 mt-3">
+                           <label for="password">New Password</label>
+                           <input type="password" name="password" class="form-control form-input" id="password" aria-describedby="emailHelp" placeholder="Enter password" #password= "ngModel" (ngModelChange)="typePwd($event)"(input)="cp.control.updateValueAndValidity()" ngModel required>
+                           <div *ngIf="password.errors && (password.valid || password.touched || chgepwd.submitted)" class="errMsg">
+                              <span *ngIf="password.errors?.['required']" class="error">{{"Enter Password"}}</span>
+                           </div>
+                           <div *ngIf="((!lower||!upper||!len||!num||!spec) && password.valid)" class="errMsg">
+                              <span *ngIf="!lower" class="error">{{"Enter atleast one lowercase"}}</span>
+                              <span *ngIf="!upper" class="error">{{"Enter atleast one uppercase"}}</span>
+                              <span *ngIf="!len" class="error">{{"Enter atleast 8 characters"}}</span>
+                              <span *ngIf="!num" class="error">{{"Enter atleast one number"}}</span>
+                              <span *ngIf="!spec" class="error">{{"Enter atleast one special character"}}</span>
+                            </div>
+                            <div *ngIf="((passmatch) && password.valid)" class="errMsg">
+                              <span *ngIf="passmatch" class="error">{{"Password should not match with last five passwords !"}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-xl-11 p-0 mt-3">
+                           <label for="confirm_password">Confirm New Password</label>
+                           <input type="password" name="confirm_password" class="form-control form-input" id="confirm_password" aria-describedby="emailHelp" [maxlength]="20" placeholder="Enter Confirm Password" #cp="ngModel" (ngModelChange)="checkpassword($event)" ngModel required>
+                           <div *ngIf="cp.errors && (cp.valid || cp.touched || chgepwd.submitted)" class="errMsg">
+                              <span *ngIf="cp.errors?.['required']" class="error">{{"Enter Confirm Password"}}</span>
+                              <span *ngIf="cp.errors?.['maxlength']" class="error">{{"Confirm password must be 8-20 letters"}}</span>
+                           </div>
+                           <div *ngIf="!checkpwd  && cp.valid" class="errMsg">
+                              <span *ngIf="!checkpwd" class="error">{{"Password does not match"}}</span>
+                           </div>
+                        </div>
+                        <div class="green-t"><i class="fas fa-info-circle"></i> Re-login will be required after changing the password.</div>
+                        <button class="btn sitebtn mt-3 smallbtn" (click)="executeAction(chgepwd,'chgepwd')">Save Changes</button>
+                     </div>
+                  </form>
+                  <div class="col margg">
+                     <form #tfaForm="ngForm" autocomplete="off">
+                        <h6 class="text-white">TWO Factor Authentication</h6>
+                        <div *ngIf="TfaData.tfa_status !== 1">
+                           <p class="mh100">Download and install Google Authenticator. Enable Two-factor Authentication to protect your account from unauthorized access.
+                              <br><br>Scan the QR code with your Google Authenticator App or enter the secret key manually.
+                           </p>
+                           <div class="text-center">
+                              <img style="width: 130px;" [src] ="TfaUrl ||''" >
+                           </div>
+                           <div class="form-group col-xl-11 p-0 mt-3">
+                              <label for="exampleInputEmail1 bf">Your Secret Key</label>
+                              <div class="input-group mb-3">
+                                 <input type="text" class="form-control" placeholder={{tfa_code}} aria-label="Recipient's username" aria-describedby="basic-addon2" disabled>
+                                 <div class="input-group-append" (click)=copytext(tfa_code)>
+                                    <span class="input-group-text" id="basic-addon2"><i class="fas fa-copy"></i></span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div *ngIf="TfaData.tfa_status == 1">
+                           <p class="mh100">To disable Two-Factor authentication, enter your one-time Password (OTP).
+                        </div>
+                        <div class="form-group col-xl-11 p-0 text-center">
+                           <label for="exampleInputEmail1 bf">Verification Code</label>
+                           <div class="d-flex otpbox">
+                              <input #digit1 class="form-control" type="text" name="digit1" #di1="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                              <input #digit2 class="form-control" type="text" name="digit2" #di2="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                              <input #digit3 class="form-control" type="text" name="digit3" #di3="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                              <input #digit4 class="form-control" type="text" name="digit4" #di4="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                              <input #digit5 class="form-control" type="text" name="digit5" #di5="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                              <input #digit6 class="form-control" type="text" name="digit6" #di6="ngModel" ngModel maxlength="1" (keyup)="onDigitInput($event)" pattern="^(0|[1-9][0-9]*)$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"/>
+                           </div>
+                        </div>
+                        <div class="form-group col-xl-11 p-0 mt-3">
+                           <label for="exampleInputEmail1 bf">Login Password</label>
+                           <div class="input-group mb-3">
+                              <input type="{{ showPassword ? 'text' : 'password' }}" name="password" #p="ngModel" class="form-control" [minlength]="8" [maxlength]="20" aria-label="Recipient's username" aria-describedby="basic-addon2" ngModel required>
+                              <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2" (click)="passVisible()"><i class="fas fa-eye"></i></span>
+                              </div>
+                           </div>
+                           <div *ngIf= "p.errors && (p.valid || p.touched || tfaForm.submitted)" class="errMsg">
+                              <span *ngIf="p.errors?.['required']" class="error">{{"Enter Password"}}</span>
+                              <span *ngIf="p.errors?.['minlength']" class="error">{{"password must be 8-20 letters"}}</span>
+                           </div>
+                        </div>
+                        <button class="btn sitebtn mt-3 smallbtn" (click)="executeAction(tfaForm,'tfa')">{{typeBtn}}</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <app-footer></app-footer>
+   
+</div>

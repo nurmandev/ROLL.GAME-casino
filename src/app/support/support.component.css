@@ -1,0 +1,18 @@
+.cus-height input,select{
+	height: 55px !important;
+}
+.form-group label,.cut-clr{
+	font-size: 14px;
+	color: #fff;
+}
+.form-group input,select,textarea{
+	color: #fff !important;
+}
+.errMsg span{
+	font-size: 14px;
+}
+.btn-outline-warning{
+width: 170px;
+    height: 45px;
+    font-size: 17px;
+}
