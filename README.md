@@ -1,5 +1,23 @@
 # 🎰 BC.Game Clone Casino Script contact me on telegram for complete project **[proficient](https://t.me/Proficientng)**
 
+## 🖼️ Screenshots
+
+### 🏠 Home Page View
+
+![Home Page](./screenshots/home-page.jpg)
+
+### 🎮 Alternate Home Layout
+
+![Home 2](./screenshots/home2.jpg)
+
+### 🎮 Admin page
+
+![Admin](./screenshots/admin-first-page.jpg)
+![Game History](./screenshots/game-history.jpg)
+![Blog page](./screenshots/blog-page.jpg)
+
+
+
 ## Revolutionize Your Online Casino with the Ultimate BC.Game Clone
 
 Take your online gaming platform to the next level with our **state-of-the-art BC.Game clone casino script**. Built to replicate the renowned [BC.Game](https://bc.game) platform, this all-in-one solution delivers an **unparalleled gaming experience** with powerful features designed for both players and administrators.
