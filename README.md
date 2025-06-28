@@ -1,4 +1,4 @@
-# 🎰 BC.Game Clone Casino Script contact me for complete project **[proficient](https://t.me/Proficientng)**
+# 🎰 BC.Game Clone Casino Script contact me on telegram for complete project **[proficient](https://t.me/Proficientng)**
 
 ## Revolutionize Your Online Casino with the Ultimate BC.Game Clone
 
@@ -86,8 +86,8 @@ By choosing our solution, you’re investing in a **powerful, customizable, and 
 
 ## 📞 Get Started
 
-Ready to launch your casino? Contact us to request a **[proficient](https://t.me/Proficientng)**, or to discuss **custom features, branding, or integrations**.
+Ready to launch your casino? Contact me on telegram to request a **[proficient](https://t.me/Proficientng)**, or to discuss **custom features, branding, or integrations**.
 
 ---
 
-© 2025 YourCompanyName. All rights reserved.
+© 2025 All rights reserved.
