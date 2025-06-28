@@ -1,0 +1,122 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Site Settings
+	</h3>
+</div>
+<div class="row">
+	<div class="col-12 grid-margin">
+		<div class="card">
+			<div class="card-body">
+				<form class="forms-sample" [formGroup]="settingsForm" (ngSubmit)="onSubmit()">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Site Name</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="site_name" formControlName="site_name" name="site_name" required value="{{siteData.site_name}}"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Contact Mail</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="contact_mail" formControlName="contact_mail" name="contact_mail" required value="{{siteData.contact_mail}}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Contact Number</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="contactnumber" formControlName="contactnumber" name="contactnumber" required value="{{siteData.contactnumber}}"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Site mode</label>
+								<div class="col-sm-9">
+									<select class="form-control" id="site_mode" formControlName="site_mode" name="site_mode" [(ngModel)]="siteData.site_mode">
+										<option value="1">Live Mode</option>
+										<option value="0">Under Maintenance</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Copyright</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="copyright" formControlName="copyright" name="copyright" required value="{{siteData.copyright}}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<p class="card-description">
+						Social Media
+					</p>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Facebook</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="facebook" formControlName="facebook" name="facebook" required value="{{siteData.facebook}}"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Twitter</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="twitter" formControlName="twitter" name="twitter" required value="{{siteData.twitter}}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">LinkedIn</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="linkedin" formControlName="linkedin" name="linkedin" required value="{{siteData.linkedin}}"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Telegram</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="telegram" formControlName="telegram" name="telegram" required value="{{siteData.telegram}}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">Instagram</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="instagram" formControlName="instagram" name="instagram" required value="{{siteData.instagram}}"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label">skype</label>
+								<div class="col-sm-9">
+									<input class="form-control" id="skype" formControlName="skype" name="skype" required value="{{siteData.skype}}"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

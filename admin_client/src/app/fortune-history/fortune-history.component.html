@@ -1,0 +1,106 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Fortune Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+			                  	<div>
+			                     	<div class="my-2 font-siz">
+			                     		<label class="col-3" for="network">User name:</label>
+			                     		<span>{{Det_name}}</span>
+			                     	</div>
+			                  	</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" class="col-3" for="name">Game Id:</label>
+			                     	<span>{{Det_id}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" class="col-3" for="name">Bet Amount:</label>
+			                    	<span>{{Det_betamount}}</span>
+
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" class="col-3" for="name">Winning Amount:</label>
+			                    	<span>{{Det_pro_amt}}</span>
+
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" class="col-3" for="name">Payout:</label>
+			                    	<span>{{Det_payout}}</span>
+								</div>
+								<div class="my-2 font-siz d-flex align-items-center">
+									<label class="col-3" for="name">Initial Bet:</label>
+			                    	<div class="row justify-content-center">
+			                            <div class="d-flex" *ngFor="let bet of Det_initialbet;let i=index">
+				                            <div class="mb-2 col pl-0">
+				                              	<div class="d-flex initial adj">
+				                                	<div class="grey1  bf"  [ngStyle]="{'background-color': bet.color}"></div>
+				                                	<div class="align-self-center ml-2">{{((bet.amount)*1).toFixed(4)}}</div>
+				                              	</div>
+				                            </div>
+			                          	</div>
+			                        </div>
+								</div>
+								<div class="my-2 font-siz d-flex align-items-center">
+									<label class="col-3" class="col-3" for="name">game result:</label>
+			                    	<div class="d-flex" *ngFor="let result of Det_gameResult">
+			                            <div class="ui-input col pl-0">
+			                              	<div class="d-flex justify-content-center adj">
+				                                <div class="grey2 bf"  [ngStyle]="{'background-color': result.color}">
+				                                  <ng-container *ngIf="result.color=='#cfdff7'">
+				                                    <div >2.00 X</div> 
+				                                  </ng-container>
+				                                  <ng-container *ngIf="result.color=='#773cfd'">
+				                                    <div >3.00 X</div> 
+				                                  </ng-container>
+				                                  <ng-container *ngIf="result.color=='#ff842e'">
+				                                    <div >6.00 X</div> 
+				                                  </ng-container>
+				                                  <ng-container *ngIf="result.color=='#7bc514'">
+				                                    <div >99.00 X</div> 
+				                                  </ng-container>
+				                                </div>
+			                              	</div>
+			                            </div>
+			                        </div>
+								</div>
+								
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Status:</label>
+									<span>{{Det_status}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Client Seed: </label>
+									<span>{{Det_clientSeed}}</span>:
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">serverSeed:</label>
+			                    	<span>{{Det_serverSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Nonce:</label>
+			                    	<span>{{Det_nounce}}</span>
+								</div>
+								
+							</form>
+							<hr>
+					      <div>
+					        <!-- <button type="submit" class="btn btn-gradient-primary">Cancel</button> -->
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

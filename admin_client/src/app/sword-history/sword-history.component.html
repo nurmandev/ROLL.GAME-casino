@@ -1,0 +1,74 @@
+<div class="page-header">
+	<h3 class="page-title">
+	Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+								<div >
+									<div class="my-2 font-siz">
+										<label class="col-3" for="network">User name:</label>
+										<span class="">{{Det_name}}</span>
+									</div>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Game Id:</label>
+									<span>{{Det_id}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Bet Amount:</label>
+									<span>{{Det_betamount}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">winning Amount:</label>
+									<span>{{Det_status=='loser' ? '-'+Det_pro_amt : Det_pro_amt}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="naye">Payout:</label>
+									<span>{{Det_payout}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Status:</label>
+									<span>{{Det_status}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Bet Result:</label>
+									<span>{{Result}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Cat Spin Result:</label>
+									<span>{{CatResult}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Sword chance:</label>
+									<span>{{respin=="" ? "None" : respin+"  X"}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Client Seed: </label>
+									<span>{{Det_clientSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">serverSeed:</label>
+									<span>{{Det_serverSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="name">Nonce:</label>
+									<span>{{Det_serverSeed}}</span>
+								</div>
+							</form>
+							<hr>
+							<div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

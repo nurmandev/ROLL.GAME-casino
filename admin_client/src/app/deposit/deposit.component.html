@@ -1,0 +1,62 @@
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      <i class="mdi mdi-cash menu-icon"></i>      
+    </span>
+    Deposit
+  </h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" *ngIf="isLoading">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Address</th>
+								<th>Currency</th>
+								<th>Amount</th>
+								<th>Transaction ID</th>
+								<th>Status</th>
+								<th>Payment Method</th>
+								<th>Datetime</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="deposits.length > 0">
+							<tr *ngFor="let deposit of deposits; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td class="cursor" title="{{deposit['address_info']}}" [routerLink]="['/usersInfo', deposit.address_info]">{{ deposit['address_info'].substr(0, 6)+"..."+deposit['address_info'].slice(-6) }}</td>
+								<td>{{deposit.currency}}</td>
+								<td>{{deposit.amount}}</td>
+								<td class="cursor" title="{{deposit['reference_no']}}" (click)="copyText(deposit['reference_no'], 'Transaction hash')">{{ deposit['reference_no'].substr(0, 6)+"..."+deposit['reference_no'].slice(-6) }}</td>
+								<td class="text-capitalize">{{deposit.status}}</td>
+								<td class="text-capitalize">{{deposit.payment_method}}</td>
+								<td>{{deposit.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/deposit', deposit.reference_no]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="deposits.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>  
+					
+<!-- 					<button [ngClass]="{'active': activePage === item}" *ngFor="let item of pagination"  
+      					(click)="pagethreemove(item)">{{item}}
+      				</button> -->
+
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

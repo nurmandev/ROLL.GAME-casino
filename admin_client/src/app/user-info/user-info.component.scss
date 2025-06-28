@@ -1,0 +1,96 @@
+.pageination ::ng-deep .ngx-pagination a, .ngx-pagination button {
+    color: #1e1919;
+    display: block;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 0;
+}
+.pageination ::ng-deep .ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #4b83bf;
+    color: white;
+    cursor: default;
+}
+.table thead th,td{
+  border-bottom-width: 1px;
+  border-bottom: 2px solid #c5c5c5;
+}
+.card{
+  padding: 50px !important;
+}
+.flex-col{
+  display: flex;
+  gap: 20px;
+      padding: 0px 20px;
+}
+.card-body{
+  background:#f2edf3;
+  border-radius: 10px !important;
+}
+.font-siz{
+    font-family: 'ubuntu-regular', sans-serif;
+    font-size: 19px !important;
+    color: rgb(52, 58, 64);
+}
+.pageination ::ng-deep .ngx-pagination a:hover{
+  color: black;
+  
+  background:#617dbd73;
+}
+
+.pageination ::ng-deep .ngx-pagination .disabled {
+  padding: 0.1875rem 0.625rem;
+    color: #201a1a;
+    cursor: default;
+}
+
+.activeClass {
+    color: #1a98f1 !important;
+    border-bottom: 2px solid;
+}
+
+.gray-n{
+  background: #767575;
+  padding: 4px;
+  border-radius: 3px;
+  color: #f9f9f9;
+  font-size: 11px;
+}
+.danger-n{
+  background: #fe7c96;
+  padding: 4px;
+  border-radius: 3px;
+  color: #f9f9f9;
+  font-size: 11px;
+}
+.success-n{
+  background: #1bcfb4;
+  padding: 4px;
+  border-radius: 3px;
+  color: #f9f9f9;
+  font-size: 11px;
+}
+.idproof{max-width: 220px; max-height: 150px;object-fit: fill;}
+
+.btnClass {
+  width: 52px;
+  height: 40px;
+  text-align: center;
+}
+
+.BtnSucc{
+  background: #1bcfb4;
+  padding: 4px;
+  border-radius: 3px;
+  color: #f9f9f9;
+  font-size: 11px;
+  width:65px;
+}
+
+.BtnDang{
+  background: #fe7c96;
+  padding: 4px;
+  border-radius: 3px;
+  color: #f9f9f9;
+  font-size: 11px;
+  width:65px;
+}

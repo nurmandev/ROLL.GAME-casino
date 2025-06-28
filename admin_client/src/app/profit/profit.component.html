@@ -1,0 +1,123 @@
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      <i class="mdi mdi-handshake-outline"></i>      
+    </span>
+    Profit
+  </h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+				<div class="card-body" *ngIf="isLoading">
+					<form class="forms-sample" #profitForm="ngForm" autocomplete="off">
+						<div class="d-flex">
+	          	<div class="col-md-3">
+	             	<div>
+	             		<label for="curr">Currency</label>
+	                	<select class="form-control" name="curr" required [(ngModel)]="ProfitData.currs" #currs="ngModel">
+	                		<option value="">Select Currency</option>
+	                		<option *ngFor="let curr of currData">
+											   {{curr}}
+											</option>
+	                	</select>
+	             	</div>
+	          	</div>
+	          	<div class="col-md-4">
+	             	<div>
+	             		<label for="game">Game</label>
+	                	<select class="form-control" name="game" required [(ngModel)]="ProfitData.games" #games="ngModel">
+	                		<option value="">Selct Game</option>
+	                		<option *ngFor="let gam of gameData">
+											   {{gam}}
+											</option>
+	                	</select>
+	             	</div>
+	          	</div>
+	          	<div class="col-md-3">
+	             	<div>
+	             		<label for="day">Day</label>
+	                	<select class="form-control" name="day" required [(ngModel)]="ProfitData.Day" #days="ngModel">
+	                		<option value="">Select Day</option>
+											<option *ngFor="let daylist of dayData">
+											   {{daylist}}
+											</option>
+	                	</select>
+	             	</div>
+	          	</div>
+	          	<div class="col-md-3 mt-3">
+	             	<button type="submit" class="btn btn-gradient-primary" (click)="SearchProfit(profitForm)">Search</button>
+	          	</div>
+						</div>
+					</form>
+				</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h1>Profit Details</h1>
+				<div class="mt-5 ml-3">
+					<div class="row ml-3">
+						<div class="col-md-4">
+							<p>Admin Profit</p>
+						</div>
+						<div class="col-md-4">
+							<p>{{AdminProfit}}</p>
+						</div>
+					</div>
+					<div class="row ml-3">
+						<div class="col-md-4">
+							<p>User bets</p>
+						</div>
+						<div class="col-md-4">
+							<p>{{userBets}}</p>
+						</div>
+					</div>
+					<div class="row ml-3">
+						<div class="col-md-4">
+							<p>Bet count</p>
+						</div>
+						<div class="col-md-4">
+							<p>{{userBetCount}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" *ngIf="isLoading">
+						<thead>
+							<tr>
+								<th>S.No</th>
+				               	<th>Currency</th>
+				               	<th>Profit</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="Profit.length > 0">
+							<tr *ngFor="let prof of Profit; let i = index">
+								<td>{{i+1}}</td>
+								<td>{{prof.currency}}</td>
+								<td>{{prof.amount}}</td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="Profit.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->

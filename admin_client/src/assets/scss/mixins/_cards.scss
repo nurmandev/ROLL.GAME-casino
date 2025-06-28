@@ -1,0 +1,21 @@
+// Cards Mixins 
+
+@mixin card-inverse-variant($bg, $border, $color) {
+  background: $bg;
+  border: 1px solid $border;
+  color: $color;
+}
+.card .card-title
+{
+  font-size:16px !important;
+}
+
+//  .mdi::before
+//  {
+//    color:#1279ab;
+//  }
+
+//  .sidebar .nav .nav-item.active .nav-link .menu-title
+//  {
+//    color: #3e4b5b !important;
+//  }

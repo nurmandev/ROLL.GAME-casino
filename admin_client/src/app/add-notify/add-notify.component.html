@@ -1,0 +1,40 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Add Notification
+	</h3>
+</div>
+
+<div class="row">
+	<div class="col-md-12 grid-margin">
+		<div class="card">
+			<div class="card-body">
+				<form class="forms-sample" #f="ngForm" autocomplete="off">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="name">category</label>
+							<input type="text" class="form-control bg-white" name="category" placeholder="Category" [(ngModel)]="notifyInfo.category" #category="ngModel" [ngClass]="{ 'is-invalid': (category.touched && category.invalid) }" required>
+							
+							<div *ngIf="category.errors && (category.valid || category.touched || f.submitted)" class="errMsg">
+			                   <span *ngIf="category.errors.required">{{"Enter Category"}}</span>
+			                </div>
+						</div>
+						<div class="col-md-6">
+		                 	<div class="mb-2">
+		                 		<label for="status">status</label>
+		                    	<select class="form-control" name="status" #status="ngModel" [(ngModel)]="notifyInfo.status" required>
+		                    	<option value=1>Active</option>
+		                    	<option value=0>Deactive</option>
+		                    	</select>
+		                 	</div>
+		              	</div>
+					</div>
+					<div class="form-group">
+						<label for="name">Page Content</label>
+						<angular-editor id="notitycontent" name="message" [placeholder]="'Enter text here...'" [config]="config"  [(ngModel)]="notifyInfo.message"></angular-editor>
+					</div>
+					<button type="submit" class="btn btn-gradient-primary mr-2" (click)="submitData(f)">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

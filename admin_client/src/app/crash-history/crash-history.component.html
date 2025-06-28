@@ -1,0 +1,108 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Plinko Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<form class="forms-sample" #forms="ngForm" autocomplete="off">
+
+								<div class="my-2 font-siz">
+									<label for="id" class="col-3 px-0" >Game Id </label>
+									<label class="col-2">:</label>
+			                     	<span>{{detail._id}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label for="betamt" class="col-3 px-0">Bet Result</label>
+									<label class="col-2">:</label>
+			                    	<span>{{detail.bet_result}}</span>
+
+								</div>
+
+								<div class="my-2 font-siz">
+									<label for="betamt" class="col-3 px-0">Status</label>
+									<label class="col-2">:</label>
+			                    	<span>{{detail.status}}</span>
+
+								</div>
+
+								<div class="my-2 font-siz">
+									<label for="apyout" class="col-3 px-0" >Client Seed</label>
+									<label class="col-2">:</label>
+			                    	<span>{{detail.client_seed}}</span>
+								</div>
+
+
+								<div class="my-2 font-siz">
+									<label for="cliseed" class="col-3 px-0">Server Seed </label>
+									<label class="col-2">:</label>
+									<span>{{detail.server_seed}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label for="cliseed" class="col-3 px-0">Nonce</label>
+									<label class="col-2">:</label>
+									<span>{{detail.nonce}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label for="cliseed" class="col-3 px-0">Created date</label>
+									<label class="col-2">:</label>
+									<span>{{detail.created_at}}</span>
+								</div>
+								<hr>
+								<div class="my-2 font-siz mt-2">
+									<div class="d-flex">
+										<label for="cliseed" class="col-3 px-0">Players </label>
+									</div>
+									<div>
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>S.No</th>
+									               	<th>Game Name</th>
+									               	<th>Bet amount</th>
+									               	<th>Auto cashout On</th>
+									               	<th>Status</th>
+									               	<th>Amount</th>
+									               	<th>Currency</th>
+												</tr>
+											</thead>
+											<tbody *ngIf="users_det.length > 0">
+												<tr *ngFor="let table1 of users_det; let i = index">
+													<td>{{i+1}}</td>
+													<td >{{table1.username | titlecase}}</td>
+													<td>{{table1.bet_amount}}</td>
+													<td>{{table1.auto_cashout}}</td>
+													<td [ngClass]="table1.status == 'loser' ? 'danger-n' : 'success-n'">{{table1.status}}</td>
+													<td>{{table1.win_lose_amt}}</td>
+													<td>{{table1.currency}}</td>
+												</tr>
+											</tbody>
+											<tbody *ngIf="users_det.length == 0">
+												<tr>
+													<p>No records found</p>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+							</form>
+							<hr>
+					      <div>
+					        <!-- <button type="submit" class="btn btn-gradient-primary">Cancel</button> -->
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

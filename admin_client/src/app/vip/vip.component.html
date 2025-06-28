@@ -1,0 +1,54 @@
+<div class="page-header" >
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      	<i class="mdi mdi-shopping"></i>     
+    </span>
+    VIP List
+  </h3>
+</div>
+<div class="row" >
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+				               	<th>Level</th>
+				               	<th>Type</th>
+				               	<th>XP</th>
+				               	<th>Bonus</th>
+				               	<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="table.length > 0">
+							<tr *ngFor="let table1 of table; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td >{{table1.level | titlecase}}</td>
+								<td >{{table1.type }}</td>
+								<td>{{table1.XP}}</td>
+								<td>{{table1.Bonus}}</td>
+								<td class="cursor" [routerLink]="['/viplist', table1._id]"><span class="mdi mdi-account-edit"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

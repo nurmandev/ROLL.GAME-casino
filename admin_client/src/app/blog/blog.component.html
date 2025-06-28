@@ -1,0 +1,54 @@
+<div class="page-header" >
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      	<i class="mdi mdi-shopping"></i>     
+    </span>
+    Blog List
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    	<button type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/addBlog']">Add Blog</button>
+    </ul> 
+  </nav>
+</div>
+<div class="row" >
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+				               	<th>title</th>
+				               	<th>status</th>
+				               	<th>created at</th>
+				               	<th>updated at</th>
+				               	<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="table.length > 0">
+							<tr *ngFor="let table1 of table; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td>{{table1.title }}</td>
+								<td class="text-capitalize cursor"><span [ngClass]="table1.status == 0 ? 'danger-n' : 'success-n'">{{(table1.status == 0) ? "De-Active" : "Active" }}</span></td>
+								<td>{{table1.created_at | date:'dd-MM-yyyy hh:mm:ss'}}</td>
+								<td>{{table1.updated_at | date:'dd-MM-yyyy hh:mm:ss'}}</td>
+								<td class="cursor" [routerLink]="['/blog', table1._id]"><span class="mdi mdi-account-edit"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="table.length == 0">
+							<tr><p>No records found</p></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,155 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item nav-profile">
+      <a href="javascript:;" class="nav-link"  routerLink="/dashboard">
+        <div class="nav-profile-image">
+          <img src="assets/images/profile-y.svg" alt="profile">
+          <span class="login-status online"></span> <!--change to offline or busy as needed-->              
+        </div>
+        <div class="nav-profile-text">
+          <span class="font-weight-bold mb-2">Admin</span>
+          <span class="text-secondary text-small">Roll Game</span>
+        </div>
+        <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': users.isActive }">
+      <a class="nav-link" routerLink="/users" routerLinkActive #users="routerLinkActive">
+        <span class="menu-title">Users</span>
+        <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': deposit.isActive }">
+      <a class="nav-link" routerLink="/deposit" routerLinkActive #deposit="routerLinkActive">
+        <span class="menu-title">Deposit</span>
+        <i class="mdi mdi-cash menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': withdraw.isActive }">
+      <a class="nav-link" routerLink="/withdraw" routerLinkActive #withdraw="routerLinkActive">
+        <span class="menu-title">Withdraw</span>
+        <i class="mdi mdi-bank-transfer-out menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': curr.isActive }">
+      <a class="nav-link" routerLink="/currency" routerLinkActive #curr="routerLinkActive">
+        <span class="menu-title">Currencies</span>
+        <i class="mdi mdi-currency-usd menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': profit.isActive }">
+      <a class="nav-link" routerLink="/profit" routerLinkActive #profit="routerLinkActive">
+        <span class="menu-title">Profit</span>
+        <i class="mdi mdi-handshake-outline menu-icon"></i>
+      </a>
+    </li>
+    <!-- <li class="nav-item" [ngClass]="{ 'active': cms.isActive }">
+      <a class="nav-link" routerLink="/cms" routerLinkActive #cms="routerLinkActive">
+        <span class="menu-title">CMS</span>
+        <i class="mdi mdi-clipboard-text menu-icon"></i>
+      </a>
+    </li> -->
+    <li class="nav-item" [ngClass]="{ 'active': support.isActive }">
+      <a class="nav-link" routerLink="/support" routerLinkActive #support="routerLinkActive">
+        <span class="menu-title">Support</span>
+        <i class="mdi mdi-handshake-outline menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': game_history.isActive }">
+      <a class="nav-link" routerLink="/game_history" routerLinkActive #game_history="routerLinkActive">
+        <span class="menu-title">Game History</span>
+        <i class="mdi mdi-trophy menu-icon"></i>
+        <!-- <i class="far fa-ghost menu-icon"></i> -->
+        <!-- <i class="mdi mdi-handshake-outline menu-icon"></i> -->
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': gameList.isActive }">
+      <a class="nav-link" routerLink="/gameList" routerLinkActive #gameList="routerLinkActive">
+        <span class="menu-title">Game List</span>
+       <i class="mdi mdi-gamepad-variant menu-icon"></i>
+        <!-- <i class="far fa-ghost menu-icon"></i> -->
+        <!-- <i class="mdi mdi-handshake-outline menu-icon"></i> -->
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': vip.isActive }">
+      <a class="nav-link" routerLink="/viplist" routerLinkActive #vip="routerLinkActive">
+        <span class="menu-title">VIP</span>
+        <i class="mdi mdi-handshake-outline menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': notify.isActive }">
+      <a class="nav-link" routerLink="/notify" routerLinkActive #notify="routerLinkActive">
+        <span class="menu-title">Notify</span>
+        <i class="mdi mdi-handshake-outline menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item" [ngClass]="{ 'active': blog.isActive }">
+      <a class="nav-link" routerLink="/blog" routerLinkActive #blog="routerLinkActive">
+        <span class="menu-title">Blog</span>
+        <i class="mdi mdi-handshake-outline menu-icon"></i>
+      </a>
+    </li>
+
+    <!-- <li class="nav-item" [ngClass]="{ 'active': limbo.isActive }">
+        <a class="nav-link" routerLink="/limbo" routerLinkActive #limbo="routerLinkActive">
+          <span class="menu-title">Limbo</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': dice.isActive }">
+        <a class="nav-link" routerLink="/dice" routerLinkActive #dice="routerLinkActive">
+          <span class="menu-title">Dice</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': coinflip.isActive }">
+        <a class="nav-link" routerLink="/coinflip" routerLinkActive #coinflip="routerLinkActive">
+          <span class="menu-title">coinflip</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': wheel.isActive }">
+        <a class="nav-link" routerLink="/wheel" routerLinkActive #wheel="routerLinkActive">
+          <span class="menu-title">Wheel</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': fortune.isActive }">
+        <a class="nav-link" routerLink="/fortune" routerLinkActive #fortune="routerLinkActive">
+          <span class="menu-title">Ring of fortune</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': caveofplunder.isActive }">
+        <a class="nav-link" routerLink="/caveofplunder" routerLinkActive #caveofplunder="routerLinkActive">
+          <span class="menu-title">Cave of plunder</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': keno.isActive }">
+        <a class="nav-link" routerLink="/keno" routerLinkActive #keno="routerLinkActive">
+          <span class="menu-title">Keno</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': roulette.isActive }">
+        <a class="nav-link" routerLink="/roulette" routerLinkActive #roulette="routerLinkActive">
+          <span class="menu-title">Roulette</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+      </li>
+      <li class="nav-item" [ngClass]="{ 'active': mines.isActive }">
+        <a class="nav-link" routerLink="/mines" routerLinkActive #mines="routerLinkActive">
+          <span class="menu-title">Mines</span>
+          <i class="mdi mdi-handshake-outline menu-icon"></i>
+        </a>
+    </li> -->
+
+  </ul>
+</nav>

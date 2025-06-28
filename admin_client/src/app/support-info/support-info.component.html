@@ -1,0 +1,64 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Support Info
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" *ngIf="isLoading">
+							<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+								<div class="d-flex justify-content-between">
+									
+								<div class="form-group px-0 gap-c">
+									<label for="name">Name</label>
+									<input type="text" class="form-control bg-white" name="name" placeholder="name" [(ngModel)]="supportData.userName" #name="ngModel" [ngClass]="{ 'is-invalid': (name.touched && name.invalid) }"  disabled>
+								</div>
+								<div class="form-group px-0 gap-c">
+									<label for="name">Email</label>
+									<input type="text" class="form-control bg-white" name="email" placeholder="email" [(ngModel)]="supportData.email" #email="ngModel" [ngClass]="{ 'is-invalid': (email.touched && email.invalid) }"  disabled>
+								</div>
+								<div class="form-group px-0 gap-c">
+									<label for="name">Subject</label>
+									<input type="text" class="form-control bg-white" name="subject" placeholder="subject" [(ngModel)]="supportData.SelectedOption" #subject="ngModel" [ngClass]="{ 'is-invalid': (subject.touched && subject.invalid) }"  disabled>
+								</div>
+								</div>
+								<div class="form-group">
+									<label for="name">Message</label>
+		                        	<textarea type="text" class="form-control h-100 borders bg-white" placeholder="User Message" name="message"  [(ngModel)]="supportData.Query" #message="ngModel" [class.is-invalid] = "message.invalid && message.touched" rows="5" ngModel  disabled>
+		                        	</textarea>
+								</div>
+								<div class="form-group" *ngIf="supportData.ProofUrl!=''">
+									<label for="name">Uploaded File</label>
+		                        	<div>
+		                        		<img [src]="supportData.ProofUrl" alt="upladed img" height="135" width="210">
+		                        	</div>
+								</div>
+								<div class="form-group" *ngIf="supportData.Status==0">
+									<label for="name">Admin Reply</label>
+									<textarea type="text" class="form-control h-100 borders" name="admin_reply" placeholder="Enter Admin Reply" [(ngModel)]="supportData.admin_reply" #admin_reply="ngModel" (blur)="onBlurMethod($event.target.value)" [ngClass]="{ 'is-invalid': (admin_reply.touched && admin_reply.invalid) }" rows="5" required>
+									</textarea>
+								</div>
+								<div class="form-group" >
+									<label for="name">Admin Reply</label>
+									<div [ngClass]="{'disabled-text': supportData.Status==1}">
+										<textarea type="text" class="form-control h-100 borders" name="admin_reply" placeholder="Enter Admin Reply" [(ngModel)]="supportData.admin_reply" #admin_reply="ngModel" (blur)="onBlurMethod($event.target.value)" [ngClass]="{ 'is-invalid': (admin_reply.touched && admin_reply.invalid) }" rows="5" required>
+										</textarea>
+									</div>
+								</div>
+							</form>
+							<hr>
+					      <div *ngIf="supportData.Status=='0'">
+					        <button type="submit" class="btn btn-gradient-primary" [disabled]="Managetrade.invalid" (click)="submitFunc(Managetrade)" >Update</button>
+					        <button type="submit" class="btn btn-gradient-info" [routerLink]="['/support']">Cancel</button>
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

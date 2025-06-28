@@ -1,0 +1,260 @@
+<!-- <div class="page-header">
+	<h3 class="page-title">
+		User Info
+	</h3>
+</div> -->
+<ul class="nav">
+  <li class="nav-item">
+    <a class="nav-link active page-title" aria-current="page" [ngClass]="userTable == true ? 'activeClass' : ''" (click)="TabClick('user')">User Info</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-title" [ngClass]="KYCTable == true ? 'activeClass' : ''" (click)="TabClick('kyc')">KYC verification</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-title" [ngClass]="WalletTable == true ? 'activeClass' : ''" (click)="TabClick('wallet')">Wallet Balance</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-title" [ngClass]="ReferralTable == true ? 'activeClass' : ''" (click)="TabClick('referral')">Referral of user</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-title" [ngClass]="gameTable == true ? 'activeClass' : ''" (click)="TabClick('game')">Game Info</a>
+  </li>
+</ul>
+
+<div class="row mt-3">
+	<div class="col-lg-12 grid-margin stretch-card" *ngIf="userTable && rLoading">
+		<div class="card">
+			<div class="card-body">
+				<div class="">
+					<div class="col d-flex card-title font-siz">
+						<span class="col-3">User Name : </span>
+						<label>{{userInfo.username}}</label>
+					</div>
+					<div class="col d-flex card-title font-siz">
+						<span class="col-3">firstname : </span>
+						<label>{{(userInfo.firstname == '') ? "none" : userInfo.firstname}}</label>
+					</div>
+				</div>
+				<div class="">
+					<div class="col d-flex card-title font-siz">
+						<span class="col-3">lastname :</span>
+						<label> {{(userInfo.lastname == '') ? "none" : userInfo.lastname}}</label>
+					</div>
+					<div class="col d-flex card-title font-siz">
+						<span class="text-lowercase col-3">email : </span>
+						<label class="text-lowercase">{{userInfo.email}}</label>
+					</div>
+				</div>
+				<div class="">
+					<div class="col d-flex card-title font-siz">
+						<span class="col-3">country : </span>
+						<label>{{userInfo.country }}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 grid-margin stretch-card" *ngIf="KYCTable && rLoading">
+		<div class="card">
+			<div class="card-body">
+				<form #kyc="ngForm" autocomplete="off">
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">Active Status</span>:
+						<span class="col-md-4">
+							<span [ngClass]="KycInfo.kyc_status == 2 ? 'danger-n' : KycInfo.kyc_status == 3 ? 'success-n' : 'gray-n'">{{KycInfo.kyc_status == 0 ? "Not verified" : KycInfo.kyc_status == 1 ? "Pending" : KycInfo.kyc_status == 2 ? "Rejected" : "Verifed"}}</span>
+						</span>
+					</div>
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">First Name</span>:
+						<span class="col-md-4">{{(userInfo.firstname == '') ? "none" : userInfo.firstname}}</span>
+					</div>
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">Last Name</span>:
+						<span class="col-md-4">{{(userInfo.lastname == '') ? "none" : userInfo.lastname}}</span>
+					</div>
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">Idproof Proof</span>:
+						<div class="flex-col  align-items-center">
+							
+						<span class=""><img width="220" height="135" class="idproof" [src]="idFrtImg"></span>
+						<div class="text-center ">OR</div>
+						<span class=""><img width="220" height="135" class="idproof" [src]="idBackImg"></span>
+						<div class="" *ngIf="!idrej">
+							<span *ngIf="KycInfo.id_status == 1"><button class="m-2 BtnSucc btnClass" (click)="approveKYC('id_proof')">Approve</button><button class="m-2 BtnDang btnClass" (click)="rejectKYC('id_proof')">Reject</button></span>
+						</div>
+						<div class="col-md-3" *ngIf="idrej">
+							<span class="form-group">
+								<label for="name">Id Proof Reason</label>
+								<input type="text" class="form-control bg-white" name="id_proof" placeholder="Id Proof Reason" ngModel >
+								<button class="m-2 BtnSucc btnClass" (click)="ReasonKYC('id_proof', kyc)">Confirm</button>
+								<button class="m-2 BtnDang btnClass" (click)="cancelReas('id_proof')">Cencel</button>
+							</span>
+						</div>
+						</div>
+					</div>
+					
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">PassPort Proof</span>:
+						<span class="col-md-3"><img width="220" height="135" class="idproof" [src]="PassPortImg"></span>
+						<div class="col-md-3" *ngIf="!passportrej">
+							<span *ngIf="KycInfo.passport_status == 1"><button class="m-2 BtnSucc btnClass" (click)="approveKYC('passport_proof')">Approve</button><button class="m-2 BtnDang btnClass" (click)="rejectKYC('passport_proof')" >Reject</button></span>
+						</div>
+						<div class="col-md-3" *ngIf="passportrej">
+							<span class="form-group">
+								<label for="name">Passport Proof Reason</label>
+								<input type="text" class="form-control bg-white" name="pp_proof" placeholder="Passport Proof Reason" ngModel >
+								<button class="m-2 BtnSucc btnClass" (click)="ReasonKYC('passport_proof', kyc)">Confirm</button>
+								<button class="m-2 BtnDang btnClass" (click)="cancelReas('passport_proof')">Cencel</button>
+							</span>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">Residence Proof</span>:
+						<span class="col-md-3"><img width="220" height="135" class="idproof" [src]="residenceImg"></span>
+						<div class="col-md-3" *ngIf="!residencerej">
+							<span *ngIf="KycInfo.residence_status == 1"><button class="m-2 BtnSucc btnClass" (click)="approveKYC('residence_proof')">Approve</button><button class="m-2 BtnDang btnClass" (click)="rejectKYC('residence_proof')">Reject</button></span>
+						</div>
+						<div class="col-md-3" *ngIf="residencerej">
+							<span class="form-group">
+								<label for="name">Residence Proof Reason</label>
+								<input type="text" class="form-control bg-white" name="residence_proof" placeholder="Residence Proof Reason" ngModel >
+								<button class="m-2 BtnSucc btnClass" (click)="ReasonKYC('residence_proof', kyc)">Confirm</button>
+								<button class="m-2 BtnDang btnClass" (click)="cancelReas('residence_proof')">Cencel</button>
+							</span>
+						</div>
+					</div>
+					<div class="row mt-3">
+						<span class="pl-5 col-md-2">Selfie Proof</span>:
+						<span class="col-md-3"><img width="220" height="135" class="idproof" [src]="selfieImg"></span>
+						<div class="col-md-3" *ngIf="!selrej">
+							<span *ngIf="KycInfo.selfie_status == 1"><button class="m-2 BtnSucc btnClass" (click)="approveKYC('selfie_proof')">Approve</button><button class="m-2 BtnDang btnClass" (click)="rejectKYC('selfie_proof')">Reject</button></span>
+						</div>
+						<div class="col-md-3" *ngIf="selrej">
+							<span class="form-group">
+								<label for="name">Selfie Proof Reason</label>
+								<input type="text" class="form-control bg-white" name="selfie_proof" placeholder="Selfie Proof" ngModel >
+								<button class="m-2 BtnSucc btnClass" (click)="ReasonKYC('selfie_proof', kyc)">Confirm</button>
+								<button class="m-2 BtnDang btnClass" (click)="cancelReas('selfie_proof')">Cencel</button>
+							</span>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 grid-margin stretch-card" *ngIf="WalletTable && rLoading">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Currency</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="wallet.length > 0">
+							<tr *ngFor="let wall of wallet | paginate: { itemsPerPage: 10, currentPage: pgWallt, id:'wallet'}; let i = index" >
+								<td>{{i+((pgWallt*10)-10)+1}}</td>
+								<td>{{wall['currency']}}</td>
+								<td>{{wall['amount']}}</td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="wallet.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			    <div class="text-right mb-4" *ngIf="wallet.length > 10">
+			      <div class="text-left d-inline-block ">
+			        <pagination-controls id="wallet" previousLabel="Previous" nextLabel="Next" class = "pageination" (pageChange)="pgWallt = $event"></pagination-controls> 
+			      </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 grid-margin stretch-card" *ngIf="ReferralTable && rLoading">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title cursor">ReferredBy : {{ReferralInfo.ReferredBy}}</h4>
+				<div class="table-responsive mt-3">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>User</th>
+								<th>Regsiter At</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="ReferralInfo.ReferredEmail.length > 0">
+							<tr *ngFor="let wall of ReferralInfo.ReferredEmail | paginate: { itemsPerPage: 10, currentPage: pgKYC, id:'KYC'}; let i = index" >
+								<td>{{i+((pgKYC*10)-10)+1}}</td>
+								<td>{{wall['email']}}</td>
+								<td>{{wall.created_at | date:'dd-MM-yyyy hh:mm:ss'}}</td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="ReferralInfo.ReferredEmail.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			    <div class="text-right mb-4" *ngIf="ReferralInfo.ReferredEmail.length > 10">
+			      <div class="text-left d-inline-block ">
+			        <pagination-controls id="KYC" previousLabel="Previous" nextLabel="Next" class = "pageination" (pageChange)="pgKYC = $event"></pagination-controls> 
+			      </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 grid-margin stretch-card" *ngIf="gameTable && rLoading">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Game</th>
+								<th>Played Games</th>
+								<th>Action</th>
+								<!-- <th>No of Times Loss</th> -->
+							</tr>
+						</thead>
+						<tbody *ngIf="gameData.length > 0">
+							<tr *ngFor="let game of gameData | paginate: { itemsPerPage: 10, currentPage: pgGame, id:'gameDe'}; let i = index" >
+								<td>{{i+((pgGame*10)-10)+1}}</td>
+								<td>{{game['name']}}</td>
+								<td>{{game['total_count']}}</td>
+								<td *ngIf="game['total_count']!=0">
+									<span [routerLink]="['/usersInfo', this.UserId, game['name']]" class="mdi mdi-eye"></span>
+								</td>
+								<td *ngIf="game['total_count']==0">
+
+									<i class="mdi mdi-close"></i>
+								</td>
+								<!-- <td>{{game['total_win']}}</td> -->
+								<!-- <td>{{game['total_loss']}}</td> -->
+							</tr>
+						</tbody>
+						<tbody *ngIf="gameData.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			    <div class="text-right mb-4" *ngIf="gameData.length > 10">
+			      <div class="text-left d-inline-block ">
+			        <pagination-controls id="gameDe" previousLabel="Previous" nextLabel="Next" class = "pageination" (pageChange)="pgGame = $event"></pagination-controls> 
+			      </div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+<button type="submit" class="btn btn-gradient-info" *ngIf="userTable && rLoading" routerLink="/users">Back</button>

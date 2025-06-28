@@ -1,0 +1,65 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Manage <span class="text-capitalize">{{game}}</span> List
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" *ngIf="isLoading">
+							<form class="forms-sample" #Managegame="ngForm" autocomplete="off">
+								<div class="d-flex">		
+				                  	<div class="col-md-6">
+				                     	<div class="mb-2">
+				                     		<label for="curr">Currency</label>
+				                        	<select class="form-control" name="curr" #curr="ngModel" [(ngModel)]="CurrData.curr" required (change)="onsecondCurr($event.target)">
+				                        		<option *ngFor="let curr of currency">
+							                        {{curr}}
+							                    </option>
+				                        	</select>
+				                     	</div>
+				                  	</div>
+				                  	<div class="col-md-6">
+				                     	<div class="mb-2">
+				                     		<label for="status">status</label>
+				                        	<select class="form-control" name="status" #status="ngModel" [(ngModel)]="CurrData.status" required>
+					                        	<option value=1>Active</option>
+					                        	<option value=0>Deactive</option>
+				                        	</select>
+				                     	</div>
+				                  	</div>
+								</div>
+								<div class="d-flex">
+									<div class="form-group col-md-6">
+										<label for="name">Minimun bet</label>
+										<input type="text" class="form-control bg-white" name="min_bet" placeholder="min_bet" [(ngModel)]="CurrData.min_bet" #min_bet="ngModel" [ngClass]="{ 'is-invalid': (min_bet.touched && min_bet.invalid) }"  pattern="^\d{0,50}(\.\d{1,8})?$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+										<div *ngIf="min_bet.errors && (min_bet.valid || min_bet.touched || Managegame.submitted)" class="errMsg">
+						                   <span *ngIf="min_bet.errors.pattern">{{"Minimun bet invalid"}}</span>
+						                   <span *ngIf="min_bet.errors.required">{{"Enter Minimun bet"}}</span>
+						                </div>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="name">Maximun bet</label>
+										<input type="text" class="form-control bg-white" name="max_bet" placeholder="max_bet" [(ngModel)]="CurrData.max_bet" #max_bet="ngModel" [ngClass]="{ 'is-invalid': (max_bet.touched && max_bet.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+										<div *ngIf="max_bet.errors && (max_bet.valid || max_bet.touched || Managegame.submitted)" class="errMsg">
+						                   <span *ngIf="max_bet.errors.pattern">{{"Maximun bet invalid"}}</span>
+						                   <span *ngIf="max_bet.errors.required">{{"Enter Maximun bet"}}</span>
+						                </div>
+									</div>
+								</div>
+							</form>
+							<hr>
+					      <div>
+					        <button type="submit" class="btn btn-gradient-primary" [disabled]="Managegame.invalid" (click)="submitFunc(Managegame)" >Update</button>
+					        <button type="submit" class="btn btn-gradient-info" routerLink="/gameList">Cancel</button>
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

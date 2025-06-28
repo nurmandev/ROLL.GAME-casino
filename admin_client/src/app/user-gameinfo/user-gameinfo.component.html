@@ -1,0 +1,52 @@
+<div class="page-header">
+	<h3 class="page-title">
+	Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="network">Game name :</label>
+									<span class="">{{name}}</span>
+								</div>
+							</div>
+							<div class="my-2 font-siz"> 
+								<label class="col-3" for="name">Total Game Palyed :</label>
+								<span>{{totGame}}</span>
+							</div>
+							<div class="my-2 font-siz">
+								<label class="col-3" for="name">Total Game Win :</label>
+								<span>{{winGame}}</span>
+							</div>
+							<div class="my-2 font-siz">
+								<label class="col-3" for="name">Total Game Loss :</label>
+								<span>{{lossGame}}</span>
+							</div>
+							<div class="my-2 d-flex align-items-center font-siz" *ngFor="let data of gamePro">
+								<div class="d-flex col-4 justify-content-between pr-5">
+									<label class="" for="name">Currency Name :</label>
+								    <span class="w-50 pr-4 text-right">{{data._id}}</span>
+								</div>
+								<div class="col-4 d-flex justify-content-around">
+									<label for="name">Total Amount :</label>
+								   <span>{{(data.total*1).toFixed(2)}}</span>
+								</div>
+								<div class="col-4 d-flex justify-content-around">
+								  <label for="name">Total Profit :</label>
+								  <span>{{data.totalProfit}}</span>
+								</div>
+							</div>
+							<hr>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

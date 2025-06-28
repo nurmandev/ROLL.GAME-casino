@@ -1,0 +1,45 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Admin Login History
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive" *ngIf="isLoading">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>IP address</th>
+								<th>Browser</th>
+								<th>Device</th>
+								<th>Datetime</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="activity.length > 0">
+							<tr *ngFor="let act of activity; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td>{{act.ipaddress}}</td>
+								<td>{{act.browser}}</td>
+								<td>{{act.deviceinfo}}</td>
+								<td>{{act.datetime | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="activity.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

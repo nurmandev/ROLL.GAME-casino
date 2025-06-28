@@ -1,0 +1,56 @@
+<div class="page-header">
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      <i class="mdi mdi-currency-usd"></i>      
+    </span>
+    Currencies
+  </h3>
+  <nav aria-label="breadcrumb">
+    <!-- <ul class="breadcrumb">
+    	<button type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/addCurrency']">Add Currencies</button>
+    </ul>  -->
+  </nav>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover" *ngIf="isLoading">
+						<thead>
+							<tr>
+								<th>S.No</th>
+								<th>Currency</th>
+								<th>Type</th>
+								<th>Network</th>
+								<th>Status</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="currencies.length > 0">
+							<tr *ngFor="let curr of currencies; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td>{{curr.currency}}</td>
+								<td class="text-capitalize">{{curr.type}}</td>
+								<td>{{curr.network}}</td>
+								<td class="text-capitalize cursor"><span [ngClass]="curr.status == 0 ? 'danger-n' : 'success-n'">{{(curr.status == 0) ? "Deactive" : "Active" }}</span></td>
+								<td [routerLink]="['/currencyInfo', curr._id]"><span class="mdi mdi-account-edit"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="currencies.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

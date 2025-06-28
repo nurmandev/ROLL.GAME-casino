@@ -1,0 +1,148 @@
+<div class="page-header">
+	<h3 class="page-title">
+	Roulette Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+								<div >
+									<div class="my-2 font-siz">
+										<label class="col-3" for="usrname">User name :</label>
+										<span>{{Det_name}}</span>
+									</div>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="id">Game Id :</label>
+									<span>{{Det_id}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Bet Amount :</label>
+									<span>{{Det_betamount}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Winning Amount :</label>
+									<!-- <span>{{Det_pro_amt}}</span> -->
+									<ng-container *ngIf="Det_status=='loser'">
+									<span [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}">{{Det_pro_amt}}</span>
+									</ng-container>
+									<ng-container *ngIf="Det_status=='winner'">
+									<span [ngClass]="{'winner':Det_status=='winner','looser':Det_status== 'loser'}">{{Det_pro_amt}}</span>
+									</ng-container>
+									<ng-container *ngIf="Det_status=='tied'">
+									<span [ngClass]="{'tied':Det_status=='tied'}">{{Det_pro_amt}}</span>
+									</ng-container>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Result :</label>
+									<!-- <span>{{Det_betamount}}</span> -->
+									<div class="items d-flex justify-content-between">
+										<div class="rotateTable">
+											<div id="resbetting_board">
+												<div class="result_lines">
+													<div class="bbtop">
+														<div class="resultcoin resbbtoptwo chipresultselect" id="reshalf1"><span>1 to 18</span><div [ngClass]="resultcoins.half1 < 1000 ? 'chipresult blue' : 'chipresult red'" ><span class="chipSpanresult">{{resultcoins.half1}}</span></div></div>
+														<div class="resultcoin resbbtoptwo" id="reshalf2"><span>19 to 36</span><div [ngClass]="resultcoins.half2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.half2}}</span></div></div>
+													</div>
+													<div class="resnumber_board">
+														<div class="resultcoin resnumber_0" id="res0"> <div class="nbn text-white">0</div><div [ngClass]="resultcoins.num0 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num0}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res3"><div class="nbn text-white">3</div><div [ngClass]="resultcoins.num3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num3}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res6"><div class="nbn text-white">6</div><div [ngClass]="resultcoins.num6 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num6}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res9"><div class="nbn text-white">9</div><div [ngClass]="resultcoins.num9 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num9}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res12"><div class="nbn text-white">12</div><div [ngClass]="resultcoins.num12 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num12}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res15"><div class="nbn">15</div><div [ngClass]="resultcoins.num15 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num15}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res18"><div class="nbn">18</div><div [ngClass]="resultcoins.num18 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num18}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res21"><div class="nbn">21</div><div [ngClass]="resultcoins.num21 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num21}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res24"><div class="nbn">24</div><div [ngClass]="resultcoins.num24 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num24}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res27"><div class="nbn">27</div><div [ngClass]="resultcoins.num27 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num27}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res30"><div class="nbn">30</div><div [ngClass]="resultcoins.num30 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num30}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res33"><div class="nbn" >33</div><div [ngClass]="resultcoins.num33 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num33}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res36"><div class="nbn">36</div><div [ngClass]="resultcoins.num36 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num36}}</span></div></div>
+														<div class="resultcoin resrestt1_block" id="resrow1"><div class="nbn1">2:1</div><div [ngClass]="resultcoins.row1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row1}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res2"><div class="nbn">2</div><div [ngClass]="resultcoins.num2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num2}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res5"><div class="nbn">5</div><div [ngClass]="resultcoins.num5 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num5}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res8"><div class="nbn">8</div><div [ngClass]="resultcoins.num8 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num8}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res11"><div class="nbn">11</div><div [ngClass]="resultcoins.num11 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num11}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res14"><div class="nbn">14</div><div [ngClass]="resultcoins.num14 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num14}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res17"><div class="nbn">17</div><div [ngClass]="resultcoins.num17 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num17}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res20"><div class="nbn">20</div><div [ngClass]="resultcoins.num20 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num20}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res23"><div class="nbn">23</div><div [ngClass]="resultcoins.num23 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num23}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res26"><div class="nbn">26</div><div [ngClass]="resultcoins.num26 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num26}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res29"><div class="nbn">29</div><div [ngClass]="resultcoins.num29 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num29}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res32"><div class="nbn" >32</div><div [ngClass]="resultcoins.num32 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num32}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res35"><div class="nbn">35</div><div [ngClass]="resultcoins.num35 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num35}}</span></div></div>
+														<div class="resultcoin resrestt1_block" id="resrow2"><div class="nbn1">2:1</div><div [ngClass]="resultcoins.row2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row2}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res1"><div class="nbn">1</div><div [ngClass]="resultcoins.num1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num1}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res4"><div class="nbn">4</div><div [ngClass]="resultcoins.num4 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num4}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res7"><div class="nbn">7</div><div [ngClass]="resultcoins.num7 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num7}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res10"><div class="nbn">10</div><div [ngClass]="resultcoins.num10 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num10}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res13"><div class="nbn">13</div><div [ngClass]="resultcoins.num13 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num13}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res16"><div class="nbn">16</div><div [ngClass]="resultcoins.num16 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num16}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res19"><div class="nbn">19</div><div [ngClass]="resultcoins.num19 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num19}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res22"><div class="nbn">22</div><div [ngClass]="resultcoins.num22 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num22}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res25"><div class="nbn">25</div><div [ngClass]="resultcoins.num25 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num25}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res28"><div class="nbn">28</div><div [ngClass]="resultcoins.num28 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num28}}</span></div></div>
+														<div class="resultcoin resnumber_block blackNum" id="res31"><div class="nbn">31</div><div [ngClass]="resultcoins.num31 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num31}}</span></div></div>
+														<div class="resultcoin resnumber_block redNum" id="res34"><div class="nbn">34</div><div [ngClass]="resultcoins.num34 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.num34}}</span></div></div>
+														<div class="resultcoin resrestt1_block" id="resrow3"><div class="nbn1">2:1</div><div [ngClass]="resultcoins.row3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.row3}}</span></div></div>
+													</div>
+													<div class="resbo3_board">
+														<div class="resultcoin resbo3_block" id="resseg1"><span>1 to 12</span><div [ngClass]="resultcoins.seg1 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg1}}</span></div></div>
+														<div class="resultcoin resbo3_block" id="resseg2"><span>13 to 24</span><div [ngClass]="resultcoins.seg2 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg2}}</span></div></div>
+														<div class="resultcoin resbo3_block" id="resseg3"><span>25 to 36 </span><div [ngClass]="resultcoins.seg3 < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.seg3}}</span></div></div>
+													</div>
+													<div class="resoto_board">
+														<div class="resultcoin resoto_block" id="reseven"><span>EVEN</span><div [ngClass]="resultcoins.even < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.even}}</span></div></div>
+														<div class="resultcoin resoto_block Nubred" id="resred"><span> RED</span><div [ngClass]="resultcoins.red < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.red}}</span></div></div>
+														<div class="resultcoin resoto_block Nubblack" id="resblack"><span>BLACK</span><div [ngClass]="resultcoins.black < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.black}}</span></div></div>
+														<div class="resultcoin resoto_block" id="resodd"><span> ODD </span><div [ngClass]="resultcoins.odd < 1000 ? 'chipresult blue' : 'chipresult red'"><span class="chipSpanresult">{{resultcoins.odd}}</span></div></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="payout">Payout :</label>
+									<span>{{Det_payout}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="payout">Status :</label>
+									<span>{{Det_status}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="cliseed">Client Seed : </label>
+									<span>{{Det_clientSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="serseed">serverSeed :</label>
+									<span>{{Det_serverSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="nounce">Nonce :</label>
+									<span>{{Det_nounce}}</span>
+								</div>
+								
+								<!-- <div class="form-group">
+										<label for="name">DW RPC</label>
+								</div>
+								<div class="form-group">
+										<label for="name">Network API</label>
+								</div> -->
+							</form>
+							<hr>
+							<div>
+								<!-- <button type="submit" class="btn btn-gradient-primary">Cancel</button> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

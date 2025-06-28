@@ -1,0 +1,118 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Add Currency
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+					<div class="form-group">
+						<label for="currency">Currency</label>
+						<input type="text" class="form-control " name="currency" placeholder="Enter Currency Name" ngModel #currency="ngModel" pattern="[a-zA-Z]+" minlength="3" (ngModelChange)="CurrMatch($event)" [ngClass]="{ 'is-invalid': (currency.touched && currency.invalid) }" required>
+	                  	<div *ngIf="((currencymatch) && currency.valid)" class="errMsg">
+	                    	<span *ngIf="currencymatch">{{"Currency name already exists"}}</span>
+	                	</div>
+		                <div *ngIf="currency.errors && (currency.valid || currency.touched || Managetrade.submitted)" class="errMsg">
+		                   <span *ngIf="currency.errors.pattern">{{"currency name invalid"}}</span>
+		                   <span *ngIf="currency.errors.minlength">{{"Enter atleast 3 characters"}}</span>
+		                </div>
+					</div>
+                  	<div class="row">
+                     	<div class="col mb-2">
+                     		<label for="network">Network</label>
+                        	<select class="form-control" name="network" #network="ngModel" [(ngModel)]="OptionsdataData.network" required>
+                        	<option value="BNB">BNB</option>
+                        	<!-- <option value="dummy">dummy</option> -->
+                        	</select>
+                     	</div>
+                     	<div class="col mb-2">
+                     		<label for="type">Type</label>
+                        	<select class="form-control" name="type" #type="ngModel" [(ngModel)]="OptionsdataData.type" required>
+                        	<option value="token">Token</option>
+                        	<option value="coin">Coin</option>
+                        	</select>
+                     	</div>
+                  	</div>
+					<div class="row">
+                     	<div class="col-md-6 mb-2">
+                     		<label for="status">status</label>
+                        	<select class="form-control" name="status" #status="ngModel" [(ngModel)]="supportData.status" required>
+                        	<option value=1>Active</option>
+                        	<option value=0>Deactive</option>
+                        	</select>
+                     	</div>
+                  	</div>
+					<div class="row">
+						<div class="form-group col">
+							<label for="name">Minimun bet</label>
+							<input type="text" class="form-control bg-white" name="min_bet" placeholder="min_bet" [(ngModel)]="supportData.min_bet" #min_bet="ngModel" [ngClass]="{ 'is-invalid': (min_bet.touched && min_bet.invalid) }"  pattern="^\d{0,50}(\.\d{1,8})?$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+							<div *ngIf="min_bet.errors && (min_bet.valid || min_bet.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="min_bet.errors.pattern">{{"Minimun bet invalid"}}</span>
+			                   <span *ngIf="min_bet.errors.required">{{"Enter Minimun bet"}}</span>
+			                </div>
+						</div>
+						<div class="form-group col">
+							<label for="name">Maximun bet</label>
+							<input type="text" class="form-control bg-white" name="max_bet" placeholder="max_bet" [(ngModel)]="supportData.max_bet" #max_bet="ngModel" [ngClass]="{ 'is-invalid': (max_bet.touched && max_bet.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+							<div *ngIf="max_bet.errors && (max_bet.valid || max_bet.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="max_bet.errors.pattern">{{"Maximun bet invalid"}}</span>
+			                   <span *ngIf="max_bet.errors.required">{{"Enter Maximun bet"}}</span>
+			                </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label for="name">Minimum deposit</label>
+							<input type="text" class="form-control bg-white" name="min_deposit" placeholder="min_deposit" [(ngModel)]="supportData.min_deposit" #min_deposit="ngModel" [ngClass]="{ 'is-invalid': (min_deposit.touched && min_deposit.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+							<div *ngIf="min_deposit.errors && (min_deposit.valid || min_deposit.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="min_deposit.errors.pattern">{{"Minimum deposit invalid"}}</span>
+			                   <span *ngIf="min_deposit.errors.required">{{"Enter Minimum deposit"}}</span>
+			                </div>
+						</div>
+						<div class="form-group col">
+							<label for="name">Maximun deposit</label>
+							<input type="text" class="form-control bg-white" name="max_deposit" placeholder="max_deposit" [(ngModel)]="supportData.max_deposit" #max_deposit="ngModel" [ngClass]="{ 'is-invalid': (max_deposit.touched && max_deposit.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+							<div *ngIf="max_deposit.errors && (max_deposit.valid || max_deposit.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="max_deposit.errors.pattern">{{"Maximun deposit invalid"}}</span>
+			                   <span *ngIf="max_deposit.errors.required">{{"Enter Maximun deposit"}}</span>
+			                </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label for="name">Minimum withdraw</label>
+							<input type="text" class="form-control bg-white" name="min_withdraw" placeholder="min_withdraw" [(ngModel)]="supportData.min_withdraw" #min_withdraw="ngModel" [ngClass]="{ 'is-invalid': (min_withdraw.touched && min_withdraw.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+							<div *ngIf="min_withdraw.errors && (min_withdraw.valid || min_withdraw.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="min_withdraw.errors.pattern">{{"Minimum withdraw invalid"}}</span>
+			                   <span *ngIf="min_withdraw.errors.required">{{"Enter Minimum withdraw"}}</span>
+			                </div>
+						</div>
+						<div class="form-group col">
+							<label for="name">Maximun withdraw</label>
+							<input type="text" class="form-control bg-white" name="max_withdraw" placeholder="max_withdraw" [(ngModel)]="supportData.max_withdraw" #max_withdraw="ngModel" [ngClass]="{ 'is-invalid': (max_withdraw.touched && max_withdraw.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+							<div *ngIf="max_withdraw.errors && (max_withdraw.valid || max_withdraw.touched || Managetrade.submitted)" class="errMsg">
+			                   <span *ngIf="max_withdraw.errors.pattern">{{"Maximun withdraw invalid"}}</span>
+			                   <span *ngIf="max_withdraw.errors.required">{{"Enter Maximun withdraw"}}</span>
+			                </div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name">withdraw Fee</label>
+						<input type="text" class="form-control bg-white" name="withdraw_fee" placeholder="withdraw_fee" [(ngModel)]="supportData.withdraw_fee" #withdraw_fee="ngModel" [ngClass]="{ 'is-invalid': (withdraw_fee.touched && withdraw_fee.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+						<div *ngIf="withdraw_fee.errors && (withdraw_fee.valid || withdraw_fee.touched || Managetrade.submitted)" class="errMsg">
+		                   <span *ngIf="withdraw_fee.errors.pattern">{{"withdraw Fee invalid"}}</span>
+		                   <span *ngIf="withdraw_fee.errors.required">{{"Enter withdraw Fee"}}</span>
+		                </div>
+					</div>
+				</form>
+				<hr>
+		      	<div>
+			        <button type="submit" class="btn btn-gradient-primary" [disabled]="Managetrade.invalid || currencymatch" (click)="submitFunc(Managetrade)" >Update</button>
+			        <button type="button" class="btn btn-gradient-info"routerLink="/currency">Cancel</button>
+		      	</div>
+			</div>
+		</div>
+	</div>
+</div>

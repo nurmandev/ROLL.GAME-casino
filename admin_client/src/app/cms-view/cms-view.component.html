@@ -1,0 +1,54 @@
+<div class="page-header">
+	<h3 class="page-title">
+		CMS Info
+	</h3>
+</div>
+<!-- <div class="row">
+	<div class="col-md-12 grid-margin">
+		<div class="card">
+			<div class="card-body" *ngIf="isLoading">
+				<form class="forms-sample" [formGroup]="cmsForm" (ngSubmit)="onSubmit()">
+					<div class="form-group">
+						<label for="name">Page Type</label>
+						<input type="text" class="form-control" id="pagetype" formControlName="pagetype" name="pagetype" placeholder="pagetype" value="{{cmsInfo.pagetype}}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="name">Page Title</label>
+						<input type="text" class="form-control" id="pagetitle" formControlName="pagetitle" name="pagetitle" placeholder="Username" value="{{cmsInfo.pagetitle}}">
+					</div>
+					<div class="form-group">
+						<label for="name">Page Content</label>
+						<ckeditor [editor]="Editor" id="pagecontent" formControlName="pagecontent" name="pagecontent" data="{{cmsInfo.pagecontent}}"></ckeditor>   
+					</div>
+					<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="row">
+	<div class="col-md-12 grid-margin">
+		<div class="card">
+			<div class="card-body" *ngIf="isLoading">
+				<form class="forms-sample" [formGroup]="cmsForm" (ngSubmit)="onSubmit()">
+					<div class="form-group">
+						<label for="name">Page Type</label>
+						<input type="text" class="form-control" id="pagetype" formControlName="pagetype" name="pagetype" placeholder="pagetype" value="{{cmsInfo.pagetype}}" readonly>
+					</div>
+					<div class="form-group">
+						<label for="name">Page Title</label>
+						<input type="text" class="form-control" id="pagetitle" formControlName="pagetitle" name="pagetitle" placeholder="Username" value="{{cmsInfo.pagetitle}}">
+					</div>
+					<div class="form-group">
+						<label for="name">Page Content</label>
+						<angular-editor id="pagecontent" formControlName="pagecontent" name="pagecontent" [placeholder]="'Enter text here...'" [config]="config"  [(ngModel)]="cmsInfo.pagecontent"></angular-editor>  
+					</div>
+					{{htmlContent}}
+					<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+					<button type="button" class="btn btn-gradient-info mr-2" [routerLink]="['/cms']">Back</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

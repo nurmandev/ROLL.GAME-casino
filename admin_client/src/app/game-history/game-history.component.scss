@@ -1,0 +1,49 @@
+.hov{
+	cursor:pointer;
+}
+
+.appinfobox{
+	background-color: #22252a;
+	padding: 8px;
+	border-radius: 5px; 
+	display: none; 
+	left:-140px; 
+	width: 300px; 
+	top: 110px;
+}
+
+.darkformbox{
+	background: #181818;
+	padding: 5px 5px; 
+	margin: 5px 0px;
+}
+
+.rows {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 125px;
+}
+
+.alg{
+    width: 200px;
+    margin-right: 22px;
+    margin-top: 20px;
+}
+
+.infoicon {
+    width: fit-content;
+    z-index: 999;
+    position: relative;
+}
+
+.infoicon:hover .appinfobox {
+    position: absolute;
+    display: block;
+    top: -18px;
+    left: 38px;
+}
+
+
+.lgrey{
+	color: #61676e !important;
+}  

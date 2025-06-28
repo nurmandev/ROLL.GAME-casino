@@ -1,0 +1,51 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Blog Info
+	</h3>
+</div>
+
+<div class="row">
+	<div class="col-md-12 grid-margin">
+		<div class="card">
+			<div class="card-body">
+				<form class="forms-sample" #f="ngForm" autocomplete="off">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="name">Title</label>
+							<input type="text" class="form-control bg-white" name="title" placeholder="title" [(ngModel)]="blogInfo.title" #title="ngModel" [ngClass]="{ 'is-invalid': (title.touched && title.invalid) }" required>
+							<div *ngIf="title.errors && (title.valid || title.touched || f.submitted)" class="errMsg">
+			                   <span *ngIf="title.errors.required">{{"Enter Category"}}</span>
+			                </div>
+						</div>
+						<div class="col-md-6">
+		                 	<div class="mb-2">
+		                 		<label for="status">status</label>
+		                    	<select class="form-control" name="status" #status="ngModel" [(ngModel)]="blogInfo.status" required>
+		                    	<option value=1>Active</option>
+		                    	<option value=0>Deactive</option>
+		                    	</select>
+		                 	</div>
+		              	</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+					        <div class="uploadbtnwhl">
+		                        <input type="file" id="id-front" class="d-none" name="idCardFront" (change)="onFileSteptwo($event.target)">
+		                        <label for="id-front" class="bluebtn text-center smallbtn border border-secondary p-1 ">Choose File</label>
+		                    </div>
+						</div>
+						<div class="col-md-6">
+				          	<label for="inputsymbolImg" class="form-label">Image</label><br />
+				          	<span id="inputsymbolImg"><img width="100" height="100" class="idproof" [src]="blogInfo.image"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name">Page Content</label>
+						<angular-editor id="notitycontent" name="message" [placeholder]="'Enter text here...'" [config]="config"  [(ngModel)]="blogInfo.message"></angular-editor>
+					</div>
+					<button type="submit" class="btn btn-gradient-primary mr-2" (click)="submitData(f)">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

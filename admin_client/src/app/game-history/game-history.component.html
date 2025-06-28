@@ -1,0 +1,258 @@
+<div class="page-header">
+	<h3 class="page-title">
+	<span class="page-title-icon bg-gradient-info text-white mr-2">
+		<i class="mdi mdi-trophy cv"></i>
+	</span>
+	Game History
+	</h3>
+	<nav aria-label="breadcrumb">
+		<ul class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">
+				<span></span>Overview
+				<i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+			</li>
+		</ul>
+	</nav>
+</div>
+<div class="row" *ngIf="isLoading">
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/limbo">
+		<div class="card bg-gradient-info card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-diamond-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Limbo</h2>
+				<div class="infoicon">
+					<img class="hov-bx" src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.limbo}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/dice">
+		<div class="card bg-gradient-danger card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Dice</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.dice}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/coinflip">
+		<div class="card bg-gradient-success card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-chart-line mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Coinflip</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.flip}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/wheel">
+		<div class="card bg-gradient-danger card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Wheel</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.wheel}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/fortune">
+		<div class="card bg-gradient-dark card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-diamond-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Rings Of Fortune</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.fortune}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/caveofplunder">
+		<div class="card bg-gradient-secondary card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Cave Of Plunder</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.plunder}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/keno">
+		<div class="card bg-gradient-info card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Keno</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.keno}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/roulette">
+		<div class="card bg-gradient-primary card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Roulette</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.roulette}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/mines">
+		<div class="card bg-gradient-warning card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Mines</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.mine}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/sword">
+		<div class="card bg-gradient-success card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Sword</h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.sword}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/crash">
+		<div class="card bg-gradient-info card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Crash </h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.crash}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4 stretch-card grid-margin hov" routerLink="/plinko">
+		<div class="card bg-gradient-danger card-img-holder text-white">
+			<div class="card-body">
+				<img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
+				<h4 class="font-weight-normal mb-3">
+				<i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+				</h4>
+				<h2 class="mb-5">Plinko </h2>
+				<div class="infoicon">
+					<img src="assets/images/app-info-icon.svg" width="20px">
+					<div class="appinfobox lgrey">
+						<div class="darkformbox d-flex justify-content-between">
+							<div>Number Of Played Game</div>
+							<div><span class="green-t">{{history.plinko}}</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

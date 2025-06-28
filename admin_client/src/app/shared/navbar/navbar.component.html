@@ -1,0 +1,67 @@
+<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <a class="navbar-brand brand-logo" routerLink="/dashboard"><img src="assets/images/logo-white.svg" alt="logo" style="max-width: 130px;width: 100%;height: auto;object-fit: cover;margin:0 auto;vertical-align: middle;" /></a>
+    <a class="navbar-brand brand-logo-mini" routerLink="/dashboard">
+      <img src="assets/images/logo-white.svg" alt="logo" style="max-width: 60px;width: 100%;height: auto;object-fit: cover;"/></a>
+  </div>
+  <div class="navbar-menu-wrapper d-flex align-items-stretch">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="toggleSidebar()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+    <ul class="navbar-nav navbar-nav-right">
+      <li class="nav-item nav-profile dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="profileDropdown" ngbDropdownToggle>
+          <div class="nav-profile-img">
+            <img src="assets/images/profile-y.svg" alt="image">
+            <span class="availability-status online"></span>
+          </div>
+          <div class="nav-profile-text">
+            <p class="mb-1 text-black">Admin</p>
+          </div>
+        </a>
+        <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown" style="width: 175px;">
+<!--           <a class="dropdown-item" href="javascript:;" (click)="onConnectMetamask()" *ngIf="!isConnected">
+            <i class="mdi mdi-pin mr-2 text-primary"></i>
+            Connect Wallet
+          </a>
+          <a class="dropdown-item" href="javascript:;" *ngIf="isConnected">
+            <i class="mdi mdi-account-check mr-2 text-primary"></i>
+            {{adminAddr}}
+          </a>
+          <a class="dropdown-item" href="javascript:;" (click)="disconnectMetamask()" *ngIf="isConnected">
+            <i class="mdi mdi-pin-off mr-2 text-primary"></i>
+            Disconnect
+          </a>
+          <a class="dropdown-item" routerLink="/activity">
+            <i class="mdi mdi-cached mr-2 text-primary"></i>
+            Activity Log
+          </a> -->
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/sitesettings">
+            <i class="mdi mdi-file-cog mr-2 text-info"></i>
+            Site Settings
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/changePassword">
+            <i class="mdi mdi-cached mr-2 text-info"></i>
+            Change Password
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/pattern">
+            <span class="mdi mdi-lock-pattern clr mr-2 text-info"></span>
+            Change Pattern
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/logout">
+            <i class="mdi mdi-logout mr-2 text-info"></i>
+            Signout
+          </a>
+        </div>
+      </li>
+    </ul>
+    <notifier-container></notifier-container>
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" (click)="toggleOffcanvas()">
+      <span class="mdi mdi-menu"></span>
+    </button>
+  </div>
+</nav>

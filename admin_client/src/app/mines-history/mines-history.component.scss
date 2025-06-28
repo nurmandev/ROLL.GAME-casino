@@ -1,0 +1,96 @@
+.font-siz{
+  font-size: 19px !important;
+}
+
+.gridboxmini
+{
+   max-width: 460px;
+    background: #0a0a0a;
+    margin: 40px auto;
+    display: flow-root;
+    padding: 10px;
+}
+.gridboxmini > div {
+    width: 77px;
+    height: 77px;
+    background: #17181c;
+    margin: 5px;
+    float: left;
+    cursor: pointer;
+    position: relative;
+}
+
+.diamondmini.show
+{
+   background: #ccc;
+   position: relative;
+}
+.diamondmini.show::before
+{
+  background-image: url(/assets/images/gems.webp);
+}
+.diamondmini.selected
+{
+  position: relative;
+  background: #390e71 !important;
+}
+.diamondmini.selected:hover
+{
+  transform: none !important;
+}
+.diamondmini.selected::after
+{
+  background-image: url(/assets/images/gems.webp);
+  content: "";
+  width: 80px;
+  height: 90px;
+  position: absolute;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  left: 0px;
+  top:0px;
+}
+
+.diamondmini.unselected::after
+{
+  background-image: url(/assets/images/gems.webp);
+  content: "";
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.3;
+  left: 0;
+  top: 0;
+}
+.diamondmini.selected.mines::after
+{
+  background-image: url(/assets/images/mines.webp);
+  content: "";
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  left: 0;
+  top: 0;
+}
+.diamondmini.unselected.mines::after
+{
+  background-image: url(/assets/images/mines.webp);
+  content: "";
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  background-size: 70px;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.3;
+  left: 0;
+  top: 0;
+}
+.diamondmini.selected.mines{background:#303238 !important;position: relative;}

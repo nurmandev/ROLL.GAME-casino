@@ -1,0 +1,56 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Manage VIP
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" *ngIf="isLoading">
+							<form class="forms-sample" #VipInfo="ngForm" autocomplete="off">
+								<div class="d-flex">
+									<div class="form-group col-md-6">
+										<label for="network">Level</label>
+										<div class="form-control text-blk text-capitalize pt-2"> {{ CurrData.level }}
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="name">Type</label>
+										<div class="form-control text-capitalize text-blk pt-2"> {{ CurrData.type }}
+										</div>
+									</div>
+								</div>
+								<div class="d-flex">
+									<div class="form-group col-md-6">
+										<label for="name">XP</label>
+										<input type="text" class="form-control bg-white" name="XP" placeholder="XP" [(ngModel)]="CurrData.XP" #XP="ngModel" [ngClass]="{ 'is-invalid': (XP.touched && XP.invalid) }"  pattern="^\d{0,50}(\.\d{1,8})?$" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+										<div *ngIf="XP.errors && (XP.valid || XP.touched || VipInfo.submitted)" class="errMsg">
+						                   <span *ngIf="XP.errors.pattern">{{"XP value invalid"}}</span>
+						                   <span *ngIf="XP.errors.required">{{"Enter XP"}}</span>
+						                </div>
+									</div>
+									<div class="form-group col-md-6">
+										<label for="name">Bonus</label>
+										<input type="text" class="form-control bg-white" name="Bonus" placeholder="Bonus" [(ngModel)]="CurrData.Bonus" #Bonus="ngModel" [ngClass]="{ 'is-invalid': (Bonus.touched && Bonus.invalid) }" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" pattern="^\d{0,50}(\.\d{1,8})?$" required>
+										<div *ngIf="Bonus.errors && (Bonus.valid || Bonus.touched || VipInfo.submitted)" class="errMsg">
+						                   <span *ngIf="Bonus.errors.pattern">{{"Bonus value invalid"}}</span>
+						                   <span *ngIf="Bonus.errors.required">{{"Enter Bonus"}}</span>
+						                </div>
+									</div>
+								</div>
+							</form>
+							<hr>
+					      <div>
+					        <button type="submit" class="btn btn-gradient-primary" [disabled]="VipInfo.invalid" (click)="submitFunc(VipInfo)" >Update</button>
+					        <button type="submit" class="btn btn-gradient-info" routerLink="/viplist">Cancel</button>
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

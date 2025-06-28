@@ -1,0 +1,107 @@
+<div class="page-header">
+	<h3 class="page-title">
+		Keno Game Details
+	</h3>
+</div>
+<div class="row">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-12 grid-margin">
+					<div class="card">
+						<div class="card-body" >
+							<form class="forms-sample" #Managetrade="ngForm" autocomplete="off">
+			                  	<div >
+			                     	<div class="my-2 font-siz">
+			                     		<label class="col-3" for="username">User name :</label>
+			                     		<span>{{Det_name}}</span>
+			                     	</div>
+			                  	</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="id">Game Id :</label>
+			                     	<span>{{Det_id}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Bet Amount :</label>
+			                    	<span>{{Det_betamount}}</span>
+								</div>
+
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Result :</label>
+			                    	<!-- <span>{{Det_betamount}}</span> -->
+			                    	<div class="items d-flex justify-content-between">
+					                  	<div class="gridbox">
+					                    	<ng-container *ngFor="let kenNum of kenobetsdig;">
+					                        	<div class="kenohis" id={{kenNum}}res>
+					                        		<span>{{kenNum}}</span>
+					                        	</div>
+					                    	</ng-container>
+					                  	</div>
+					               </div>	
+								</div>
+
+
+								<!-- <div class="my-2 font-siz">
+									<label class="col-3" for="betamt">User Bet :</label>
+			                    	<span>{{Det_betamount}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Loss Bet :</label>
+			                    	<span>{{Det_betamount}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="betamt">Win Bet :</label>
+			                    	<span>{{Det_betamount}}</span>
+								</div> -->
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="amt">Winning Amount :</label>
+			                    	<span>{{Det_pro_amt}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="payout">Payout :</label>
+			                    	<span>{{Det_payout}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="status">Status :</label>
+			                    	<span>{{Det_status}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="cliseed">Client Seed :</label>
+									<span>{{Det_clientSeed}}</span>
+								</div>
+
+								<div class="my-2 font-siz">
+									<label class="col-3" for="serseed">serverSeed :</label>
+			                    	<span>{{Det_serverSeed}}</span>
+								</div>
+								<div class="my-2 font-siz">
+									<label class="col-3" for="nounce">Nonce :</label>
+			                    	<span>{{Det_nounce}}</span>
+								</div>
+								
+								<!-- <div class="form-group">
+									<label for="name">DW RPC</label>
+								</div>
+								<div class="form-group">
+									<label for="name">Network API</label>
+								</div> -->
+							</form>
+							<hr>
+					      <div>
+					        <!-- <button type="submit" class="btn btn-gradient-primary">Cancel</button> -->
+					      </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

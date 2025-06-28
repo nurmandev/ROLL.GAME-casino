@@ -1,0 +1,682 @@
+<div class="page-header" >
+  <h3 class="page-title">
+    <span class="page-title-icon bg-gradient-info text-white mr-2">
+      <i class="mdi mdi-bank-transfer-out"></i>      
+    </span>
+    History
+  </h3>
+</div>
+<div class="row" *ngIf="game1">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Bet Result</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>Currency</th>
+               	<th>status</th>
+               	<th>Date</th>
+								<!-- <th>Action</th> -->
+							</tr>
+						</thead>
+						<tbody *ngIf="limbo_table.length > 0">
+							<tr *ngFor="let table1 of limbo_table; let i = index">
+								<td>{{i+(p*limit)+1}}</td>
+								<td class="cursor">{{table1.username}}</td>
+								<td>{{table1.bet_amount}}</td>
+								<td>{{table1.bet_result}}</td>
+								<ng-container *ngIf="table1.status=='loser'">
+                 	<td [ngClass]="{'winner':table1.status=='winner','looser':table1.status== 'loser'}">-{{((table1.win_lose_amt)*1).toFixed(6)}}</td>
+               </ng-container>
+               <ng-container *ngIf="table1.status!='loser'">
+                 	<td [ngClass]="{'winner':table1.status=='winner','looser':table1.status== 'loser'}">+{{((table1.win_lose_amt)*1).toFixed(6)}}</td>
+               </ng-container>
+								<!-- <td>{{table1.win_lose_amt}}</td> -->
+								<td>{{table1.payout}}</td>
+								<td>{{table1.currency}}</td>
+								<td class="cursor">{{table1.status}}</td>
+								<td>{{table1.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<!-- <td [routerLink]="['/gamehistory/limbo', table1._id]"><span class="mdi mdi-eye"></span></td> -->
+							</tr>
+						</tbody>
+						<tbody *ngIf="limbo_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="p > 0?paginate('first'):null" [disabled]="p == 0"> << </button>
+					<button (click)="p > 0?paginate('prev'):null" [disabled]="p == 0"> < </button>
+					<button (click)="page > p?paginate('next'):null" [disabled]="page == p"> > </button>
+					<button (click)="page > p?paginate('last'):null" [disabled]="page == p"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="row" *ngIf="game2">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Bet Type</th>
+               	<th>Roll Value</th>
+               	<th>Bet Result</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>Currency</th>
+               	<th>status</th>
+               	<th>Date</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="dice_table.length > 0">
+							<tr *ngFor="let table2 of dice_table; let i = index">
+								<td>{{i+(p1*limit1)+1}}</td>
+								<td class="cursor">{{table2.username}}</td>
+								<td>{{table2.bet_amount}}</td>
+								<td>{{table2.bet_type}}</td>
+								<td>{{table2.roll_value}}</td>
+								<td>{{table2.bet_result}}</td>
+								<ng-container *ngIf="table2.status=='loser'">
+                 	<td [ngClass]="{'winner':table2.status=='winner','looser':table2.status== 'loser'}">-{{((table2.win_lose_amt)*1).toFixed(6)}}</td>
+               </ng-container>
+               <ng-container *ngIf="table2.status!='loser'">
+                 	<td [ngClass]="{'winner':table2.status=='winner','looser':table2.status== 'loser'}">+{{((table2.win_lose_amt)*1).toFixed(6)}}</td>
+               </ng-container>
+								<td>{{table2.payout}}</td>
+								<td>{{table2.currency}}</td>
+								<td class="cursor">{{table2.status}}</td>
+								<td>{{table2.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<!-- <td [routerLink]="['/gamehistory/dice', table2._id]"><span class="mdi mdi-eye"></span></td> -->
+							</tr>
+						</tbody>
+						<tbody *ngIf="dice_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate1('first'):null" [disabled]="p1 == 0"> << </button>
+					<button (click)="p1> 0?paginate1('prev'):null" [disabled]="p1 == 0"> < </button>
+					<button (click)="page1 > p1?paginate1('next'):null" [disabled]="page1 == p1"> > </button>
+					<button (click)="page1 > p1?paginate1('last'):null" [disabled]="page1 == p1"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- coinflip -->
+<div class="row" *ngIf="game3">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>Game Id</th>
+               	<th>Bet Amount</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="flip_table.length > 0">
+							<tr *ngFor="let table3 of flip_table; let i = index">
+								<td>{{i+(p2*limit2)+1}}</td>
+								<td class="cursor">{{table3.username}}</td>
+								<td>{{table3.bet_amount}}</td>
+								<ng-container *ngIf="table3.status=='loser'">
+                 	<td [ngClass]="{'winner':table3.status=='winner','looser':table3.status== 'loser'}">-{{((table3.win_lose_amt)*1).toFixed(6)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table3.status!='loser'">
+                 	<td [ngClass]="{'winner':table3.status=='winner','looser':table3.status== 'loser'}">+{{((table3.win_lose_amt)*1).toFixed(6)}}</td>
+               	</ng-container>
+								<td>{{table3.payout}}</td>
+								<td class="cursor">{{table3.status}}</td>
+								<td>{{table3.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/coinflip', table3.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="flip_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate2('first'):null" [disabled]="p2 == 0"> << </button>
+					<button (click)="p2> 0?paginate2('prev'):null" [disabled]="p2 == 0"> < </button>
+					<button (click)="page2 > p2?paginate2('next'):null" [disabled]="page2 == p2"> > </button>
+					<button (click)="page2 > p2?paginate2('last'):null" [disabled]="page2 == p2"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- wheel -->
+<div class="row" *ngIf="game4">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Bet Result</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>Risk</th>
+               	<th>Segment</th>
+               	<th>Currency</th>
+               	<th>status</th>
+               	<th>Date</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="wheel_table.length > 0">
+							<tr *ngFor="let table4 of wheel_table; let i = index">
+								<td>{{i+(p3*limit3)+1}}</td>
+								<td class="cursor">{{table4.username}}</td>
+								<td>{{table4.bet_amount}}</td>
+								<td>{{table4.bet_result}}</td>
+								<ng-container *ngIf="table4.status=='loser'">
+                 	<td [ngClass]="{'winner':table4.status=='winner','looser':table4.status== 'loser'}">-{{((table4.win_lose_amt)*1).toFixed(6)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table4.status!='loser'">
+                 	<td [ngClass]="{'winner':table4.status=='winner','looser':table4.status== 'loser'}">+{{((table4.win_lose_amt)*1).toFixed(6)}}</td>
+               	</ng-container>
+								<td>{{table4.payout}}</td>
+								<td>{{table4.risk}}</td>
+								<td>{{table4.segment}}</td>
+								<td>{{table4.currency}}</td>
+								<td  [ngClass]="{'winner':table4.status=='winner','looser':table4.status== 'loser'}">
+									{{ table4.status }}</td>
+								<td>{{table4.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<!-- <td [routerLink]="['/gamehistory/wheel', table4._id]"><span class="mdi mdi-eye"></span></td> -->
+							</tr>
+						</tbody>
+						<tbody *ngIf="wheel_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate3('first'):null" [disabled]="p3 == 0"> << </button>
+					<button (click)="p3> 0?paginate3('prev'):null" [disabled]="p3 == 0"> < </button>
+					<button (click)="page3 > p3?paginate3('next'):null" [disabled]="page3 == p3"> > </button>
+					<button (click)="page3 > p3?paginate3('last'):null" [disabled]="page3 == p3"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- fortune -->
+<div class="row" *ngIf="game5">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Amount</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="fortune_table.length > 0">
+							<tr *ngFor="let table5 of fortune_table; let i = index">
+								<td>{{i+(p4*limit4)+1}}</td>
+								<td class="cursor">{{table5.username}}</td>
+								<td>{{table5.bet_amount}}</td>
+								<td>{{table5.payout}}</td>
+								<td class="cursor">{{table5.status}}</td>
+								<td>{{table5.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/fortune', table5.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="fortune_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate4('first'):null" [disabled]="p4 == 0"> << </button>
+					<button (click)="p4> 0?paginate4('prev'):null" [disabled]="p4 == 0"> < </button>
+					<button (click)="page4 > p4?paginate4('next'):null" [disabled]="page4 == p4"> > </button>
+					<button (click)="page4 > p4?paginate4('last'):null" [disabled]="page4 == p4"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- cave -->
+<div class="row" *ngIf="game6">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Bet Result</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Currency</th>
+               	<th>Date</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="plunder_table.length > 0">
+							<tr *ngFor="let table6 of plunder_table; let i = index">
+								<td>{{i+(p5*limit5)+1}}</td>
+								<td class="cursor">{{table6.username}}</td>
+								<td>{{table6.bet_amount}}</td>
+								<td>{{table6.bet_result}}</td>
+								<ng-container *ngIf="table6.status=='loser'">
+                 	<td [ngClass]="{'winner':table6.status=='winner','looser':table6.status== 'loser'}">-{{((table6.win_lose_amt)*1).toFixed(2)}}</td>
+               </ng-container>
+               <ng-container *ngIf="table6.status!='loser'">
+                 	<td [ngClass]="{'winner':table6.status=='winner','looser':table6.status== 'loser'}">+{{((table6.win_lose_amt)*1).toFixed(2)}}</td>
+               </ng-container>
+								<td>{{table6.payout}}</td>
+								<td class="cursor">{{table6.status}}</td>
+								<td class="cursor">{{table6.currency}}</td>
+								<td>{{table6.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<!-- <td [routerLink]="['/gamehistory/caveofplunder', table6.gameid]"><span class="mdi mdi-eye"></span></td> -->
+							</tr>
+						</tbody>
+						<tbody *ngIf="plunder_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate5('first'):null" [disabled]="p5 == 0"> << </button>
+					<button (click)="p5> 0?paginate5('prev'):null" [disabled]="p5 == 0"> < </button>
+					<button (click)="page5 > p5?paginate5('next'):null" [disabled]="page5 == p5"> > </button>
+					<button (click)="page5 > p5?paginate5('last'):null" [disabled]="page5 == p5"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- keno -->
+<div class="row" *ngIf="game7">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Winning  Amount</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="keno_table.length > 0">
+							<tr *ngFor="let table7 of keno_table; let i = index">
+								<td>{{i+(p6*limit6)+1}}</td>
+								<td class="cursor">{{table7.username}}</td>
+								<td>{{table7.bet_amount}}</td>
+								<ng-container *ngIf="table7.status=='loser'">
+                 	<td [ngClass]="{'winner':table7.status=='winner','looser':table7.status== 'loser'}">-{{((table7.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table7.status!='loser'">
+                 	<td [ngClass]="{'winner':table7.status=='winner','looser':table7.status== 'loser'}">+{{((table7.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+								<!-- <td>{{table7.win_lose_amt.toFixed(2)}}</td> -->
+								<td>{{table7.payout}}</td>
+								<td class="cursor">{{table7.status}}</td>
+								<td>{{table7.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/keno', table7.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="keno_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate6('first'):null" [disabled]="p6 == 0"> << </button>
+					<button (click)="p6> 0?paginate6('prev'):null" [disabled]="p6 == 0"> < </button>
+					<button (click)="page6 > p6?paginate6('next'):null" [disabled]="page6 == p6"> > </button>
+					<button (click)="page6 > p6?paginate6('last'):null" [disabled]="page6 == p6"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- roulette -->
+<div class="row" *ngIf="game8">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="roulette_table.length > 0">
+							<tr *ngFor="let table8 of roulette_table; let i = index">
+								<td>{{i+(p7*limit7)+1}}</td>
+								<td class="cursor">{{table8.username}}</td>
+								<td>{{table8.bet_amount}}</td>
+								<ng-container *ngIf="table8.status=='loser'">
+                 	<td [ngClass]="{'winner':table8.status=='winner','looser':table8.status== 'loser'}">-{{((table8.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table8.status=='winner'">
+                 	<td [ngClass]="{'winner':table8.status=='winner','looser':table8.status== 'loser'}">+{{((table8.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table8.status=='tied'">
+                 	<td [ngClass]="{'tied':table8.status=='tied'}">+{{((table8.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+								<td>{{table8.payout}}</td>
+								<td class="cursor">{{table8.status}}</td>
+								<td>{{table8.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/roulette', table8.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="roulette_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate7('first'):null" [disabled]="p7 == 0"> << </button>
+					<button (click)="p7> 0?paginate7('prev'):null" [disabled]="p7 == 0"> < </button>
+					<button (click)="page7 > p7?paginate7('next'):null" [disabled]="page7 == p7"> > </button>
+					<button (click)="page7 > p7?paginate7('last'):null" [disabled]="page7 == p7"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- mines -->
+<div class="row" *ngIf="game9">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Winning Amount</th>
+               	<th>Number of Mines</th>
+               	<th>payout</th>
+               	<th>status</th>
+               	<th>Currency</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="mines_table.length > 0">
+							<tr *ngFor="let table9 of mines_table; let i = index">
+								<td>{{i+(p8*limit9)+1}}</td>
+								<td class="cursor">{{table9.username}}</td>
+								<td>{{table9.bet_amount}}</td>
+								<ng-container *ngIf="table9.status=='loser'">
+                 	<td [ngClass]="{'winner':table9.status=='winner','looser':table9.status== 'loser'}">-{{((table9.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table9.status=='winner'">
+                 	<td [ngClass]="{'winner':table9.status=='winner','looser':table9.status== 'loser'}">+{{((table9.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+               	<ng-container *ngIf="table9.status=='pending'">
+                 	<td [ngClass]="{'pending':table9.status=='pending'}">+{{((table9.win_lose_amt)*1).toFixed(2)}}</td>
+               	</ng-container>
+								<td>{{table9.noMines}}</td>
+								<td>{{table9.payout}}</td>
+								<td class="cursor">{{table9.status}}</td>
+								<td class="cursor">{{table9.currency}}</td>
+								<td>{{table9.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/mines', table9.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="mines_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate8('first'):null" [disabled]="p8 == 0"> << </button>
+					<button (click)="p8> 0?paginate8('prev'):null" [disabled]="p8 == 0"> < </button>
+					<button (click)="page8 > p8?paginate8('next'):null" [disabled]="page8 == p8"> > </button>
+					<button (click)="page8 > p8?paginate8('last'):null" [disabled]="page8 == p8"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- sword -->
+<div class="row" *ngIf="game10">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>Currency</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="sword_table.length > 0">
+							<tr *ngFor="let table10 of sword_table; let i = index">
+								<td>{{i+(p9*limit9)+1}}</td>
+								<td class="cursor">{{table10.username}}</td>
+								<td>{{table10.bet_amount}}</td>
+								<td [ngClass]="table10.status == 'loser' ? 'looser': table10.status == 'pending' ? 'pending' : 'winner'">
+									{{(table10.status == 'loser') ? '-'+(((table10.win_lose_amt)*1).toFixed(2)) : '+'+(((table10.win_lose_amt)*1).toFixed(2))}}
+								</td>
+								<td>{{table10.payout}}</td>
+								<td class="cursor">{{table10.currency}}</td>
+								<td>{{table10.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/sword', table10.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="sword_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate9('first'):null" [disabled]="p9 == 0"> << </button>
+					<button (click)="p9> 0?paginate9('prev'):null" [disabled]="p9 == 0"> < </button>
+					<button (click)="page9 > p9?paginate9('next'):null" [disabled]="page9 == p9"> > </button>
+					<button (click)="page9 > p9?paginate9('last'):null" [disabled]="page9 == p9"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- plinko -->
+<div class="row" *ngIf="game12">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>User Name</th>
+               	<th>Bet Amount</th>
+               	<th>Winning Amount</th>
+               	<th>payout</th>
+               	<th>Currency</th>
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="plinko_table.length > 0">
+							<tr *ngFor="let table11 of plinko_table; let i = index">
+								<td>{{i+(p11*limit11)+1}}</td>
+								<td class="cursor">{{table11.username}}</td>
+								<td>{{table11.bet_amount}}</td>
+								<td [ngClass]="table11.status == 'loser' ? 'looser': table11.status == 'pending' ? 'pending' : 'winner'">
+									{{(table11.status == 'loser') ? '-'+(((table11.win_lose_amt)*1).toFixed(2)) : '+'+(((table11.win_lose_amt)*1).toFixed(2))}}
+								</td>
+								<td>{{table11.payout}}</td>
+								<td class="cursor">{{table11.currency}}</td>
+								<td>{{table11.created_at | date:'dd-MM-yyyy hh:mm:ss' }}</td>
+								<td [routerLink]="['/gamehistory/plinko', table11.gameid]"><span class="mdi mdi-eye"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="plinko_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate11('first'):null" [disabled]="p11 == 0"> << </button>
+					<button (click)="p11> 0?paginate11('prev'):null" [disabled]="p11 == 0"> < </button>
+					<button (click)="page9 > p11?paginate11('next'):null" [disabled]="page9 == p11"> > </button>
+					<button (click)="page9 > p11?paginate11('last'):null" [disabled]="page9 == p11"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- crash -->
+<div class="row" *ngIf="game11">
+	<div class="col-lg-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>S.No</th>
+               	<th>Total Participants</th>
+               	<th>Total BetAmount</th>
+               	<th>Bet Result</th>
+               	<!-- <th>status</th> -->
+               	<th>Date</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="crash_table.length > 0">
+							<tr *ngFor="let table12 of crash_table; let i = index">
+								<td>{{i+(p10*limit10)+1}}</td>
+								<td class="cursor">{{table12.participants}}</td>
+								<td>{{table12.totalbetamt}}</td>
+								<td>{{table12.betresult}}</td>
+								<!-- <td>{{table12.status}}</td> -->
+								<td>{{table12.created_at | date:'dd-MM-yyyy hh:mm:ss a' }}</td>
+								<td [routerLink]="['/gamehistory/crash', table12._id]"><span class="mdi mdi-eye hov"></span></td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="crash_table.length == 0">
+							<tr>
+								<p>No records found</p>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="paginator d-flex flex-row">
+					<button color="primary" (click)="1 > 0?paginate9('first'):null" [disabled]="p10 == 0"> << </button>
+					<button (click)="p10> 0?paginate9('prev'):null" [disabled]="p10 == 0"> < </button>
+					<button (click)="page9 > p10?paginate9('next'):null" [disabled]="page9 == p10"> > </button>
+					<button (click)="page9 > p10?paginate9('last'):null" [disabled]="page9 == p10"> >> </button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
