@@ -1,4 +1,4 @@
-# 🎰 BC.Game Clone Casino Script contact me on telegram for complete project **[proficient](https://t.me/Proficientng)**  
+# 🎰 BC.Game Clone Casino Script contact me on telegram for complete project **[proficient](https://t.me/Proficientng)**  .
 
 ## 🖼️ Screenshots
 
